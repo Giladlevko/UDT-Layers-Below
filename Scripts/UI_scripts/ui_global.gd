@@ -2,6 +2,8 @@ extends Node
 
 @onready var dark_screen:ColorRect = ColorRect.new()
 
+@onready var canvas:CanvasLayer = CanvasLayer.new()
+
 @onready var song_player:AudioStreamPlayer = AudioStreamPlayer.new()
 
 
@@ -42,7 +44,8 @@ func init_dark_screen():
 	dark_screen.anchor_top = 0
 	dark_screen.anchor_left = 0
 	dark_screen.z_index = 500
-	get_tree().root.add_child.call_deferred(dark_screen)
+	get_tree().root.add_child.call_deferred(canvas)
+	canvas.add_child((dark_screen))
 	if(get_tree().current_scene is not MenuUI):
 		dark_screen.modulate.a = 0
 		dark_screen.visible = false

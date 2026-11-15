@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=4 uid="uid://cao14xofyevlq"]
+
+[ext_resource type="Texture2D" uid="uid://biajiaoq5pmhs" path="res://Assets/tiles/default_tiles.png" id="1_go701"]
+[ext_resource type="PackedScene" uid="uid://bnwtgpmpg6kf" path="res://Scenes/tile_hit_box.tscn" id="2_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://dr4fcm00cdgx2" path="res://Scenes/player.tscn" id="2_go701"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5a7ea"]
+texture = ExtResource("1_go701")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = &"DarkStone"
+0:0/0/custom_data_1 = Vector2i(0, 1)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/custom_data_0 = &"LightStone"
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/custom_data_0 = &"DarkDirt"
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0/custom_data_0 = &"DarkSandyDirt"
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0/custom_data_0 = &"Pumpkin"
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/custom_data_0 = &"BlackGem"
+0:1/0/custom_data_1 = Vector2i(-1, -1)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/custom_data_0 = &"GreenGEm"
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/custom_data_0 = &"LightDirt"
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/custom_data_0 = &"LightSandyDirt"
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0/custom_data_0 = &"Wood"
+
+[sub_resource type="TileSet" id="TileSet_8j60k"]
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "TileType"
+custom_data_layer_0/type = 21
+custom_data_layer_1/name = "NextCoords"
+custom_data_layer_1/type = 6
+custom_data_layer_2/name = "TileData"
+custom_data_layer_2/type = 24
+sources/0 = SubResource("TileSetAtlasSource_5a7ea")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8j60k"]
+scenes/1/scene = ExtResource("2_5a7ea")
+
+[sub_resource type="TileSet" id="TileSet_fo5ed"]
+sources/1 = SubResource("TileSetScenesCollectionSource_8j60k")
+
+[node name="world" type="Node2D"]
+
+[node name="tile_layers" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="tile_layers"]
+tile_map_data = PackedByteArray("AAD9/wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAASAAAAAAAAAAAAAAATAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAAWAAAAAAAAAAAAAAAbAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAdAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAhAAAAAAAAAAAAAAAlAAAAAAAAAAAAAAAmAAAAAAAAAAAAAAAnAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAApAAAAAAAAAAAAAAAqAAAAAAAAAAAAAAArAAAAAAAAAAAAAAAqAP7/AAAAAAAAAAArAP7/AAAAAAAAAAAsAP7/AAAAAAAAAAAtAP7/AAAAAAAAAAAuAP7/AAAAAAAAAAAvAP7/AAAAAAAAAAAwAP7/AAAAAAAAAAAtAPv/AAAAAAAAAAAuAPv/AAAAAAAAAAAvAPv/AAAAAAAAAAAwAPv/AAAAAAAAAAAxAPv/AAAAAAAAAAAyAPv/AAAAAAAAAAAzAPv/AAAAAAAAAAAjAPr/AAAAAAAAAAAkAPr/AAAAAAAAAAAlAPr/AAAAAAAAAAAmAPr/AAAAAAAAAAAnAPr/AAAAAAAAAAAoAPr/AAAAAAAAAAApAPr/AAAAAAAAAAAdAPf/AAAAAAAAAAAeAPf/AAAAAAAAAAAfAPf/AAAAAAAAAAAgAPf/AAAAAAAAAAAhAPf/AAAAAAAAAAAiAPf/AAAAAAAAAAAjAPf/AAAAAAAAAAAcAPf/AAAAAAAAAAAbAPf/AAAAAAAAAAAaAPf/AAAAAAAAAAAZAPf/AAAAAAAAAAAYAPf/AAAAAAAAAAAXAPf/AAAAAAAAAAAWAPf/AAAAAAAAAAATAPf/AAAAAAAAAAASAPf/AAAAAAAAAAARAPf/AAAAAAAAAAAQAPf/AAAAAAAAAAAPAPf/AAAAAAAAAAAOAPf/AAAAAAAAAAANAPf/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8j60k")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="tile_layers"]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAQD//wAAAQAAAAAAAQAAAAAAAQAAAAAAAQABAAAAAQAAAAAAAQACAAAAAQAAAAAAAQD9/wAAAQAAAAAAAQADAAAAAQAAAAAAAQAEAAAAAQAAAAAAAQAFAAAAAQAAAAAAAQAGAAAAAQAAAAAAAQAHAAAAAQAAAAAAAQAIAAAAAQAAAAAAAQAJAAAAAQAAAAAAAQAKAAAAAQAAAAAAAQALAAAAAQAAAAAAAQAMAAAAAQAAAAAAAQANAAAAAQAAAAAAAQAOAAAAAQAAAAAAAQAPAAAAAQAAAAAAAQAQAAAAAQAAAAAAAQARAAAAAQAAAAAAAQASAAAAAQAAAAAAAQATAAAAAQAAAAAAAQAUAAAAAQAAAAAAAQAVAAAAAQAAAAAAAQAWAAAAAQAAAAAAAQA=")
+tile_set = SubResource("TileSet_fo5ed")
+
+[node name="player" parent="." instance=ExtResource("2_go701")]
+position = Vector2(17, -27)
