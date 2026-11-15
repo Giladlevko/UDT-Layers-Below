@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://caxf0jf1bi0f7"]
+
+[ext_resource type="Script" uid="uid://dow3o7el1q8cq" path="res://Scripts/Music_scripts/music_handler.gd" id="1_ujt6n"]
+[ext_resource type="PackedScene" uid="uid://cwre5slffxbbj" path="res://Scenes/Music_scenes/BGM_scenes/bgm_title.tscn" id="2_ql1sj"]
+[ext_resource type="PackedScene" uid="uid://btb0o5t3074mb" path="res://Scenes/Music_scenes/BGM_scenes/bgm_gameplay.tscn" id="3_lntdu"]
+
+[node name="MusicHandler" type="Node"]
+script = ExtResource("1_ujt6n")
+_music_names = Dictionary[int, PackedScene]({
+1: ExtResource("2_ql1sj"),
+2: ExtResource("3_lntdu")
+})
+metadata/_custom_type_script = "uid://dow3o7el1q8cq"

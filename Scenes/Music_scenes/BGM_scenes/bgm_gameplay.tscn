@@ -1,0 +1,36 @@
+[gd_scene load_steps=11 format=3 uid="uid://btb0o5t3074mb"]
+
+[ext_resource type="Script" uid="uid://13f1qplilho4" path="res://Scripts/Music_scripts/mus_base.gd" id="1_axjmv"]
+[ext_resource type="AudioStream" uid="uid://d07mwqsltgfyh" path="res://Assets/Music_assets/GWJ099_Gameplay_01a_80bpm_8bars.ogg" id="2_n5n2s"]
+[ext_resource type="AudioStream" uid="uid://cbg0mjotcvhhm" path="res://Assets/Music_assets/GWJ099_Gameplay_01b_80bpm_8bars.ogg" id="3_rwcat"]
+[ext_resource type="AudioStream" uid="uid://dwivpn8ccg6sg" path="res://Assets/Music_assets/GWJ099_Gameplay_01c_80bpm_8bars.ogg" id="4_7nc31"]
+[ext_resource type="AudioStream" uid="uid://lodhdig7tjds" path="res://Assets/Music_assets/GWJ099_Gameplay_01d_80bpm_8bars.ogg" id="5_3km4t"]
+[ext_resource type="AudioStream" uid="uid://lxexqk7l2f25" path="res://Assets/Music_assets/GWJ099_Gameplay_02a_80bpm_8bars.ogg" id="6_o8v66"]
+[ext_resource type="AudioStream" uid="uid://cdsjesvuejgfw" path="res://Assets/Music_assets/GWJ099_Gameplay_02b_80bpm_8bars.ogg" id="7_4punl"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_htwe7"]
+shuffle = true
+loop = false
+fade_time = 0.0
+stream_count = 4
+stream_0 = ExtResource("2_n5n2s")
+stream_1 = ExtResource("3_rwcat")
+stream_2 = ExtResource("4_7nc31")
+stream_3 = ExtResource("5_3km4t")
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0l4a4"]
+shuffle = true
+loop = false
+stream_count = 2
+stream_0 = ExtResource("6_o8v66")
+stream_1 = ExtResource("7_4punl")
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_yk2di"]
+stream_count = 2
+stream_0 = SubResource("AudioStreamPlaylist_htwe7")
+stream_1 = SubResource("AudioStreamPlaylist_0l4a4")
+
+[node name="BGM_Gameplay" type="Node"]
+script = ExtResource("1_axjmv")
+max_volume = 0.8
+my_stream = SubResource("AudioStreamPlaylist_yk2di")
