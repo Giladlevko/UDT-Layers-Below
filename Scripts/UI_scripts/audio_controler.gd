@@ -74,4 +74,5 @@ func _on_ui_slider_value_changed(value: float) -> void:
 
 
 func _on_close_button_pressed() -> void:
+	Music_GLOBAL.music_title.switch_to_main();
 	tween_visibility(self,false)

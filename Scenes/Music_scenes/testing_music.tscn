@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqm2fce83jcie"]
+
+[ext_resource type="Script" uid="uid://d0faicdfdbmmm" path="res://Scripts/Music_scripts/testing_music.gd" id="1_ssfeq"]
+[ext_resource type="PackedScene" uid="uid://caxf0jf1bi0f7" path="res://Scenes/Music_scenes/music_handler.tscn" id="2_5a2nw"]
+
+[node name="Testing" type="Node"]
+script = ExtResource("1_ssfeq")
+
+[node name="MusicHandler" parent="." instance=ExtResource("2_5a2nw")]

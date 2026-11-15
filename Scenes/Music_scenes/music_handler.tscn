@@ -6,8 +6,8 @@
 
 [node name="MusicHandler" type="Node"]
 script = ExtResource("1_ujt6n")
-_music_names = Dictionary[int, PackedScene]({
-1: ExtResource("2_ql1sj"),
-2: ExtResource("3_lntdu")
+_music_dictionary = Dictionary[StringName, PackedScene]({
+&"BGM_Gameplay": ExtResource("3_lntdu"),
+&"BGM_Title": ExtResource("2_ql1sj")
 })
 metadata/_custom_type_script = "uid://dow3o7el1q8cq"

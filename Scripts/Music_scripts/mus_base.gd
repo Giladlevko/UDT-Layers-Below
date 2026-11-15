@@ -6,6 +6,7 @@ var my_stream_player:AudioStreamPlayer;
 	
 var my_fadeout_tween:Tween;
 var is_playing:bool = false;
+var play_from_position:float = 0.0;
 @export_range(0.0, 1.0, 0.001) var max_volume:float = 1.0;
 
 ## This is the volume relative to this music instance's max volume.
@@ -22,13 +23,16 @@ func _ready() -> void:
 	add_child(my_stream_player);
 	my_stream_player.bus = "music";
 	my_stream_player.stream = my_stream;
-	play();
-	is_playing = true;
-	print("Playing music : " + name)
+	if is_playing:
+		play(play_from_position);
+		print("Playing music : " + name)
 
-#Play the music instance..
+## Play the music instance..
 func play(from_position:float = 0.0) -> void:
-	my_stream_player.play(from_position);
+	is_playing = true;
+	play_from_position = from_position;
+	if is_node_ready():
+		my_stream_player.play(play_from_position)
 	
 
 ## This will set the volume relative to THIS music instance full volume.
@@ -36,40 +40,48 @@ func play(from_position:float = 0.0) -> void:
 func set_volume_linear(linear_vol:float) -> void:
 	current_linear_volume = linear_vol;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	my_stream_player.volume_linear = lerp(0.0, max_volume, current_linear_volume);
 
 ## Pause the music instance.
-func pause_music(is_paused:bool):
-	my_stream_player.stream_paused = is_paused;
+func pause_music(is_paused_enabled:bool):
+	my_stream_player.stream_paused = is_paused_enabled;
 	
 func is_paused() -> bool:
 	return my_stream_player.stream_paused;
 	
 ## Stop the music instance and queue it to be freed and deleted.
-## If [b]kill_it[/] this will be queued up for deletion 
-func stop_music(kill_it:bool = false):
+func stop_music():
 	is_playing = false;
-	my_stream_player.stop();
-	
+	if is_node_ready():
+		my_stream_player.stop();
+
+## terminate this music and queue it up for deletion
+func terminate_music():
+	queue_free();
+
+## Fades out the music in the duration determined by the "duration" argument.
+## [b]Optional[/b] by passing a [b]callback[/b] this will fire oncce it fully fades out
+func fade_out_music(duration:float = 2.0, callback:Callable = Callable()):
 	if my_fadeout_tween and my_fadeout_tween.is_valid():
 		my_fadeout_tween.kill();
 		
-	if kill_it:
-		queue_free();
-
-
-## Fade out the music in the duration determined by the "duration" argument.
-## If [b]kill_it[/] is true and once it is fully faded out, it will be deleted
-func fade_out_music(duration:float = 2.0, kill_it:bool = false):
+	my_fadeout_tween = create_tween();
+	my_fadeout_tween.tween_property(self, "current_linear_volume", 0.0, duration);
+	my_fadeout_tween.tween_callback(func():
+		if callback.is_valid():
+			callback.call();
+	)
+				
+## Fades in the music in the duration determined by the "duration" argument.
+## [b]Optional[/b] by passing a [b]callback[/b] this will fire oncce it fully fades in
+func fade_in_music(duration:float = 2.0, callback:Callable = Callable()):
 	if my_fadeout_tween and my_fadeout_tween.is_valid():
-		return;
+		my_fadeout_tween.kill();
 		
 	my_fadeout_tween = create_tween();
-	my_fadeout_tween.tween_property(my_stream_player, "volume_linear", 0.0, duration);
+	my_fadeout_tween.tween_property(self, "current_linear_volume", 1.0, duration);
 	my_fadeout_tween.tween_callback(func():
-		my_stream_player.stop();
-		if kill_it:
-			queue_free();
-		is_playing = false;
+		if callback.is_valid():
+			callback.call();
 	)
