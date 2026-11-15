@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 UI_GLOBAL="*res://Scripts/UI_scripts/ui_global.gd"
+Music_GLOBAL="*res://Scenes/Music_scenes/music_handler.tscn"
 
 [display]
 
