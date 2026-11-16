@@ -73,6 +73,7 @@ DRILL={
 
 [layer_names]
 
+2d_physics/layer_2="dril_coli"
 2d_physics/layer_4="tile_coli"
 
 [rendering]

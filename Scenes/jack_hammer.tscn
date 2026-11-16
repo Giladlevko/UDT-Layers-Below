@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://2mi232hnubdl"]
+[gd_scene load_steps=10 format=3 uid="uid://2mi232hnubdl"]
 
 [ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/jack_hammer.gd" id="1_nny23"]
 [ext_resource type="Texture2D" uid="uid://b2blwsjtvv766" path="res://Assets/dril_anim.png" id="1_uwvx3"]
+[ext_resource type="Texture2D" uid="uid://c8xobhdfg77bv" path="res://Assets/tiles/basic_particle.png" id="3_q4y5v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nny23"]
 atlas = ExtResource("1_uwvx3")
@@ -39,8 +40,10 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nny23"]
-size = Vector2(15.5, 4)
+[sub_resource type="Curve" id="Curve_nny23"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="jack_hammer" type="Node2D"]
 script = ExtResource("1_nny23")
@@ -49,19 +52,45 @@ script = ExtResource("1_nny23")
 rotation = 0.610865
 sprite_frames = SubResource("SpriteFrames_jqfdv")
 animation = &"drill"
-frame = 2
-frame_progress = 0.619818
-
-[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
-position = Vector2(-18, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
-visible = false
-position = Vector2(24, -1)
-shape = SubResource("RectangleShape2D_nny23")
+autoplay = "drill"
+metadata/_edit_lock_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
-position = Vector2(-8.60195, -0.0807253)
-target_position = Vector2(23.0204, -0.248975)
+position = Vector2(7.20922, -0.16485)
+target_position = Vector2(5.81649, -0.410426)
 collision_mask = 8
+hit_from_inside = true
 collide_with_areas = true
+collide_with_bodies = false
+
+[node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(-10, 0)
+target_position = Vector2(17.2092, -0.16485)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="particles" type="Node" parent="."]
+
+[node name="tile_particle" type="CPUParticles2D" parent="particles"]
+emitting = false
+amount = 16
+texture = ExtResource("3_q4y5v")
+lifetime = 0.8
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+linear_accel_min = 25.0
+linear_accel_max = 25.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_curve = SubResource("Curve_nny23")
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

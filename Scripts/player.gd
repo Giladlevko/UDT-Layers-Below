@@ -2,11 +2,14 @@ extends CharacterBody2D
 class_name PLAYER
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var colli: CollisionShape2D = $CollisionShape2D
+@onready var jack_hammer: JACK_HAMMER = $jack_hammer
 
 enum STATES{IDLE,RUNNING,JUMP,DASH}
 var state:STATES
 var can_dash:bool = true
 const SPEED:int = 150
+
 
 @export var jump_height:float = 45
 @export var jump_time_to_peak:float = 0.35
@@ -75,10 +78,14 @@ func move_state():
 	
 	if(Input.is_action_just_pressed("DASH") and can_dash):
 		change_state(STATES.DASH)
-	if(Input.is_action_just_pressed("JUMP")):
+	if(Input.is_action_just_pressed("JUMP") and can_jump()):
 		change_state(STATES.JUMP)
 	pass
 
+var in_coyote_time:bool = false
+
+func can_jump()->bool:
+	return is_on_floor() || in_coyote_time
 
 func dash_state(delta:float):
 	const DASH_POWER:int = 25 * SPEED
@@ -87,10 +94,24 @@ func dash_state(delta:float):
 	
 	pass
 
+func start_coyote():
+	in_coyote_time = true
+	can_coyote = false
+	var dur = 0.08
+	await get_tree().create_timer(dur).timeout
+	in_coyote_time = false
+
+var can_coyote:bool = true
+
 func constant_state(delta:float):
 	move_and_slide()
 	if(!is_on_floor()):
-		velocity.y += get_grav() * delta
+		if(can_coyote):
+			start_coyote() 
+		if(!in_coyote_time || state == STATES.JUMP):
+			velocity.y += get_grav() * delta
+	else:
+		can_coyote = true
 	var dir_x = Input.get_axis("LEFT","RIGHT")
 	if(dir_x != 0):
 		anim.flip_h = (dir_x == -1)
@@ -131,3 +152,16 @@ func enter_state(state_name:STATES):
 func exit_state(state_name):
 	match state_name:
 		pass
+
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	pass
+
+
+func _on_animated_sprite_2d_animation_changed() -> void:
+	if(jack_hammer.state == jack_hammer.states.stashed):
+		if(anim.animation == "run"):
+			pass
+		else:
+			pass
+	pass # Replace with function body.
