@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btb0o5t3074mb"]
+
+[ext_resource type="Script" uid="uid://c01mok1ut1svt" path="res://Scripts/Music_scripts/mus_gameplay.gd" id="1_5bq45"]
+
+[node name="BGM_Gameplay" type="Node"]
+script = ExtResource("1_5bq45")
+max_volume = 0.8

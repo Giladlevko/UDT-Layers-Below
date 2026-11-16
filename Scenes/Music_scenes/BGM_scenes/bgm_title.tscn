@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwre5slffxbbj"]
+
+[ext_resource type="Script" uid="uid://dvgrp6nbs52n2" path="res://Scripts/Music_scripts/mus_title.gd" id="1_ir6el"]
+[ext_resource type="AudioStream" uid="uid://bntse6uhx85q3" path="res://Assets/Music_assets/GWJ099_Menu_Layer1_Intro_90bpm.ogg" id="2_02ucx"]
+[ext_resource type="AudioStream" uid="uid://bbx5gsomfekv4" path="res://Assets/Music_assets/GWJ099_Menu_Layer2_Intro_90bpm.ogg" id="3_rlnus"]
+[ext_resource type="AudioStream" uid="uid://dygate2wwdxp0" path="res://Assets/Music_assets/GWJ099_Menu_Layer1_Loop_90bpm.ogg" id="4_ctuo4"]
+[ext_resource type="AudioStream" uid="uid://cntqprxpeywve" path="res://Assets/Music_assets/GWJ099_Menu_Layer2_Loop_90bpm.ogg" id="5_6i3e5"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_c2t3y"]
+stream_count = 2
+stream_0/stream = ExtResource("2_02ucx")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("3_rlnus")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_gpch2"]
+stream_count = 2
+stream_0/stream = ExtResource("4_ctuo4")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("5_6i3e5")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_aoyns"]
+clip_count = 2
+clip_0/name = &"Intro"
+clip_0/stream = SubResource("AudioStreamSynchronized_c2t3y")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Loop"
+clip_1/stream = SubResource("AudioStreamSynchronized_gpch2")
+clip_1/auto_advance = 0
+
+[node name="BGM_Title" type="Node"]
+script = ExtResource("1_ir6el")
+sync_streams = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_c2t3y"), SubResource("AudioStreamSynchronized_gpch2")])
+max_volume = 0.8
+my_stream = SubResource("AudioStreamInteractive_aoyns")
+metadata/_custom_type_script = "uid://13f1qplilho4"

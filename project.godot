@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 UI_GLOBAL="*res://Scripts/UI_scripts/ui_global.gd"
 SignalBus="*res://Scripts/signal_bus.gd"
 Global="*res://Scripts/global.gd"
+Music_GLOBAL="*res://Scenes/Music_scenes/music_handler.tscn"
 
 [display]
 
