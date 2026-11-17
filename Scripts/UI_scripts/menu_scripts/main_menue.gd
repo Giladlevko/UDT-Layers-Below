@@ -12,15 +12,13 @@ extends MenuUI
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.setup_UI()
+	#need to handle all music transitions related to scene switch/starting in the UI_GLOBAL
+	#not like this
 	Music_GLOBAL.music_title.play();
 	buttons = [play_button,audio_button,credits_button,quit_button,help_button]
 	self.connect_buttons()
-	setup_audio_controller()
 	pass # Replace with function body.
 
-func setup_audio_controller():
-	audio_controler.hover_sfx = self.hover_sfx
-	audio_controler.click_sfx = self.click_sfx
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -39,6 +37,7 @@ func _on_audio_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
+	Music_GLOBAL.music_title.fade_out_music(1.0)
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/credits.tscn")
 	pass # Replace with function body.
 

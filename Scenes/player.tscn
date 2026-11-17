@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dr4fcm00cdgx2"]
+[gd_scene load_steps=17 format=3 uid="uid://dr4fcm00cdgx2"]
 
 [ext_resource type="Script" uid="uid://crq0aro1chiwb" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://ffeqti6kt0gv" path="res://Scripts/player_camera.gd" id="3_vgqql"]
 [ext_resource type="PackedScene" uid="uid://dr461u8t0lyfo" path="res://Scenes/UI_scenes/menu_scenes/gameplay_menu.tscn" id="4_vgqql"]
-[ext_resource type="PackedScene" uid="uid://2mi232hnubdl" path="res://Scenes/jack_hammer.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://2mi232hnubdl" path="res://Scenes/Mining_tools_scenes/jack_hammer.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://b683mqc15w0ck" path="res://Scenes/Mining_tools_scenes/metal_detector.tscn" id="6_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("3_6t5aa")
@@ -99,10 +100,8 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
+drag_top_margin = 0.4
+drag_bottom_margin = 0.4
 editor_draw_drag_margin = true
 script = ExtResource("3_vgqql")
 
@@ -110,8 +109,12 @@ script = ExtResource("3_vgqql")
 
 [node name="gameplay_ui" parent="CanvasLayer" instance=ExtResource("4_vgqql")]
 
-[node name="jack_hammer" parent="." node_paths=PackedStringArray("drill_owner") instance=ExtResource("5_fkybt")]
-drill_owner = NodePath("..")
+[node name="jack_hammer" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("5_fkybt")]
+tool_owner = NodePath("..")
+
+[node name="MetalDetector" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("6_x3wgy")]
+visible = false
+tool_owner = NodePath("..")
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

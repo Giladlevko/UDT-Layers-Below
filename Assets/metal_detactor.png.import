@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxlmbwv4a5lpr"
-path="res://.godot/imported/slider_grabber.png-b333b5fa0a955c3a1fe1bee9df2132c7.ctex"
+uid="uid://b7gcfvfrcvd6w"
+path="res://.godot/imported/metal_detactor.png-8ea04f1eb03095dda9b7cc84158ec370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://slider_grabber.png"
-dest_files=["res://.godot/imported/slider_grabber.png-b333b5fa0a955c3a1fe1bee9df2132c7.ctex"]
+source_file="res://Assets/metal_detactor.png"
+dest_files=["res://.godot/imported/metal_detactor.png-8ea04f1eb03095dda9b7cc84158ec370.ctex"]
 
 [params]
 

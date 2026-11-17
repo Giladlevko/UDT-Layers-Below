@@ -1,0 +1,185 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvaw0e5x1pkaw"]
+
+[ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_fjcak"]
+[ext_resource type="Script" uid="uid://cuml5xlxlas0c" path="res://Scripts/UI_scripts/inventory_scripts/inventory.gd" id="2_6ve4c"]
+[ext_resource type="PackedScene" uid="uid://baaju4ku8gwaw" path="res://Scenes/UI_scenes/Inventory_scenes/inventory_slot.tscn" id="3_fjcak"]
+[ext_resource type="Resource" uid="uid://crqj6t805sehi" path="res://Scripts/UI_scripts/inventory_scripts/empty_tool_slot.tres" id="4_6ve4c"]
+[ext_resource type="Resource" uid="uid://bb8urce6sojr3" path="res://Scripts/UI_scripts/inventory_scripts/empty_item_slot.tres" id="5_h6a8m"]
+[ext_resource type="PackedScene" uid="uid://dmp6psxbdi2jh" path="res://Scenes/UI_scenes/currency_label.tscn" id="6_s6fqn"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fjcak")
+script = ExtResource("2_6ve4c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="close_button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Close"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="title_panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/title_panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Inventory"
+
+[node name="inventory_panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/inventory_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 39
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="tool_title_panel" type="Panel" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/tool_title_panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tools:"
+
+[node name="toolsContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="InventorySlot" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/toolsContainer" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("4_6ve4c")
+
+[node name="InventorySlot2" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/toolsContainer" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("4_6ve4c")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="item_panel" type="Panel" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/item_panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -8.0
+offset_right = 34.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Items:"
+
+[node name="items_container" type="GridContainer" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="InventorySlot" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/items_container" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("5_h6a8m")
+
+[node name="InventorySlot2" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/items_container" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("5_h6a8m")
+
+[node name="InventorySlot3" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/items_container" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("5_h6a8m")
+
+[node name="InventorySlot4" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/items_container" instance=ExtResource("3_fjcak")]
+layout_mode = 2
+slot_data = ExtResource("5_h6a8m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 80
+
+[node name="coal_label" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/HBoxContainer" instance=ExtResource("6_s6fqn")]
+layout_mode = 2
+tex_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[node name="CurrencyLabel" parent="MarginContainer/VBoxContainer/inventory_panel/MarginContainer/HBoxContainer" instance=ExtResource("6_s6fqn")]
+layout_mode = 2
+tex_color = Color(0, 1, 0, 1)
+currency_type = "Gems"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/close_button" to="." method="_on_close_button_pressed"]

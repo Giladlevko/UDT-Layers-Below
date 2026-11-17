@@ -19,6 +19,7 @@ class_name AUDIO_CONTROLER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.set_button_sfx_to_global()
 	buttons.push_back(close_button)
 	connect_buttons()
 	update_slider_to_real_audio()

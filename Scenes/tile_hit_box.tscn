@@ -1,27 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnwtgpmpg6kf"]
+[gd_scene load_steps=4 format=3 uid="uid://bnwtgpmpg6kf"]
 
 [ext_resource type="Script" uid="uid://c3k4a02d51fte" path="res://Scripts/Tile_scripts/tile_hit_box.gd" id="1_hvy5x"]
-[ext_resource type="Shader" uid="uid://v746ywhbfuoy" path="res://Scripts/Tile_scripts/tile_crack.gdshader" id="1_istyx"]
 [ext_resource type="Texture2D" uid="uid://b2qud388i28ug" path="res://Assets/tiles/New Piskel-1.png.png" id="3_h2xtc"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2xtc"]
-shader = ExtResource("1_istyx")
-shader_parameter/crack_depth = 0.112
-shader_parameter/crack_scale = 0.899
-shader_parameter/crack_zebra_scale = 0.449
-shader_parameter/crack_zebra_amp = 3.708
-shader_parameter/crack_profile = 6.451
-shader_parameter/crack_slope = 50.0
-shader_parameter/crack_width = 0.0
-shader_parameter/refraction_offset = Vector2(25, 25)
-shader_parameter/reflection_offset = Vector2(1, 1)
-shader_parameter/reflection_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rwj2"]
 size = Vector2(18, 18)
 
 [node name="tile_hit_box" type="Area2D"]
-material = SubResource("ShaderMaterial_h2xtc")
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_hvy5x")

@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmp6psxbdi2jh"]
+
+[ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_bcfkk"]
+[ext_resource type="Script" uid="uid://culip0gj862hl" path="res://Scripts/UI_scripts/currency_label.gd" id="2_s44yd"]
+[ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="3_81o6r"]
+
+[node name="CurrencyLabel" type="Control"]
+custom_minimum_size = Vector2(150, 63)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_bcfkk")
+script = ExtResource("2_s44yd")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 150.0
+offset_bottom = 63.0
+theme_override_constants/separation = 3
+
+[node name="texPanel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/texPanel"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -7.5
+offset_right = 12.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_81o6r")
+stretch_mode = 5
+
+[node name="labelPanel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/labelPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -8.0
+offset_right = 31.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Coal:"
+horizontal_alignment = 1

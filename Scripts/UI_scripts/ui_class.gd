@@ -15,6 +15,11 @@ func enter_trans():
 	lighten_screen()
 	song_on(song)
 
+##Sets the button SFX to their global counterparts
+func set_button_sfx_to_global():
+	click_sfx = UI_GLOBAL.button_click_sfx
+	hover_sfx = UI_GLOBAL.button_hover_sfx
+
 ##Connects the buttons to on_mouse_entered, on_mouse_exited && base_button_pressed 
 ##global function. These functions handle sound and Shrink / Expand effects
 func connect_buttons(dur:float = 0.2,scale_size:float = 1.3):

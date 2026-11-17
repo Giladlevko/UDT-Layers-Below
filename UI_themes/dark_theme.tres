@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=13 format=3 uid="uid://rgyna2d0tcac"]
 
-[ext_resource type="Texture2D" uid="uid://dxlmbwv4a5lpr" path="res://slider_grabber.png" id="1_upn7g"]
+[ext_resource type="Texture2D" uid="uid://dxlmbwv4a5lpr" path="res://Assets/UI_assets/slider_grabber.png" id="1_upn7g"]
 [ext_resource type="FontFile" uid="uid://c2bwhwnaitdi0" path="res://Assets/UI_fonts/default_pixel_font.ttf" id="1_yos3a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pyarg"]

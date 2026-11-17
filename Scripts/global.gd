@@ -24,3 +24,13 @@ var tile_health:Dictionary[String,int] = {
 	"LightPinkGem":190,
 	
 }
+
+
+var currency:Dictionary[String,int] = {
+	"Coal":0,
+	"Gems":0
+}
+
+func change_currency_amount(type:String,amount:int):
+	currency[type] += amount
+	SignalBus.currency_changed.emit()

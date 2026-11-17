@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://b683mqc15w0ck"]
+
+[ext_resource type="Script" uid="uid://51mwnvp8dhnb" path="res://Scripts/mining_tool_scripts/metal_detector.gd" id="1_y2j5e"]
+[ext_resource type="Texture2D" uid="uid://b7gcfvfrcvd6w" path="res://Assets/metal_detactor.png" id="2_higt5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqgvm"]
+atlas = ExtResource("2_higt5")
+region = Rect2(150, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maewx"]
+atlas = ExtResource("2_higt5")
+region = Rect2(100, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qmkg"]
+atlas = ExtResource("2_higt5")
+region = Rect2(50, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id2o8"]
+atlas = ExtResource("2_higt5")
+region = Rect2(0, 0, 50, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qcjdu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqgvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maewx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qmkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id2o8")
+}],
+"loop": true,
+"name": &"detect",
+"speed": 5.0
+}]
+
+[node name="MetalDetector" type="Node2D" node_paths=PackedStringArray("anim", "ray_cast", "collider_ray")]
+script = ExtResource("1_y2j5e")
+anim = NodePath("AnimatedSprite2D")
+ray_cast = NodePath("AnimatedSprite2D/ray_cast")
+collider_ray = NodePath("AnimatedSprite2D/collider_ray")
+stashed_angle = 155.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(15, 0)
+sprite_frames = SubResource("SpriteFrames_qcjdu")
+animation = &"detect"
+frame_progress = 0.577675
+
+[node name="ray_cast" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(-1, 2)
+target_position = Vector2(11, 5)
+collide_with_bodies = false
+
+[node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(-8, -1)
+target_position = Vector2(14, 6)
+
+[node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-8, 0)
+target_position = Vector2(97, 0)
+collision_mask = 16

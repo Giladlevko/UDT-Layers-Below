@@ -52,8 +52,8 @@ func init_dark_screen():
 		
 
 func init_button_sfx():
-	button_hover_sfx.bus = "sfx"
-	button_click_sfx.bus = "sfx"
+	button_hover_sfx.bus = "UI"
+	button_click_sfx.bus = "UI"
 	button_hover_sfx.stream = button_hover_sfx_stream
 	button_click_sfx.stream = button_click_sfx_stream
 	button_hover_sfx.volume_db = button_hover_sfx_db

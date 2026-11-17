@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cudn50eg3p4km" path="res://Scripts/UI_scripts/cooldown_bar.gd" id="2_pv0vq"]
 
 [node name="cooldown_bar" type="Control" node_paths=PackedStringArray("bar")]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4

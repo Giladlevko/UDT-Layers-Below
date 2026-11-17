@@ -1,39 +1,39 @@
 [gd_scene load_steps=10 format=3 uid="uid://2mi232hnubdl"]
 
-[ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/jack_hammer.gd" id="1_nny23"]
-[ext_resource type="Texture2D" uid="uid://b2blwsjtvv766" path="res://Assets/dril_anim.png" id="1_uwvx3"]
-[ext_resource type="Texture2D" uid="uid://c8xobhdfg77bv" path="res://Assets/tiles/basic_particle.png" id="3_q4y5v"]
+[ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/mining_tool_scripts/jack_hammer.gd" id="1_odu2g"]
+[ext_resource type="Texture2D" uid="uid://bt4m8y712klsb" path="res://Assets/drill_anim.png" id="2_dts8e"]
+[ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="3_xx4kr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nny23"]
-atlas = ExtResource("1_uwvx3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqfdv"]
+atlas = ExtResource("2_dts8e")
 region = Rect2(0, 0, 50, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q4y5v"]
-atlas = ExtResource("1_uwvx3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy0y3"]
+atlas = ExtResource("2_dts8e")
 region = Rect2(50, 0, 50, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w22yf"]
-atlas = ExtResource("1_uwvx3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vrxc"]
+atlas = ExtResource("2_dts8e")
 region = Rect2(100, 0, 50, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n3dl1"]
-atlas = ExtResource("1_uwvx3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_oaww5"]
+atlas = ExtResource("2_dts8e")
 region = Rect2(150, 0, 50, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jqfdv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nny23")
+"texture": SubResource("AtlasTexture_jqfdv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q4y5v")
+"texture": SubResource("AtlasTexture_oy0y3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w22yf")
+"texture": SubResource("AtlasTexture_4vrxc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n3dl1")
+"texture": SubResource("AtlasTexture_oaww5")
 }],
 "loop": true,
 "name": &"drill",
@@ -45,27 +45,30 @@ _limits = [0.0, 0.3, 0.0, 1.0]
 _data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="jack_hammer" type="Node2D"]
-script = ExtResource("1_nny23")
+[node name="jack_hammer" type="Node2D" node_paths=PackedStringArray("anim", "ray_cast", "collider_ray")]
+script = ExtResource("1_odu2g")
+anim = NodePath("AnimatedSprite2D")
+ray_cast = NodePath("AnimatedSprite2D/RayCast2D")
+collider_ray = NodePath("AnimatedSprite2D/collider_ray")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-rotation = 0.610865
+position = Vector2(15, 0)
 sprite_frames = SubResource("SpriteFrames_jqfdv")
 animation = &"drill"
 autoplay = "drill"
 metadata/_edit_lock_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
-position = Vector2(7.20922, -0.16485)
-target_position = Vector2(5.81649, -0.410426)
+position = Vector2(6.636, -0.984)
+target_position = Vector2(6.421, -0.459)
 collision_mask = 8
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
-position = Vector2(-10, 0)
-target_position = Vector2(17.2092, -0.16485)
+position = Vector2(-10.5683, -1.14546)
+target_position = Vector2(17.2039, 0.161455)
 collision_mask = 2
 hit_from_inside = true
 
@@ -74,7 +77,7 @@ hit_from_inside = true
 [node name="tile_particle" type="CPUParticles2D" parent="particles"]
 emitting = false
 amount = 16
-texture = ExtResource("3_q4y5v")
+texture = ExtResource("3_xx4kr")
 lifetime = 0.8
 one_shot = true
 preprocess = 0.1
