@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://dr4fcm00cdgx2"]
+
+[ext_resource type="Script" uid="uid://crq0aro1chiwb" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://ffeqti6kt0gv" path="res://Scripts/player_camera.gd" id="3_vgqql"]
+[ext_resource type="PackedScene" uid="uid://dr461u8t0lyfo" path="res://Scenes/UI_scenes/menu_scenes/gameplay_menu.tscn" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://2mi232hnubdl" path="res://Scenes/jack_hammer.tscn" id="5_fkybt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(50, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(150, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(0, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(100, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(0, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(50, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(100, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("3_6t5aa")
+region = Rect2(150, 0, 50, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v0iea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8erm5")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ek2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0iea"]
+radius = 7.0
+height = 20.0
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_v0iea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v0iea")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_v0iea")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
+script = ExtResource("3_vgqql")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="gameplay_ui" parent="CanvasLayer" instance=ExtResource("4_vgqql")]
+
+[node name="jack_hammer" parent="." node_paths=PackedStringArray("drill_owner") instance=ExtResource("5_fkybt")]
+drill_owner = NodePath("..")
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
