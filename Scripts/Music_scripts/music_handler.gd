@@ -7,6 +7,7 @@ class_name MusicHandler
 @export var _music_dictionary:Dictionary[StringName, PackedScene]
 
 var music_title:MUS_Title;
+var music_credits:MUS_Base
 var music_gameplay:MUS_Gameplay;
 
 func _ready() -> void:

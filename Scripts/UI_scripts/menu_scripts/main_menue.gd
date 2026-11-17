@@ -39,6 +39,9 @@ func _on_audio_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
+	Music_GLOBAL.music_credits = Music_GLOBAL.add_music("BGM_Credits");
+	Music_GLOBAL.music_credits.play();
+	Music_GLOBAL.music_title.fade_out_music(2.0);
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/credits.tscn")
 	pass # Replace with function body.
 
