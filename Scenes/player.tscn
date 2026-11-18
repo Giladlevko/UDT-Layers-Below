@@ -113,7 +113,6 @@ script = ExtResource("3_vgqql")
 tool_owner = NodePath("..")
 
 [node name="MetalDetector" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("6_x3wgy")]
-visible = false
 tool_owner = NodePath("..")
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]

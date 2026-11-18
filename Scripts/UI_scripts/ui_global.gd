@@ -16,8 +16,8 @@ var button_click_sfx_stream:AudioStream = preload(button_click_sfx_path)
 @onready var button_hover_sfx:AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var button_click_sfx:AudioStreamPlayer = AudioStreamPlayer.new()
 
-const button_hover_sfx_db:float = -10
-const button_click_sfx_db:float = -10
+const button_hover_sfx_db:float = -15
+const button_click_sfx_db:float = -15
 
 var menu_songs_path:Dictionary[String,String] = {
 	"MainMenu":"",

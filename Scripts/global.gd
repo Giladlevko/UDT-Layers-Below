@@ -25,6 +25,10 @@ var tile_health:Dictionary[String,int] = {
 	
 }
 
+var drill_speed:int = 1
+var drill_power:int = 5
+var vision_range:int = 5
+var detactor_range:int = 100
 
 var currency:Dictionary[String,int] = {
 	"Coal":0,

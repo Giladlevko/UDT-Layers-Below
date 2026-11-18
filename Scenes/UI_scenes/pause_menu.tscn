@@ -1,8 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8djxxsus4lep"]
+[gd_scene load_steps=10 format=3 uid="uid://c8djxxsus4lep"]
 
 [ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_1qql8"]
 [ext_resource type="Script" uid="uid://cna1r7usepnwj" path="res://Scripts/UI_scripts/pause_menu.gd" id="2_5rtt0"]
 [ext_resource type="PackedScene" uid="uid://dvaw0e5x1pkaw" path="res://Scenes/UI_scenes/Inventory_scenes/inventory.tscn" id="3_ejxbn"]
+[ext_resource type="PackedScene" uid="uid://clovevcxnu2qx" path="res://Scenes/UI_scenes/audio_controler.tscn" id="4_fqqfg"]
+[ext_resource type="PackedScene" uid="uid://dj8vytlteyu1v" path="res://Scenes/UI_scenes/store_scenes/upgrade_store.tscn" id="5_pa47y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3uie7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa47y"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7urao"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886723, 0.230795, 0.91327, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1uowl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.995719, 0.663842, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -14,7 +64,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = ExtResource("1_1qql8")
 script = ExtResource("2_5rtt0")
 
@@ -54,7 +103,7 @@ grow_vertical = 2
 text = "Paused!"
 
 [node name="Panel" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(200, 150)
+custom_minimum_size = Vector2(280, 250)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
@@ -83,7 +132,23 @@ text = "Resume!"
 [node name="inv_button" type="Button" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_3uie7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3uie7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pa47y")
 text = "Inventory!"
+
+[node name="store_button" type="Button" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_7urao")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7urao")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1uowl")
+text = "Upgrades!"
+
+[node name="audio_button" type="Button" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Audio Settings!"
 
 [node name="back_to_main_button" type="Button" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 30)
@@ -94,6 +159,16 @@ text = "Main Menu!"
 visible = false
 layout_mode = 1
 
+[node name="audio_controler" parent="." instance=ExtResource("4_fqqfg")]
+visible = false
+layout_mode = 1
+
+[node name="UpgradeStore" parent="." instance=ExtResource("5_pa47y")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer/inv_button" to="." method="_on_inv_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer/store_button" to="." method="_on_store_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer/audio_button" to="." method="_on_audio_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer/back_to_main_button" to="." method="_on_back_to_main_button_pressed"]

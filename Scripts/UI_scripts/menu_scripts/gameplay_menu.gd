@@ -1,6 +1,8 @@
 extends MenuUI
-@onready var menu_button: Button = $MarginContainer/menu_cont/menu_button
-@onready var pause_menu: PauseMenu = $MarginContainer/menu_cont/PauseMenu
+
+@onready var menu_button: Button = $MarginContainer/menu_cont/VBoxContainer/menu_button
+
+@onready var pause_menu: PauseMenu = $MarginContainer/PauseMenu
 
 
 # Called when the node enters the scene tree for the first time.
@@ -9,6 +11,7 @@ func _ready() -> void:
 	self.buttons = [menu_button]
 	connect_buttons()
 	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

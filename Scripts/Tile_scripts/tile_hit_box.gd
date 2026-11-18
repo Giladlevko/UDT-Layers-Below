@@ -8,6 +8,7 @@ var max_health:int = 20
 var tile_stage:int = 0
 var freed:bool = false
 
+
 var curr_health:int = 20:
 	set(val):
 		curr_health = clamp(val,0,max_health)
@@ -61,6 +62,14 @@ func remove_tile_and_self():
 	sprite.visible = false
 	var tile_pos := get_tile_pos()
 	Global.tile_map_layer.set_cell.call_deferred(tile_pos,-1)
+	var data := get_tile_data()
+	var gems:int = data.get_custom_data("GemCount")
+	var coal:int = data.get_custom_data("CoalCount")
+	if( gems > 0):
+		Global.change_currency_amount("Gems",gems)
+	if(coal>0):
+		Global.change_currency_amount("Coal",coal)
+		
 	await handle_particle()
 	Global.tile_hit_layer.set_cell.call_deferred(tile_pos,-1)
 	pass

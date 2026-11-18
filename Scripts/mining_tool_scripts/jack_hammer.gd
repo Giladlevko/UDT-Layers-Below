@@ -10,6 +10,7 @@ var damage:int = 15
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.setup()
+	anim.speed_scale = 0
 	state_changed.connect(on_state_changed)
 	SignalBus.emit_tile_particle.connect(emit_tile_particle)
 	pass # Replace with function body.
@@ -29,6 +30,10 @@ func on_state_changed(prev:states,new:states):
 		stop()
 	elif(prev == states.held and new == states.using):
 		drill()
+	elif(prev == states.unequipped and new == states.using):
+		drill()
+	elif(prev == states.using and new == states.unequipped):
+		stop()
 	pass
 
 

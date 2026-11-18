@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://03uuj3wy64ik"]
+
+[ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_grbs6"]
+[ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="2_2oteg"]
+[ext_resource type="Script" uid="uid://c3u0r7ppxv1b3" path="res://Scripts/UI_scripts/merged_currency_label.gd" id="2_sq2s7"]
+
+[node name="MergedCurrencyLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_grbs6")
+script = ExtResource("2_sq2s7")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(150, 45)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="GemContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/GemContainer"]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("2_2oteg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="gem_label" type="Label" parent="Panel/MarginContainer/GemContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+
+[node name="coalContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/coalContainer"]
+modulate = Color(0.239216, 0.239216, 0.239216, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("2_2oteg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="coal_label" type="Label" parent="Panel/MarginContainer/coalContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "0"
+horizontal_alignment = 1

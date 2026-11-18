@@ -3,7 +3,11 @@ class_name PLAYER
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var colli: CollisionShape2D = $CollisionShape2D
+
 @onready var jack_hammer: JACK_HAMMER = $jack_hammer
+@onready var metal_detector: METAL_DETECTOR = $MetalDetector
+
+var mining_tools:Array[MINING_TOOL] 
 
 enum STATES{IDLE,RUNNING,JUMP,DASH}
 var state:STATES
@@ -22,6 +26,7 @@ const SPEED:int = 150
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	enter_state(STATES.IDLE)
+	mining_tools = [jack_hammer,metal_detector]
 	pass # Replace with function body.
 
 
@@ -32,9 +37,23 @@ func _process(delta: float) -> void:
 		STATES.IDLE:idle_state()
 		STATES.DASH:dash_state(delta)
 		STATES.JUMP:jump_state()
-	pass
 	constant_state(delta)
+	
+	if(Input.is_action_just_pressed("SWITCH_TOOL")):
+		switch_tool()
 
+var current_tool_index = 0
+func switch_tool():
+	var next_index:int = (current_tool_index + 1) % mining_tools.size()
+	if(next_index == current_tool_index):return
+	
+	var current_tool_state: = mining_tools[current_tool_index].state
+	mining_tools[next_index].equip(current_tool_state)
+	mining_tools[next_index].stashed_z_index = -1
+	mining_tools[current_tool_index].unequip()
+	mining_tools[current_tool_index].stashed_z_index = -2
+	current_tool_index = next_index
+	pass
 
 func get_grav() -> float:
 	return jump_gravity if velocity.y < 0 else fall_gravity
@@ -156,12 +175,3 @@ func exit_state(state_name):
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	pass
-
-
-func _on_animated_sprite_2d_animation_changed() -> void:
-	if(jack_hammer.state == jack_hammer.states.stashed):
-		if(anim.animation == "run"):
-			pass
-		else:
-			pass
-	pass # Replace with function body.

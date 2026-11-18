@@ -1,7 +1,7 @@
 extends Node2D
 class_name MINING_TOOL
 
-enum states{held,stashed,using}
+enum states{held,stashed,using,unequipped}
 var state:states
 
 @export_group("Essential Nodes")
@@ -20,6 +20,8 @@ var ray_default_pos:Vector2
 var collider_default_target:Vector2
 var collider_default_pos:Vector2
 
+var stashed_z_index:int = -1
+
 signal state_changed(prev:states,new:states)
 
 func setup():
@@ -29,8 +31,17 @@ func setup():
 	collider_default_pos = collider_ray.position
 	state = states.stashed
 	stash()
-	anim.speed_scale = 0
 	
+
+
+func equip(new:states):
+	if(new == states.using or new == states.held):
+		take_out()
+	change_state(new)
+
+func unequip():
+	stash()
+	change_state(states.unequipped)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,7 +51,7 @@ func _process(delta: float) -> void:
 
 
 func handle_collider_ray(delta:float):
-	if(state == states.stashed):
+	if(state == states.stashed or state == states.unequipped):
 		position = Vector2.ZERO
 		return
 	var target_pos:Vector2 = position
@@ -69,6 +80,9 @@ func flip_ray(flip:bool):
 
 var stopped_dir:Vector2
 func handle_tool(delta:float):
+	if(state == states.unequipped):
+		stash()
+		return
 	if(state != states.stashed):
 		var dir:float = tool_owner.global_position.angle_to_point(get_global_mouse_position())
 		dir = fposmod(snappedf(dir,PI/8),TAU)
@@ -105,6 +119,7 @@ func handle_tool(delta:float):
 func change_state(new:states):
 	state_changed.emit(state,new)
 	state = new
+	
 
 
 func take_out():
@@ -116,7 +131,7 @@ func take_out():
 
 func stash():
 	rotation_degrees = 0
-	z_index = -1
+	z_index = stashed_z_index
 	anim.flip_v = false
 	anim.position = stashed_pos
 	
