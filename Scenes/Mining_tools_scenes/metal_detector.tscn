@@ -52,18 +52,20 @@ held_pos = Vector2(15, 0)
 position = Vector2(10, 0)
 sprite_frames = SubResource("SpriteFrames_qcjdu")
 animation = &"detect"
-frame_progress = 0.643901
+frame_progress = 0.934769
 
 [node name="rays" type="Node2D" parent="AnimatedSprite2D"]
 
 [node name="ray_cast" type="RayCast2D" parent="AnimatedSprite2D/rays"]
-position = Vector2(3, 0)
-target_position = Vector2(6, 0)
+position = Vector2(-1, 0)
+target_position = Vector2(9, 0)
+collision_mask = 8
+collide_with_areas = true
 collide_with_bodies = false
 
 [node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D/rays"]
 position = Vector2(-5, 0)
-target_position = Vector2(9, 0)
+target_position = Vector2(11, 0)
 collision_mask = 2
 hit_from_inside = true
 
@@ -71,9 +73,11 @@ hit_from_inside = true
 modulate = Color(1, 0, 1, 1)
 position = Vector2(-7, 0)
 enabled = false
-target_position = Vector2(100, 0)
+target_position = Vector2(150, 0)
 collision_mask = 16
+collide_with_areas = true
 
 [node name="beep_timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="beep_timer" to="." method="_on_beep_timer_timeout"]

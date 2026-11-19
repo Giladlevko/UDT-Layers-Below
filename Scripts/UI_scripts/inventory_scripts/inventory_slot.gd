@@ -51,6 +51,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 func make_drag_preview()->Control:
 	var preview: = TextureRect.new()
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	preview.texture = slot_data.texture
 	preview.custom_minimum_size = Vector2(32,32)
 	return preview

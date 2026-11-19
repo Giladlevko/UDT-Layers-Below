@@ -6,6 +6,12 @@ signal cooldown_ended
 signal emit_tile_particle(part_count:int,color:Color)
 signal particle_finished()
 signal display_message(message:String)
+
 signal on_take_item(data:InvSlotData)
-signal on_item_taken(successful:bool)
+
+signal on_item_taken(successful:bool,data:InvSlotData)
+
 signal currency_changed()
+
+signal detector_range_changed
+signal vision_range_changed

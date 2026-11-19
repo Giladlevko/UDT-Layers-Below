@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://df6h3ihpfn731"]
+[gd_scene load_steps=7 format=3 uid="uid://df6h3ihpfn731"]
 
 [ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_esrmk"]
 [ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="2_r8oj4"]
 [ext_resource type="Script" uid="uid://kdwjkxnmtqfo" path="res://Scripts/UI_scripts/store_scripts/upgrade_item.gd" id="2_xpo5y"]
+[ext_resource type="AudioStream" uid="uid://frlvynfgkclk" path="res://Assets/sfx_assets/SFX_Store.ogg" id="4_bf85w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8cf1"]
 
@@ -60,11 +61,58 @@ layout_mode = 2
 text = "Cost: 100"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/cost_panel/costContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
 modulate = Color(0, 1, 0, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
 custom_minimum_size = Vector2(30, 20)
+layout_direction = 0
 layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+mouse_filter = 1
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
 texture = ExtResource("2_r8oj4")
+expand_mode = 0
 stretch_mode = 5
+flip_h = false
+flip_v = false
+script = null
 
 [node name="upgrade_button" type="Button" parent="VBoxContainer"]
 use_parent_material = true
@@ -75,5 +123,10 @@ size_flags_vertical = 4
 theme_override_styles/hover = SubResource("StyleBoxFlat_esrmk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_esrmk")
 text = "Hammer Speed + 30%"
+
+[node name="buy_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bf85w")
+volume_db = -30.0
+bus = &"UI"
 
 [connection signal="pressed" from="VBoxContainer/upgrade_button" to="." method="_on_upgrade_button_pressed"]

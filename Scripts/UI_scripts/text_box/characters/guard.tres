@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://b11b3survh8mb"]
+
+[ext_resource type="Script" uid="uid://bids4wsqcbdfo" path="res://Scripts/UI_scripts/text_box/character_data.gd" id="1_k1bo8"]
+[ext_resource type="Texture2D" uid="uid://duhw3dfene6v1" path="res://Assets/npcs/guard.png" id="1_q5pvk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8s18"]
+atlas = ExtResource("1_q5pvk")
+region = Rect2(57, 0, 25, 25)
+
+[resource]
+script = ExtResource("1_k1bo8")
+name = "Guard"
+portrait = SubResource("AtlasTexture_o8s18")
+description = ""
+metadata/_custom_type_script = "uid://bids4wsqcbdfo"

@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://cngthwuci8cu2"]
+
+[ext_resource type="Script" uid="uid://do514vc58jppq" path="res://Scripts/npc_scripts/guard.gd" id="1_okm1w"]
+[ext_resource type="Texture2D" uid="uid://duhw3dfene6v1" path="res://Assets/npcs/guard.png" id="2_maddd"]
+[ext_resource type="Resource" uid="uid://dc2hlfnuc14rm" path="res://Scripts/UI_scripts/text_box/dialogs/guard_dialog.tres" id="2_vnvi7"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="3_maddd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okm1w"]
+size = Vector2(158, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnvi7"]
+atlas = ExtResource("2_maddd")
+region = Rect2(0, 0, 48, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lodi7"]
+atlas = ExtResource("2_maddd")
+region = Rect2(48, 0, 48, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnvi7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnvi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lodi7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okm1w"]
+radius = 15.0
+height = 44.0
+
+[node name="Guard" type="CharacterBody2D"]
+script = ExtResource("1_okm1w")
+dialog = ExtResource("2_vnvi7")
+
+[node name="FlashLight" parent="." instance=ExtResource("3_maddd")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_okm1w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vnvi7")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0732825
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_okm1w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

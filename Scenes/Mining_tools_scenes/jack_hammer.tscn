@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://2mi232hnubdl"]
+[gd_scene load_steps=12 format=3 uid="uid://2mi232hnubdl"]
 
 [ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/mining_tool_scripts/jack_hammer.gd" id="1_odu2g"]
 [ext_resource type="Texture2D" uid="uid://bt4m8y712klsb" path="res://Assets/drill_anim.png" id="2_dts8e"]
 [ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="3_xx4kr"]
+[ext_resource type="AudioStream" uid="uid://djj3pf5uxle4x" path="res://Assets/sfx_assets/SFX_JackHammer_Boom_V2.ogg" id="4_dts8e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqfdv"]
 atlas = ExtResource("2_dts8e")
@@ -45,6 +46,11 @@ _limits = [0.0, 0.3, 0.0, 1.0]
 _data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xx4kr"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_dts8e")
+
 [node name="jack_hammer" type="Node2D" node_paths=PackedStringArray("anim", "ray_cast", "collider_ray")]
 script = ExtResource("1_odu2g")
 anim = NodePath("AnimatedSprite2D")
@@ -60,6 +66,14 @@ metadata/_edit_lock_ = true
 
 [node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
 position = Vector2(6.636, -0.984)
+target_position = Vector2(5.364, -0.416)
+collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="drill_ray" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(6.636, -0.984)
 target_position = Vector2(6.421, -0.459)
 collision_mask = 8
 hit_from_inside = true
@@ -67,8 +81,8 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
-position = Vector2(-10.5683, -1.14546)
-target_position = Vector2(17.2039, 0.161455)
+position = Vector2(-14, -1)
+target_position = Vector2(20.505, 0)
 collision_mask = 2
 
 [node name="particles" type="Node" parent="."]
@@ -94,5 +108,13 @@ linear_accel_max = 25.0
 damping_min = 5.0
 damping_max = 5.0
 scale_amount_curve = SubResource("Curve_nny23")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="using_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xx4kr")
+volume_db = -30.0
+pitch_scale = 0.7
+bus = &"sfx"
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

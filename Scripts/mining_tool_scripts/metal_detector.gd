@@ -9,8 +9,12 @@ func _ready() -> void:
 	self.setup()
 	self.state_changed.connect(on_state_changed)
 	change_state(states.unequipped)
+	SignalBus.detector_range_changed.connect(on_detector_range_changed)
 	pass # Replace with function body.
 
+func on_detector_range_changed():
+	gem_collider.target_position.x = Global.detactor_range
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -35,9 +39,6 @@ var can_beep:bool = true
 func beep():
 	if(can_beep):
 		can_beep = false
-		print("beep")
-		UI_GLOBAL.button_hover_sfx.play()
-		#sfx here
 		beep_timer.start(beep_freq)
 		
 
@@ -46,7 +47,8 @@ func handle_gem_collider():
 		beep()
 		var col_pos:Vector2 = gem_collider.get_collision_point()
 		var dist = global_position.distance_to(col_pos)
-		beep_freq = clamp(0.01*dist,0.01,3)
+		var sec_per_pixel:float = 0.005
+		beep_freq = clamp(sec_per_pixel*dist,sec_per_pixel,3)
 		pass
 
 func detect():
@@ -60,4 +62,7 @@ func stop():
 
 func _on_beep_timer_timeout() -> void:
 	can_beep = true
+	if(gem_collider.is_colliding()):
+		#sfx here
+		UI_GLOBAL.button_hover_sfx.play()
 	pass # Replace with function body.

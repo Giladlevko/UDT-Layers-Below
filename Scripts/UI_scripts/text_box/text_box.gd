@@ -20,12 +20,11 @@ var forced_end:bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup()
-	play_dialog("example_1")
 	pass # Replace with function body.
 
 ##Connects buttens, Signals, and sets Opacity to 0
 func setup():
-	modulate.a = 0
+	visible = false
 	buttons = [skip_button]
 	connect_buttons(0.2,1.1)
 	line_finished.connect(on_line_finished)

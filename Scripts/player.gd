@@ -4,8 +4,11 @@ class_name PLAYER
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var colli: CollisionShape2D = $CollisionShape2D
 
-@onready var jack_hammer: JACK_HAMMER = $jack_hammer
-@onready var metal_detector: METAL_DETECTOR = $MetalDetector
+@onready var walk_sfx: AudioStreamPlayer2D = $sfx/walk_sfx
+@onready var jump_sfx: AudioStreamPlayer2D = $sfx/jump_sfx
+
+var jack_hammer: JACK_HAMMER
+var metal_detector: METAL_DETECTOR
 
 var mining_tools:Array[MINING_TOOL] 
 
@@ -25,13 +28,19 @@ const SPEED:int = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.player = self
 	enter_state(STATES.IDLE)
-	mining_tools = [jack_hammer,metal_detector]
+	mining_tools = []
+	SignalBus.on_item_taken.connect(on_inv_item_taken)
+	SignalBus.on_take_item.emit(Global.drill_slot_data)
+	SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
+	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	match state:
 		STATES.RUNNING:move_state()
 		STATES.IDLE:idle_state()
@@ -165,6 +174,7 @@ func enter_state(state_name:STATES):
 			await SignalBus.cooldown_ended
 			can_dash = true
 		STATES.JUMP:
+			jump_sfx.play()
 			anim.play("jump")
 			velocity.y += JUMP_VELOCITY
 ##function for handleing state exits
@@ -173,5 +183,38 @@ func exit_state(state_name):
 		pass
 
 
+func already_has_tool(tool:MINING_TOOL)->bool:
+	var tool_name:String = tool.get_script().get_global_name()
+	for t in mining_tools:
+		if t.get_script().get_global_name() == tool_name:
+			return true
+	return false
+
+func on_inv_item_taken(successful:bool,data:InvSlotData):
+	if(data.slot_type == "Tool" and successful):
+		var new_tool:MINING_TOOL = data.scene.instantiate()
+		if(already_has_tool(new_tool)):
+			new_tool.queue_free()
+			return
+		new_tool.tool_owner = self
+		add_child(new_tool)
+		new_tool.global_position = global_position
+		mining_tools.push_back(new_tool)
+		if new_tool is JACK_HAMMER:
+			jack_hammer = new_tool
+		elif new_tool is METAL_DETECTOR:
+			metal_detector = new_tool
+			
+		switch_tool()
+	
+
+
 func _on_animated_sprite_2d_animation_looped() -> void:
 	pass
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if anim.animation == "run":
+		if anim.frame == 2:
+			walk_sfx.play()
+	pass # Replace with function body.

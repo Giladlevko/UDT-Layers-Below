@@ -2,6 +2,7 @@ extends Control
 @onready var cost_label: Label = $VBoxContainer/cost_panel/costContainer/cost_label
 
 @onready var upgrade_button: Button = $VBoxContainer/upgrade_button
+@onready var buy_sfx: AudioStreamPlayer = $buy_sfx
 
 
 @export_enum("drill speed", "drill power", "vision range","detactor range")
@@ -58,11 +59,13 @@ func handle_upgrade():
 
 func _on_upgrade_button_pressed() -> void:
 	if(Global.currency["Gems"] >= price):
+		handle_upgrade()
 		Global.change_currency_amount("Gems",-price)
-		#buy sfx here
+		buy_sfx.play()
 		current_use += 1
 		if(current_use == max_uses):
-			upgrade_button.disabled
+			upgrade_button.disabled = true
+			print("disabled button")
 		else: price *= 2
 	else:
 		SignalBus.display_message.emit("Not enough Gems!")

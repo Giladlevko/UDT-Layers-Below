@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://dr4fcm00cdgx2"]
+[gd_scene load_steps=20 format=3 uid="uid://dr4fcm00cdgx2"]
 
 [ext_resource type="Script" uid="uid://crq0aro1chiwb" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://ffeqti6kt0gv" path="res://Scripts/player_camera.gd" id="3_vgqql"]
 [ext_resource type="PackedScene" uid="uid://dr461u8t0lyfo" path="res://Scenes/UI_scenes/menu_scenes/gameplay_menu.tscn" id="4_vgqql"]
-[ext_resource type="PackedScene" uid="uid://2mi232hnubdl" path="res://Scenes/Mining_tools_scenes/jack_hammer.tscn" id="5_fkybt"]
-[ext_resource type="PackedScene" uid="uid://b683mqc15w0ck" path="res://Scenes/Mining_tools_scenes/metal_detector.tscn" id="6_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://wrjha12v4f5m" path="res://Assets/sfx_assets/SFX_Step.ogg" id="6_3smsa"]
+[ext_resource type="AudioStream" uid="uid://cr5fmer4ch4sy" path="res://Assets/sfx_assets/SFX_Jump.ogg" id="7_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("3_6t5aa")
@@ -85,6 +86,16 @@ animations = [{
 radius = 7.0
 height = 20.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3smsa"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_3smsa")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8erm5"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("7_8erm5")
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_v0iea")
 
@@ -109,11 +120,22 @@ script = ExtResource("3_vgqql")
 
 [node name="gameplay_ui" parent="CanvasLayer" instance=ExtResource("4_vgqql")]
 
-[node name="jack_hammer" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("5_fkybt")]
-tool_owner = NodePath("..")
+[node name="FlashLight" parent="." instance=ExtResource("5_fkybt")]
 
-[node name="MetalDetector" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("6_x3wgy")]
-tool_owner = NodePath("..")
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="walk_sfx" type="AudioStreamPlayer2D" parent="sfx"]
+stream = SubResource("AudioStreamRandomizer_3smsa")
+volume_db = -30.0
+pitch_scale = 0.25
+bus = &"sfx"
+
+[node name="jump_sfx" type="AudioStreamPlayer2D" parent="sfx"]
+stream = SubResource("AudioStreamRandomizer_8erm5")
+volume_db = -30.0
+pitch_scale = 1.68
+bus = &"sfx"
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -24,9 +24,9 @@ func _on_close_button_pressed() -> void:
 
 func take_item(data:InvSlotData):
 	if(data.slot_type == "Tool"):
-		SignalBus.on_item_taken.emit(add_tool(data))
+		SignalBus.on_item_taken.emit(add_tool(data),data)
 	else:
-		SignalBus.on_item_taken.emit(add_item(data))
+		SignalBus.on_item_taken.emit(add_item(data),data)
 
 func add_tool(data:InvSlotData)->bool:
 	for slot:InventorySlot in tools_container.get_children():

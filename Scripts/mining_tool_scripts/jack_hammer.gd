@@ -3,12 +3,16 @@ class_name JACK_HAMMER
 
 
 @onready var tile_particle: CPUParticles2D = $particles/tile_particle
+@onready var drill_ray: RayCast2D = $AnimatedSprite2D/drill_ray
+
+@onready var using_sfx: AudioStreamPlayer2D = $using_sfx
 
 
 var damage:int = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.rays.push_back(drill_ray)
 	self.setup()
 	anim.speed_scale = 0
 	state_changed.connect(on_state_changed)
@@ -44,8 +48,8 @@ func drill():
 	if(anim.speed_scale < 1):
 		drill_tween = create_tween()
 		const dur:float = 1.5
-		ray_cast.enabled = true
-		drill_tween.tween_property(anim,"speed_scale",1,dur)
+		drill_ray.enabled = true
+		drill_tween.tween_property(anim,"speed_scale",Global.drill_speed,dur)
 		await drill_tween.finished
 		drill_tween.kill()
 
@@ -54,7 +58,7 @@ func stop():
 	if(drill_tween):drill_tween.kill()
 	stop_tween = create_tween()
 	const dur:float = 1
-	ray_cast.enabled = false
+	drill_ray.enabled = false
 	stop_tween.tween_property(anim,"speed_scale",0,dur)
 	await stop_tween.finished
 	anim.stop()
@@ -64,11 +68,12 @@ func stop():
 
 var curr_collider:TILE_HIT_BOX
 func _on_animated_sprite_2d_animation_looped() -> void:
-	if(ray_cast.enabled):
-		var collider = ray_cast.get_collider()
+	using_sfx.play()
+	if(drill_ray.enabled):
+		var collider = drill_ray.get_collider()
 		curr_collider = collider
 		if(collider is TILE_HIT_BOX):
-			collider.take_damage(damage)
+			collider.take_damage(Global.drill_power)
 	pass # Replace with function body.
 
 func emit_tile_particle(count:int = 16,color:Color = Color.DARK_GRAY):

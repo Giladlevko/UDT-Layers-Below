@@ -7,8 +7,14 @@ var state:states
 @export_group("Essential Nodes")
 @export var tool_owner:PLAYER
 @export var anim:AnimatedSprite2D
+
+
 @export var ray_cast: RayCast2D
 @export var collider_ray: RayCast2D
+
+var rays:Array[RayCast2D]
+var rays_target_pos:Array[Vector2]
+var rays_default_pos:Array[Vector2]
 
 @export_group("Anim Positions")
 @export var stashed_pos:Vector2 =  Vector2(-1,0)
@@ -25,10 +31,10 @@ var stashed_z_index:int = -1
 signal state_changed(prev:states,new:states)
 
 func setup():
-	ray_default_target = ray_cast.target_position
-	ray_default_pos = ray_cast.position
-	collider_default_target = collider_ray.target_position
-	collider_default_pos = collider_ray.position
+	rays.append_array([ray_cast,collider_ray])
+	for ray in rays:
+		rays_target_pos.push_back(ray.target_position)
+		rays_default_pos.push_back(ray.position)
 	state = states.stashed
 	stash()
 	
@@ -51,32 +57,30 @@ func _process(delta: float) -> void:
 
 
 func handle_collider_ray(delta:float):
+	var lerp_mult:float = 1
 	if(state == states.stashed or state == states.unequipped):
 		position = Vector2.ZERO
 		return
 	var target_pos:Vector2 = position
 	if (collider_ray.is_colliding()):
-		var tip_pos = ray_cast.to_global(ray_cast.target_position)
-		#var tip_pos = to_global(Vector2.ZERO)
+		#var tip_pos = ray_cast.to_global(ray_cast.target_position)
+		var tip_pos = to_global(Vector2.ZERO)
 		var dir:Vector2 = collider_ray.get_collision_point().direction_to(tip_pos)
 		var dist:float = collider_ray.get_collision_point().distance_to(tip_pos)
-		target_pos = Vector2(-1,-1) - dir*dist*1.5
+		target_pos = Vector2(-1,-1) + dir*dist*0.8
+		lerp_mult = 5
 	else:
 		if(!ray_cast.is_colliding() and !collider_ray.is_colliding()):
 			target_pos = Vector2.ZERO
-	position = lerp(position,target_pos,2*delta)
+	position = lerp(position,target_pos,lerp_mult*delta)
 
 func flip_ray(flip:bool):
+	var sign:int = 1
 	if(flip):
-		ray_cast.position.y = ray_default_pos.y * -1
-		ray_cast.target_position.y = ray_default_target.y * -1
-		collider_ray.position.y = collider_default_pos.y * -1
-		collider_ray.target_position.y = collider_default_target.y * -1
-	else:
-		ray_cast.position.y = ray_default_pos.y
-		ray_cast.target_position.y = ray_default_target.y
-		collider_ray.position.y = collider_default_pos.y
-		collider_ray.target_position.y = collider_default_target.y
+		sign = -1
+	for i in rays.size():
+		rays[i].position.y = rays_default_pos[i].y * sign
+		rays[i].target_position.y = rays_target_pos[i].y * sign
 
 var stopped_dir:Vector2
 func handle_tool(delta:float):
@@ -108,7 +112,11 @@ func handle_tool(delta:float):
 	elif(Input.is_action_pressed("USE_TOOL")):
 		if(state == states.held and tool_owner.state == tool_owner.STATES.IDLE):
 			change_state(states.using)
-	elif(Input.is_action_just_released("USE_TOOL") and state == states.using):
+	elif(
+		Input.is_action_just_released("USE_TOOL")
+		and !Input.is_action_pressed("USE_TOOL")
+		and state == states.using
+		):
 		change_state(states.held)
 		
 	elif(state == states.using and tool_owner.state != tool_owner.STATES.IDLE):

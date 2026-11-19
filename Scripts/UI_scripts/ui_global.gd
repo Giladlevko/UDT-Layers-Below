@@ -7,8 +7,8 @@ extends Node
 @onready var song_player:AudioStreamPlayer = AudioStreamPlayer.new()
 
 
-const button_hover_sfx_path:String = "res://Assets/UI_assets/button_hover_sfx_example.ogg"
-const button_click_sfx_path:String = "res://Assets/UI_assets/sbutton_click_sfx_example.ogg"
+const button_hover_sfx_path:String = "res://Assets/UI_assets/UI_Button_Hover.ogg"
+const button_click_sfx_path:String = "res://Assets/UI_assets/UI_Button_Click.ogg"
 
 var button_hover_sfx_stream:AudioStream = preload(button_hover_sfx_path)
 var button_click_sfx_stream:AudioStream = preload(button_click_sfx_path)
@@ -16,8 +16,12 @@ var button_click_sfx_stream:AudioStream = preload(button_click_sfx_path)
 @onready var button_hover_sfx:AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var button_click_sfx:AudioStreamPlayer = AudioStreamPlayer.new()
 
-const button_hover_sfx_db:float = -15
-const button_click_sfx_db:float = -15
+const button_hover_sfx_db:float = -20
+const button_click_sfx_db:float = -20
+
+var text_box_scene:PackedScene = preload("res://Scenes/UI_scenes/TextBox/text_box.tscn")
+
+var text_box:TEXT_BOX
 
 var menu_songs_path:Dictionary[String,String] = {
 	"MainMenu":"",
@@ -35,6 +39,7 @@ func _ready() -> void:
 	init_dark_screen()
 	init_button_sfx()
 	init_song_player()
+	init_text_box()
 
 func init_dark_screen():
 	dark_screen.color = Color.BLACK
@@ -64,6 +69,12 @@ func init_button_sfx():
 func init_song_player():
 	song_player.bus = "music"
 	get_tree().root.add_child.call_deferred(song_player)
+
+func init_text_box():
+	text_box = text_box_scene.instantiate()
+	canvas.add_child(text_box)
+	text_box.z_index = 100
+	text_box.set_button_sfx_to_global()
 
 
 func switch_scenes(new_scene_path:String):
