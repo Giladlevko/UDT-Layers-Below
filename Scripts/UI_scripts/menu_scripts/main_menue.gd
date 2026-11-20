@@ -12,7 +12,6 @@ extends MenuUI
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.setup_UI()
-	Music_GLOBAL.music_title.play();
 	buttons = [play_button,audio_button,credits_button,quit_button,help_button]
 	self.connect_buttons()
 	setup_audio_controller()
@@ -28,20 +27,15 @@ func _process(delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
-	Music_GLOBAL.music_title.fade_out_music(1.0);
 	pass # Replace with function body.
 
 
 func _on_audio_button_pressed() -> void:
-	Music_GLOBAL.music_title.switch_to_settings();
 	self.tween_visibility(audio_controler,true)
 	pass # Replace with function body.
 
 
 func _on_credits_button_pressed() -> void:
-	Music_GLOBAL.music_credits = Music_GLOBAL.add_music("BGM_Credits");
-	Music_GLOBAL.music_credits.play();
-	Music_GLOBAL.music_title.fade_out_music(2.0);
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/credits.tscn")
 	pass # Replace with function body.
 

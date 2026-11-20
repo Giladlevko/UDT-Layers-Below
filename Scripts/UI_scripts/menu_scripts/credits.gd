@@ -15,13 +15,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_return_button_pressed() -> void:
-	Music_GLOBAL.music_title.fade_in_music(2.0);
-	var old_credits_music:MUS_Base = Music_GLOBAL.music_credits;
-	Music_GLOBAL.music_credits = null;
-	old_credits_music.fade_out_music(2.0, func():
-		old_credits_music.terminate_music();
-	)
-	
+func _on_return_button_pressed() -> void:	
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/main_menue.tscn")
 	pass # Replace with function body.
