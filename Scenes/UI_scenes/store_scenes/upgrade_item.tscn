@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://df6h3ihpfn731"]
+
+[ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_esrmk"]
+[ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="2_r8oj4"]
+[ext_resource type="Script" uid="uid://kdwjkxnmtqfo" path="res://Scripts/UI_scripts/store_scripts/upgrade_item.gd" id="2_xpo5y"]
+[ext_resource type="AudioStream" uid="uid://frlvynfgkclk" path="res://Assets/sfx_assets/SFX_Store.ogg" id="4_bf85w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8cf1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esrmk"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0, 0.968627, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="UpgradeItem" type="Control"]
+material = SubResource("ShaderMaterial_k8cf1")
+custom_minimum_size = Vector2(400, 65)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 4.0
+offset_bottom = 4.0
+theme = ExtResource("1_esrmk")
+script = ExtResource("2_xpo5y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 3
+
+[node name="cost_panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="costContainer" type="HBoxContainer" parent="VBoxContainer/cost_panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -8.0
+offset_right = 57.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="cost_label" type="Label" parent="VBoxContainer/cost_panel/costContainer"]
+layout_mode = 2
+text = "Cost: 100"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/cost_panel/costContainer"]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(30, 20)
+layout_mode = 2
+texture = ExtResource("2_r8oj4")
+stretch_mode = 5
+
+[node name="upgrade_button" type="Button" parent="VBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/hover = SubResource("StyleBoxFlat_esrmk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_esrmk")
+text = "Hammer Speed + 30%"
+
+[node name="buy_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bf85w")
+volume_db = -25.0
+bus = &"UI"
+
+[connection signal="pressed" from="VBoxContainer/upgrade_button" to="." method="_on_upgrade_button_pressed"]

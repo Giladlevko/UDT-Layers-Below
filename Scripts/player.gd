@@ -3,9 +3,19 @@ class_name PLAYER
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var colli: CollisionShape2D = $CollisionShape2D
-@onready var jack_hammer: JACK_HAMMER = $jack_hammer
+@onready var cam: PLAYER_CAM = $Camera2D
 
-enum STATES{IDLE,RUNNING,JUMP,DASH}
+@onready var walk_sfx: AudioStreamPlayer2D = $sfx/walk_sfx
+@onready var jump_sfx: AudioStreamPlayer2D = $sfx/jump_sfx
+
+@onready var flash_light: PointLight2D = $FlashLight
+
+var jack_hammer: JACK_HAMMER
+var metal_detector: METAL_DETECTOR
+
+var mining_tools:Array[MINING_TOOL] 
+
+enum STATES{IDLE,RUNNING,JUMP,DASH,FROZEN}
 var state:STATES
 var can_dash:bool = true
 const SPEED:int = 150
@@ -21,20 +31,46 @@ const SPEED:int = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.player = self
 	enter_state(STATES.IDLE)
+	mining_tools = []
+	flash_light.texture_scale = Global.vision_range
+	SignalBus.on_item_taken.connect(on_inv_item_taken)
+	SignalBus.vision_range_changed.connect(on_vision_changed)
+	SignalBus.dialog_started.connect(on_dialog_start)
+	SignalBus.dialog_ended.connect(on_dialog_end)
+	
+	SignalBus.on_take_item.emit(Global.drill_slot_data)
+	SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
+	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	match state:
 		STATES.RUNNING:move_state()
 		STATES.IDLE:idle_state()
 		STATES.DASH:dash_state(delta)
 		STATES.JUMP:jump_state()
-	pass
 	constant_state(delta)
+	
+	if(Input.is_action_just_pressed("SWITCH_TOOL")):
+		switch_tool()
 
+var current_tool_index = 0
+func switch_tool():
+	var next_index:int = (current_tool_index + 1) % mining_tools.size()
+	if(next_index == current_tool_index):return
+	
+	var current_tool_state: = mining_tools[current_tool_index].state
+	mining_tools[next_index].equip(current_tool_state)
+	mining_tools[next_index].stashed_z_index = -1
+	mining_tools[current_tool_index].unequip()
+	mining_tools[current_tool_index].stashed_z_index = -2
+	current_tool_index = next_index
+	pass
 
 func get_grav() -> float:
 	return jump_gravity if velocity.y < 0 else fall_gravity
@@ -130,6 +166,9 @@ func change_state(next:STATES,prev:STATES = state):
 ##function for handleing state entries
 func enter_state(state_name:STATES):
 	match state_name:
+		STATES.FROZEN:
+			anim.play("idle")
+			velocity.x = 0
 		STATES.IDLE:
 			anim.play("idle")
 			pass
@@ -146,6 +185,7 @@ func enter_state(state_name:STATES):
 			await SignalBus.cooldown_ended
 			can_dash = true
 		STATES.JUMP:
+			jump_sfx.play()
 			anim.play("jump")
 			velocity.y += JUMP_VELOCITY
 ##function for handleing state exits
@@ -154,14 +194,51 @@ func exit_state(state_name):
 		pass
 
 
+func already_has_tool(tool:MINING_TOOL)->bool:
+	var tool_name:String = tool.get_script().get_global_name()
+	for t in mining_tools:
+		if t.get_script().get_global_name() == tool_name:
+			return true
+	return false
+
+func on_inv_item_taken(successful:bool,data:InvSlotData):
+	if(data.slot_type == "Tool" and successful):
+		var new_tool:MINING_TOOL = data.scene.instantiate()
+		if(already_has_tool(new_tool)):
+			new_tool.queue_free()
+			return
+		new_tool.tool_owner = self
+		add_child(new_tool)
+		new_tool.global_position = global_position
+		mining_tools.push_back(new_tool)
+		if new_tool is JACK_HAMMER:
+			jack_hammer = new_tool
+		elif new_tool is METAL_DETECTOR:
+			metal_detector = new_tool
+			
+		switch_tool()
+	
+
+
+func on_vision_changed():
+	flash_light.texture_scale = Global.vision_range
+
+
 func _on_animated_sprite_2d_animation_looped() -> void:
 	pass
 
 
-func _on_animated_sprite_2d_animation_changed() -> void:
-	if(jack_hammer.state == jack_hammer.states.stashed):
-		if(anim.animation == "run"):
-			pass
-		else:
-			pass
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if anim.animation == "run":
+		if anim.frame == 2:
+			walk_sfx.play()
 	pass # Replace with function body.
+
+func on_dialog_start(dialog_name:String):
+	change_state(STATES.FROZEN)
+	cam.pan_down()
+	
+
+func on_dialog_end(dialog_name:String):
+	change_state(STATES.IDLE)
+	cam.pan_up()

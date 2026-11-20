@@ -1,0 +1,84 @@
+[gd_resource type="Resource" script_class="DialogData" load_steps=17 format=3 uid="uid://dc2hlfnuc14rm"]
+
+[ext_resource type="Script" uid="uid://bhqovwl8pw33d" path="res://Scripts/UI_scripts/text_box/dialog_entry.gd" id="1_uy80n"]
+[ext_resource type="Script" uid="uid://bxrvun5bs65ck" path="res://Scripts/UI_scripts/text_box/dialog_line.gd" id="2_6wsn7"]
+[ext_resource type="Script" uid="uid://by7pr2lmkc3eq" path="res://Scripts/UI_scripts/text_box/dialog_data.gd" id="2_pfpyo"]
+[ext_resource type="Resource" uid="uid://b11b3survh8mb" path="res://Scripts/UI_scripts/text_box/characters/guard.tres" id="3_33eh1"]
+
+[sub_resource type="Resource" id="Resource_hyq16"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Hold it there Tin Can!", "You got a job remember?", "Once you have enough coal bring it to me", "You got that Rusty?"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_yyrw0"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_hyq16")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_6wsn7"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Where you think you're going Coal Collector?", "You don't have enough coal", "Can't let you pass Oven Head", "Bring me the needed coal, then we'll talk."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_33eh1"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_6wsn7")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_g3hg8"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["You're not going anywhere Rusty.", "What did you do until now huh?", "All this time and you're still short on coal", "You're also Short on height too huh?", "Thats why you are a lowly Miner.", "Where as I am a Beutiful Gaurdian ha ha ha! ", "Come back with more coal Tin Can "])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_1f5em"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_g3hg8")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_grg5q"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Well well well...", "I see you finished your assignment...", "Very good Rusty.", "One can expect much less from a Bucket brain like you.", "Believe me I have... ", "Anyway...", "Go on what are you waiting for?  Your next assignment is waiting..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_xa5lp"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_grg5q")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_m32d5"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Finally... Please tell me you are finished...", "I can't wait to get out of this dump...", "It is more than suting for a lowly miner like yourself...", "But for a Beutiful, Powerful and great guardian like me?", "I deserve to be in a palce...", "No, wait. I deserve to have a palce! HA HA!", "Yes! I deserve to have faithful subjects. I desreve to be a King! HA HA!", "Well... ", "What are you doing just standing there?", "We don't have time to daydream. We have another shift..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_4ie28"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_m32d5")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_vbyt2"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["There's my little Eager Beaver HA HA!", "You collected all of the required coal huh?", "Took you long enough...", "Come on. I'm not waiting any longer.", "Boss scheduled us another shift...", "That Rust Brain must really hate me...", "First he assigns me to deal with you, then another shift...", "If didn't need this job, I would've...", "Nevermind...", "Don't tell him I said that..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_rovye"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_vbyt2")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[resource]
+script = ExtResource("2_pfpyo")
+entries = Dictionary[String, ExtResource("1_uy80n")]({
+"give_me_coal1": SubResource("Resource_yyrw0"),
+"give_me_coal2": SubResource("Resource_33eh1"),
+"give_me_coal3": SubResource("Resource_1f5em"),
+"you_can_pass1": SubResource("Resource_xa5lp"),
+"you_can_pass2": SubResource("Resource_4ie28"),
+"you_can_pass3": SubResource("Resource_rovye")
+})
+metadata/_custom_type_script = "uid://by7pr2lmkc3eq"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://bgcrtp5b7d5dn"]
+
+[ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="1_1k4de"]
+[ext_resource type="Script" uid="uid://bids4wsqcbdfo" path="res://Scripts/UI_scripts/text_box/character_data.gd" id="1_r5ujh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80e5x"]
+atlas = ExtResource("1_1k4de")
+region = Rect2(66, 3, 19, 19)
+
+[resource]
+script = ExtResource("1_r5ujh")
+name = "48-15"
+portrait = SubResource("AtlasTexture_80e5x")
+description = ""
+metadata/_custom_type_script = "uid://bids4wsqcbdfo"

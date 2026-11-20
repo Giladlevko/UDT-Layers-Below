@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://2mi232hnubdl"]
+
+[ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/mining_tool_scripts/jack_hammer.gd" id="1_odu2g"]
+[ext_resource type="Texture2D" uid="uid://bt4m8y712klsb" path="res://Assets/drill_anim.png" id="2_dts8e"]
+[ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="3_xx4kr"]
+[ext_resource type="AudioStream" uid="uid://djj3pf5uxle4x" path="res://Assets/sfx_assets/SFX_JackHammer_Boom_V2.ogg" id="4_dts8e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqfdv"]
+atlas = ExtResource("2_dts8e")
+region = Rect2(0, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy0y3"]
+atlas = ExtResource("2_dts8e")
+region = Rect2(50, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vrxc"]
+atlas = ExtResource("2_dts8e")
+region = Rect2(100, 0, 50, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oaww5"]
+atlas = ExtResource("2_dts8e")
+region = Rect2(150, 0, 50, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jqfdv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqfdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oy0y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vrxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oaww5")
+}],
+"loop": true,
+"name": &"drill",
+"speed": 20.0
+}]
+
+[sub_resource type="Curve" id="Curve_nny23"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xx4kr"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_dts8e")
+
+[node name="jack_hammer" type="Node2D" node_paths=PackedStringArray("anim", "ray_cast", "collider_ray")]
+script = ExtResource("1_odu2g")
+anim = NodePath("AnimatedSprite2D")
+ray_cast = NodePath("AnimatedSprite2D/RayCast2D")
+collider_ray = NodePath("AnimatedSprite2D/collider_ray")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(15, 0)
+sprite_frames = SubResource("SpriteFrames_jqfdv")
+animation = &"drill"
+autoplay = "drill"
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(6.636, -0.984)
+target_position = Vector2(5.364, -0.416)
+collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="drill_ray" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(6.636, -0.984)
+target_position = Vector2(6.421, -0.459)
+collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(-15, -1)
+target_position = Vector2(21.595, 0)
+collision_mask = 2
+
+[node name="particles" type="Node" parent="."]
+
+[node name="tile_particle" type="CPUParticles2D" parent="particles"]
+emitting = false
+amount = 16
+texture = ExtResource("3_xx4kr")
+lifetime = 0.8
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+linear_accel_min = 25.0
+linear_accel_max = 25.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_curve = SubResource("Curve_nny23")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="using_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xx4kr")
+volume_db = -28.0
+pitch_scale = 0.1
+bus = &"sfx"
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

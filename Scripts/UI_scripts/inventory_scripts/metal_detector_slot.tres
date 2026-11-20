@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="InvSlotData" load_steps=5 format=3 uid="uid://bbxwbp6qwp5o7"]
+
+[ext_resource type="PackedScene" uid="uid://b683mqc15w0ck" path="res://Scenes/Mining_tools_scenes/metal_detector.tscn" id="1_nakfc"]
+[ext_resource type="Script" uid="uid://bocn5mgtxv3gm" path="res://Scripts/UI_scripts/inventory_scripts/InvSlotData.gd" id="1_ytawr"]
+[ext_resource type="Texture2D" uid="uid://b7p88dkqpavrm" path="res://Assets/metal_detector.png" id="2_gb1r7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nakfc"]
+atlas = ExtResource("2_gb1r7")
+region = Rect2(7, 17, 17, 16)
+
+[resource]
+script = ExtResource("1_ytawr")
+name = "Metal Detector"
+slot_type = "Tool"
+texture = SubResource("AtlasTexture_nakfc")
+scene = ExtResource("1_nakfc")
+value = 100
+metadata/_custom_type_script = "uid://bocn5mgtxv3gm"

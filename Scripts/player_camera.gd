@@ -25,12 +25,9 @@ func random_offset():
 	var rand_y: = randf_range(-shake_strength,shake_strength)
 	return Vector2(rand_x,rand_y)
 
+var pan_offset:int = 50
+func pan_down():
+	position.y = pan_offset
 
-func mouse_offset(dt:float):
-	var mouse_pos:Vector2 = get_global_mouse_position()
-	var dir:float = global_position.angle_to_point(mouse_pos)
-	if abs(sin(dir)) > 0.95:
-		offset.y = lerpf(offset.y,clamp(offset.y+sin(dir)*20,-20,20),10*dt)
-	else:
-		offset.y = lerpf(offset.y,0,10*dt)
-		offset.x = lerpf(offset.x,0,10*dt)
+func pan_up():
+	position.y = -1*pan_offset

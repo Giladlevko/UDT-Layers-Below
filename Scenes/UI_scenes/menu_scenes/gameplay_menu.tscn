@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr461u8t0lyfo"]
+[gd_scene load_steps=8 format=3 uid="uid://dr461u8t0lyfo"]
 
 [ext_resource type="Script" uid="uid://dvdwmxap3ip0o" path="res://Scripts/UI_scripts/menu_scripts/gameplay_menu.gd" id="1_iob0h"]
 [ext_resource type="PackedScene" uid="uid://6vr1dc5bbyeh" path="res://Scenes/UI_scenes/cooldown_bar.tscn" id="1_lhtiu"]
+[ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_rj384"]
 [ext_resource type="PackedScene" uid="uid://c23v86s66aa4j" path="res://Scenes/UI_scenes/popup_box.tscn" id="3_aryv2"]
+[ext_resource type="PackedScene" uid="uid://c8djxxsus4lep" path="res://Scenes/UI_scenes/pause_menu.tscn" id="5_fbkoo"]
+[ext_resource type="PackedScene" uid="uid://03uuj3wy64ik" path="res://Scenes/UI_scenes/merged_currency_label.tscn" id="5_tquf2"]
+[ext_resource type="PackedScene" uid="uid://qofu32a7k4bl" path="res://Scenes/UI_scenes/coal_goal.tscn" id="7_l2372"]
 
 [node name="gameplay_ui" type="Control"]
 layout_mode = 3
@@ -11,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rj384")
 script = ExtResource("1_iob0h")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -28,8 +33,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="cooldown_bar" parent="MarginContainer/cooldown_cont" instance=ExtResource("1_lhtiu")]
-visible = false
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="message_cont" type="MarginContainer" parent="MarginContainer"]
@@ -40,3 +43,48 @@ theme_override_constants/margin_top = 20
 
 [node name="PopupBox" parent="MarginContainer/message_cont" instance=ExtResource("3_aryv2")]
 layout_mode = 2
+
+[node name="menu_cont" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="menu_button" type="Button" parent="MarginContainer/menu_cont"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Menu"
+
+[node name="PauseMenu" parent="MarginContainer" instance=ExtResource("5_fbkoo")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(170, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MergedCurrencyLabel" parent="MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource("5_tquf2")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="CoalGoal" parent="MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_l2372")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[connection signal="pressed" from="MarginContainer/menu_cont/menu_button" to="." method="_on_menu_button_pressed"]

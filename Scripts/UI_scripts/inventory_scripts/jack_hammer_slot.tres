@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="InvSlotData" load_steps=5 format=3 uid="uid://cq05wllo2ok57"]
+
+[ext_resource type="Script" uid="uid://bocn5mgtxv3gm" path="res://Scripts/UI_scripts/inventory_scripts/InvSlotData.gd" id="1_hp1t0"]
+[ext_resource type="PackedScene" uid="uid://2mi232hnubdl" path="res://Scenes/Mining_tools_scenes/jack_hammer.tscn" id="1_w5csn"]
+[ext_resource type="Texture2D" uid="uid://bt4m8y712klsb" path="res://Assets/drill_anim.png" id="2_o6mc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5csn"]
+atlas = ExtResource("2_o6mc7")
+region = Rect2(161, 9, 28, 12)
+
+[resource]
+script = ExtResource("1_hp1t0")
+name = "Jack Hammer"
+slot_type = "Tool"
+texture = SubResource("AtlasTexture_w5csn")
+scene = ExtResource("1_w5csn")
+value = 100
+metadata/_custom_type_script = "uid://bocn5mgtxv3gm"

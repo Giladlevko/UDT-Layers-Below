@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://4evdwrbru5vh"]
+
+[ext_resource type="Script" uid="uid://brlgawxi4w4uc" path="res://Scripts/npc_scripts/old_man.gd" id="1_7w33b"]
+[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="1_yttmf"]
+[ext_resource type="Resource" uid="uid://du8k1lh7ivwrs" path="res://Scripts/UI_scripts/text_box/dialogs/general_npc_dialogs.tres" id="2_7x33e"]
+[ext_resource type="Resource" uid="uid://bflh8cwhb7ff3" path="res://Scripts/UI_scripts/inventory_scripts/water_canteen.tres" id="3_74txa"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_cr8f5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w33b"]
+atlas = ExtResource("1_yttmf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dap1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w33b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yttmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x33e"]
+size = Vector2(122, 58)
+
+[node name="OldMan" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_7w33b")
+dialog_data = ExtResource("2_7x33e")
+item = ExtResource("3_74txa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.84217e-14, -2)
+scale = Vector2(0.1875, 0.261719)
+sprite_frames = SubResource("SpriteFrames_3dap1")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_yttmf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7x33e")
+
+[node name="FlashLight" parent="." instance=ExtResource("4_cr8f5")]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

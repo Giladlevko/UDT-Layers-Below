@@ -1,4 +1,3 @@
-@tool
 extends UI
 @export var bar: ProgressBar
 

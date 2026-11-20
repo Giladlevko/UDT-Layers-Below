@@ -14,12 +14,8 @@ func _ready() -> void:
 	self.setup_UI()
 	buttons = [play_button,audio_button,credits_button,quit_button,help_button]
 	self.connect_buttons()
-	setup_audio_controller()
 	pass # Replace with function body.
 
-func setup_audio_controller():
-	audio_controler.hover_sfx = self.hover_sfx
-	audio_controler.click_sfx = self.click_sfx
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,6 +23,7 @@ func _process(delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
+	self.handle_scene_transition("res://Scenes/world.tscn")
 	pass # Replace with function body.
 
 
@@ -36,6 +33,7 @@ func _on_audio_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
+	Music_GLOBAL.music_title.fade_out_music(1.0)
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/credits.tscn")
 	pass # Replace with function body.
 

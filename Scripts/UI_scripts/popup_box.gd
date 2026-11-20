@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 var message_tweening:bool
 var current_message:String
 var messages_to_tween:Array[String] = []
-func display_message(message:String,display_time:float = 1.5):
+func display_message(message:String):
 	if !message_tweening:
 		current_message = message
 		message_tweening = true
@@ -34,7 +34,7 @@ func display_message(message:String,display_time:float = 1.5):
 			label.get_theme_font_size("font_size")
 			)
 		panel.custom_minimum_size.x = new_panel_length
-		
+		var display_time = clampf(0.04*message.length(),1.5,6.0)
 		var tween = create_tween()
 		tween.tween_property(panel,"modulate",Color(1,1,1,1),0.2)
 		tween.tween_interval(display_time)
