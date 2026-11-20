@@ -3,16 +3,19 @@ class_name PLAYER
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var colli: CollisionShape2D = $CollisionShape2D
+@onready var cam: PLAYER_CAM = $Camera2D
 
 @onready var walk_sfx: AudioStreamPlayer2D = $sfx/walk_sfx
 @onready var jump_sfx: AudioStreamPlayer2D = $sfx/jump_sfx
+
+@onready var flash_light: PointLight2D = $FlashLight
 
 var jack_hammer: JACK_HAMMER
 var metal_detector: METAL_DETECTOR
 
 var mining_tools:Array[MINING_TOOL] 
 
-enum STATES{IDLE,RUNNING,JUMP,DASH}
+enum STATES{IDLE,RUNNING,JUMP,DASH,FROZEN}
 var state:STATES
 var can_dash:bool = true
 const SPEED:int = 150
@@ -31,7 +34,12 @@ func _ready() -> void:
 	Global.player = self
 	enter_state(STATES.IDLE)
 	mining_tools = []
+	flash_light.texture_scale = Global.vision_range
 	SignalBus.on_item_taken.connect(on_inv_item_taken)
+	SignalBus.vision_range_changed.connect(on_vision_changed)
+	SignalBus.dialog_started.connect(on_dialog_start)
+	SignalBus.dialog_ended.connect(on_dialog_end)
+	
 	SignalBus.on_take_item.emit(Global.drill_slot_data)
 	SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
 	
@@ -158,6 +166,9 @@ func change_state(next:STATES,prev:STATES = state):
 ##function for handleing state entries
 func enter_state(state_name:STATES):
 	match state_name:
+		STATES.FROZEN:
+			anim.play("idle")
+			velocity.x = 0
 		STATES.IDLE:
 			anim.play("idle")
 			pass
@@ -209,6 +220,10 @@ func on_inv_item_taken(successful:bool,data:InvSlotData):
 	
 
 
+func on_vision_changed():
+	flash_light.texture_scale = Global.vision_range
+
+
 func _on_animated_sprite_2d_animation_looped() -> void:
 	pass
 
@@ -218,3 +233,12 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		if anim.frame == 2:
 			walk_sfx.play()
 	pass # Replace with function body.
+
+func on_dialog_start(dialog_name:String):
+	change_state(STATES.FROZEN)
+	cam.pan_down()
+	
+
+func on_dialog_end(dialog_name:String):
+	change_state(STATES.IDLE)
+	cam.pan_up()

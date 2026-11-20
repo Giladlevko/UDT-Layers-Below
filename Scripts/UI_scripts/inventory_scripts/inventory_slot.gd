@@ -29,6 +29,7 @@ func clear():
 func update_data():
 	if(is_node_ready() and slot_data):
 		texture_rect.texture = slot_data.texture
+		tooltip_text = slot_data.name
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	if(

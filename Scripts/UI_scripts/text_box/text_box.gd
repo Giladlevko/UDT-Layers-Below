@@ -2,7 +2,6 @@ extends UI
 class_name TEXT_BOX
 @onready var label: RichTextLabel = $Panel/MarginContainer/Label
 @onready var end_label: RichTextLabel = $Panel/end_label
-@export var text_name_to_display:String
 @export var dialog_data: DialogData
 var speed:float = 30
 signal dialog_finished
@@ -16,13 +15,14 @@ var forced_end:bool
 
 @onready var character_portrait: CharacterPortrait = $Panel/CharacterPortrait
 
+var current_dialog_name:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setup()
 	pass # Replace with function body.
 
-##Connects buttens, Signals, and sets Opacity to 0
+##Connects buttens, Signals, and sets visible to false
 func setup():
 	visible = false
 	buttons = [skip_button]
@@ -50,6 +50,8 @@ func switch_character(character:CharacterData):
 
 ##Plays the corresponding Dialog based on a given DialogName
 func play_dialog(dialog_name:String,effect:String = "wave"):
+	current_dialog_name = dialog_name
+	SignalBus.dialog_started.emit(current_dialog_name)
 	character_portrait.setup()
 	forced_end = false
 	reset_text()
@@ -59,6 +61,8 @@ func play_dialog(dialog_name:String,effect:String = "wave"):
 	if effect !="": set_effect(effect)
 	var dialog:DialogEntry = select_text(dialog_name)
 	for text_lines:DialogLine in dialog.Dialog:
+		print("new character")
+		if user_skiped():break
 		switch_character(text_lines.speaker)
 		await character_switched
 		for line in text_lines.lines:
@@ -68,7 +72,7 @@ func play_dialog(dialog_name:String,effect:String = "wave"):
 			if user_skiped():break
 			if(line != text_lines.lines[-1]):
 				await input_pressed
-			
+		if user_skiped():break
 		if text_lines != dialog.Dialog[-1]:
 			pass
 			await input_pressed
@@ -91,7 +95,8 @@ var line_tween:Tween
 func display_text(message:String,effect:String = ""):
 	if !line_tween or !line_tween.is_valid():line_tween = create_tween()
 	line_tween.set_speed_scale(1)
-	tween_visibility(end_label,false)
+	if(end_label.visible):
+		tween_visibility(end_label,false)
 	label.visible_ratio = 0
 	label.text = effect_start + message + effect_end
 	var dur: = get_reveal_dur(message)
@@ -133,13 +138,16 @@ func _input(event):
 
 var ending_dialog:bool = false
 func on_dialog_end():
+	#print("end dialog call")
 	if(ending_dialog):return
+	#print("ending dialog")
 	ending_dialog = true
 	tween_visibility(self,false)
 	dialog_finished.emit()
 	#line_tween.stop()
 	await self.vis_changed
 	ending_dialog = false
+	SignalBus.dialog_ended.emit(current_dialog_name)
 
 func _on_skip_button_pressed() -> void:
 	if dialog_ended and modulate.a != 0:

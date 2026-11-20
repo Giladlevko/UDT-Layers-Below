@@ -34,7 +34,7 @@ var tile_health:Dictionary[String,int] = {
 
 var drill_speed:float = 1
 var drill_power:float = 10
-var vision_range:int = 5:
+var vision_range:int = 4:
 	set(val):
 		vision_range = val
 		SignalBus.vision_range_changed.emit()
@@ -49,7 +49,7 @@ var currency:Dictionary[String,int] = {
 }
 
 
-
+var quota_reached:bool = false
 
 func change_currency_amount(type:String,amount:int):
 	currency[type] += amount

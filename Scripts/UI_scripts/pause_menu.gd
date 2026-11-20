@@ -29,19 +29,25 @@ func _process(delta: float) -> void:
 func toggle_visibility():
 	if self.visible:
 		if(upgrade_store.visible):
-			await tween_visibility(upgrade_store,false)
+			tween_visibility(upgrade_store,false)
 		if(audio_controler.visible):
-			await tween_visibility(audio_controler,false)
+			tween_visibility(audio_controler,false)
 		if(inventory.visible):
-			await tween_visibility(inventory,false)
-		tween_visibility(self,false)
+			tween_visibility(inventory,false)
+		resume()
 	else:
-		tween_visibility(self,true)
+		enter_pause()
 
+func enter_pause():
+	tween_visibility(self,true)
+	get_tree().paused = true
+
+func resume():
+	tween_visibility(self,false)
+	get_tree().paused = false
 
 func _on_resume_button_pressed() -> void:
-	tween_visibility(self,false)
-	#put unpause logic here
+	resume()
 	pass # Replace with function body.
 
 

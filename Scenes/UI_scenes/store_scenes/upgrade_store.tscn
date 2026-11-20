@@ -93,6 +93,7 @@ columns = 2
 [node name="vision_range" parent="MarginContainer/VBoxContainer/store_panel/MarginContainer/GridContainer" instance=ExtResource("2_ttkle")]
 layout_mode = 2
 effect = "vision range"
+max_uses = 1
 
 [node name="hammer_speed" parent="MarginContainer/VBoxContainer/store_panel/MarginContainer/GridContainer" instance=ExtResource("2_ttkle")]
 layout_mode = 2

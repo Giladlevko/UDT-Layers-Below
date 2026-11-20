@@ -107,12 +107,11 @@ animation = &"run"
 shape = SubResource("CapsuleShape2D_v0iea")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_top_margin = 0.4
-drag_bottom_margin = 0.4
 editor_draw_drag_margin = true
 script = ExtResource("3_vgqql")
 
@@ -126,7 +125,7 @@ script = ExtResource("3_vgqql")
 
 [node name="walk_sfx" type="AudioStreamPlayer2D" parent="sfx"]
 stream = SubResource("AudioStreamRandomizer_3smsa")
-volume_db = -30.0
+volume_db = -28.0
 pitch_scale = 0.25
 bus = &"sfx"
 

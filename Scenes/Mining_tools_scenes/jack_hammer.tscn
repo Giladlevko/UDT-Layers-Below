@@ -81,8 +81,8 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D"]
-position = Vector2(-14, -1)
-target_position = Vector2(20.505, 0)
+position = Vector2(-15, -1)
+target_position = Vector2(21.595, 0)
 collision_mask = 2
 
 [node name="particles" type="Node" parent="."]
@@ -113,8 +113,8 @@ scale_amount_curve = SubResource("Curve_nny23")
 
 [node name="using_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_xx4kr")
-volume_db = -30.0
-pitch_scale = 0.7
+volume_db = -28.0
+pitch_scale = 0.1
 bus = &"sfx"
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

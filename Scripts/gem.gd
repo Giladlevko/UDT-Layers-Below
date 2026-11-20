@@ -27,10 +27,13 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var collision_info: = move_and_collide(velocity * delta)
 	if(collision_info):
-		velocity = velocity.bounce(collision_info.get_normal())
+		var normal = collision_info.get_normal()
+		if(normal.distance_squared_to(Vector2.ZERO)>0.1):
+			velocity = velocity.bounce(normal)
 	velocity = velocity - velocity * delta * 2
 	if(!is_on_floor()):
 		velocity.y += grav * delta
+	else: velocity.y = 0
 	pass
 
 

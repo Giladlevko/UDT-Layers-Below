@@ -47,4 +47,5 @@ texture = ExtResource("3_h2xtc")
 [node name="dig_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_f2mty")
 volume_db = -25.0
+pitch_scale = 0.5
 bus = &"sfx"

@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 
 
 func handle_collider_ray(delta:float):
-	var lerp_mult:float = 1
+	var lerp_mult:float = 2
 	if(state == states.stashed or state == states.unequipped):
 		position = Vector2.ZERO
 		return

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://4duby2eu5d17"]
+
+[ext_resource type="Script" uid="uid://bids4wsqcbdfo" path="res://Scripts/UI_scripts/text_box/character_data.gd" id="1_jtfo3"]
+
+[resource]
+script = ExtResource("1_jtfo3")
+name = "Dying Man"
+description = ""
+metadata/_custom_type_script = "uid://bids4wsqcbdfo"

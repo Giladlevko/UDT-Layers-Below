@@ -33,7 +33,7 @@ func pick_effect_text():
 		"drill power":
 			txt = "Drill Power + 50%"
 		"vision range":
-			txt = "2x Vison Range"
+			txt = "Vison Range + 50%"
 		"detactor range":
 			txt = "2x Metal Detector Range"
 	upgrade_button.text = txt
@@ -52,7 +52,7 @@ func handle_upgrade():
 			Global.drill_power *= 1.5
 			pass
 		"vision range":
-			Global.vision_range *= 2
+			Global.vision_range *= 1.5
 		"detactor range":
 			Global.detactor_range *= 2
 

@@ -100,7 +100,9 @@ func set_particles():
 func handle_particle():
 	if(!tile_particle):
 		set_particles()
-
+	if tile_particle.emitting:
+		tile_particle.restart()
+	
 	tile_particle.emitting = true
 	await tile_particle.finished
 	return

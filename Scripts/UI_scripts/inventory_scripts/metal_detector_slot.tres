@@ -10,6 +10,7 @@ region = Rect2(7, 17, 17, 16)
 
 [resource]
 script = ExtResource("1_ytawr")
+name = "Metal Detector"
 slot_type = "Tool"
 texture = SubResource("AtlasTexture_nakfc")
 scene = ExtResource("1_nakfc")

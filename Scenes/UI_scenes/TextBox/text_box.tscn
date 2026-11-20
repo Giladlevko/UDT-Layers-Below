@@ -7,20 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://bgmn3rsflj8xj" path="res://Scenes/UI_scenes/TextBox/character_portrait.tscn" id="5_e4qg0"]
 
 [node name="TextBox" type="Control"]
+custom_minimum_size = Vector2(300, 280)
 layout_mode = 3
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme = ExtResource("1_ib27d")
 script = ExtResource("2_7nphg")
 dialog_data = ExtResource("3_btqhr")
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(300, 100)
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,6 +66,7 @@ scroll_active = false
 visible_characters_behavior = 1
 
 [node name="end_label" type="RichTextLabel" parent="Panel"]
+visible = false
 clip_contents = false
 layout_mode = 1
 anchors_preset = 3
@@ -88,9 +90,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_top = 98.0
-offset_right = -5.0
-offset_bottom = 40.0
+offset_left = -140.0
+offset_top = 118.0
+offset_bottom = 148.0
 grow_horizontal = 0
 
 [node name="skip_button" type="Button" parent="Panel/skip_cont"]

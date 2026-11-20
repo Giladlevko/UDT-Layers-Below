@@ -2,6 +2,7 @@ extends UI
 class_name INVENTORY
 @onready var close_button: Button = $MarginContainer/VBoxContainer/close_button
 @onready var tools_container: GridContainer = $MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/toolsContainer
+@onready var items_container: GridContainer = $MarginContainer/VBoxContainer/inventory_panel/MarginContainer/VBoxContainer/items_container
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,12 +33,14 @@ func add_tool(data:InvSlotData)->bool:
 	for slot:InventorySlot in tools_container.get_children():
 		if(!slot.slot_data or !slot.slot_data.texture):
 			slot.slot_data = data
+			SignalBus.display_message.emit(data.name+" Added!")
 			return true
 	return false
 
 func add_item(data:InvSlotData)->bool:
-	for slot:InventorySlot in tools_container.get_children():
+	for slot:InventorySlot in items_container.get_children():
 		if(!slot.slot_data or !slot.slot_data.texture):
 			slot.slot_data = data
+			SignalBus.display_message.emit(data.name+" Added!")
 			return true
 	return false

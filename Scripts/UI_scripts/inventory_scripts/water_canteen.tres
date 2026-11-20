@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InvSlotData" load_steps=4 format=3 uid="uid://bflh8cwhb7ff3"]
+
+[ext_resource type="Script" uid="uid://bocn5mgtxv3gm" path="res://Scripts/UI_scripts/inventory_scripts/InvSlotData.gd" id="1_qrdm8"]
+[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="2_atr66"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fumw6"]
+atlas = ExtResource("2_atr66")
+region = Rect2(59, 61, 10, 15)
+
+[resource]
+script = ExtResource("1_qrdm8")
+name = "Water Canteen"
+slot_type = "Other"
+texture = SubResource("AtlasTexture_fumw6")
+value = 0
+metadata/_custom_type_script = "uid://bocn5mgtxv3gm"

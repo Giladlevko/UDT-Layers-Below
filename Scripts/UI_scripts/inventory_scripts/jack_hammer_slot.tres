@@ -10,6 +10,7 @@ region = Rect2(161, 9, 28, 12)
 
 [resource]
 script = ExtResource("1_hp1t0")
+name = "Jack Hammer"
 slot_type = "Tool"
 texture = SubResource("AtlasTexture_w5csn")
 scene = ExtResource("1_w5csn")

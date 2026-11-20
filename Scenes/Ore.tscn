@@ -11,7 +11,7 @@ radius = 5.0
 
 [sub_resource type="Gradient" id="Gradient_bb785"]
 offsets = PackedFloat32Array(0, 0.74026)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4i16t"]
 gradient = SubResource("Gradient_bb785")
@@ -39,8 +39,8 @@ collision_layer = 17
 shape = SubResource("CircleShape2D_hie2j")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.5
-shadow_enabled = true
+energy = 2.0
+blend_mode = 2
 shadow_filter = 2
 texture = SubResource("GradientTexture2D_4i16t")
 
