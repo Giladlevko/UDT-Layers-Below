@@ -8,6 +8,7 @@ class_name MusicHandler
 
 var music_title:MUS_Title;
 var music_credits:MUS_Base
+var music_options:MUS_Base
 var music_gameplay:MUS_Gameplay;
 var queue_ready_function:Callable;
 var has_ready_function_queued:bool = false;
@@ -19,10 +20,29 @@ const MENU_AUDIO_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/audio_b
 const MENU_PLAY_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/play_button";
 const MENU_CREDITS_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/credits_button";
 
+var is_currently_paused:bool = false;
 
+
+func _process(delta: float) -> void:
+	var is_paused = get_tree().paused;
+	if (is_currently_paused == is_paused):
+		return;
+	
+	is_currently_paused = is_paused;
+	if (is_currently_paused):
+		music_gameplay.pause_music(true);
+		music_options.set_volume_linear(0.0);
+		music_options.fade_in_music(20.0);
+		music_options.play();
+	else:
+		music_gameplay.pause_music(false);
+		music_options.stop_music();
+		
+	
 func _ready() -> void:
 	music_title = add_music("BGM_Title");
 	music_gameplay = add_music("BGM_Gameplay");
+	music_options = add_music("BGM_Options");
 	
 	if has_ready_function_queued:
 		queue_ready_function.call();
@@ -51,8 +71,11 @@ func _main_menu_on_credits_enter():
 	#music_title.fade_out_music(2.0);
 	
 func _main_menu_play():
-	music_title.fade_out_music(1.0);
-	music_title.fade_out_music(2.0);	
+	music_title.fade_out_music(2.0);
+	await get_tree().create_timer(2.0).timeout	
+	music_gameplay.set_volume_linear(0.0);
+	music_gameplay.fade_in_music(4.0);
+	music_gameplay.play();
 
 func _enter_menu_tree():
 	music_title.play();

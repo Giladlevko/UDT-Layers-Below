@@ -1,7 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://btb0o5t3074mb"]
+[gd_scene load_steps=7 format=3 uid="uid://btb0o5t3074mb"]
 
 [ext_resource type="Script" uid="uid://c01mok1ut1svt" path="res://Scripts/Music_scripts/mus_gameplay.gd" id="1_5bq45"]
+[ext_resource type="AudioStream" uid="uid://d07mwqsltgfyh" path="res://Assets/Music_assets/GWJ099_Gameplay_01a_80bpm_8bars.ogg" id="2_uk3no"]
+[ext_resource type="AudioStream" uid="uid://cbg0mjotcvhhm" path="res://Assets/Music_assets/GWJ099_Gameplay_01b_80bpm_8bars.ogg" id="3_vsk1g"]
+[ext_resource type="AudioStream" uid="uid://dwivpn8ccg6sg" path="res://Assets/Music_assets/GWJ099_Gameplay_01c_80bpm_8bars.ogg" id="4_axjmv"]
+[ext_resource type="AudioStream" uid="uid://lodhdig7tjds" path="res://Assets/Music_assets/GWJ099_Gameplay_01d_80bpm_8bars.ogg" id="5_n5n2s"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_rwcat"]
+shuffle = true
+stream_count = 4
+stream_0 = ExtResource("2_uk3no")
+stream_1 = ExtResource("3_vsk1g")
+stream_2 = ExtResource("4_axjmv")
+stream_3 = ExtResource("5_n5n2s")
 
 [node name="BGM_Gameplay" type="Node"]
 script = ExtResource("1_5bq45")
 max_volume = 0.8
+my_stream = SubResource("AudioStreamPlaylist_rwcat")

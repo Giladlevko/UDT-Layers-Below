@@ -33,7 +33,6 @@ func _on_audio_button_pressed() -> void:
 
 
 func _on_credits_button_pressed() -> void:
-	Music_GLOBAL.music_title.fade_out_music(1.0)
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/credits.tscn")
 	pass # Replace with function body.
 
