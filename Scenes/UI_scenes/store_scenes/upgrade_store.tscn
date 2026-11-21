@@ -67,7 +67,7 @@ grow_vertical = 2
 text = "Upgrades:"
 
 [node name="store_panel" type="Panel" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(900, 300)
+custom_minimum_size = Vector2(900, 350)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/store_panel"]

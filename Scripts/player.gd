@@ -15,7 +15,7 @@ var metal_detector: METAL_DETECTOR
 
 var mining_tools:Array[MINING_TOOL] 
 
-enum STATES{IDLE,RUNNING,JUMP,DASH,FROZEN}
+enum STATES{IDLE,RUNNING,JUMP,DASH,FROZEN,PUSHED}
 var state:STATES
 var can_dash:bool = true
 const SPEED:int = 150
@@ -28,18 +28,19 @@ const SPEED:int = 150
 @onready var jump_gravity: float = ((-2 * jump_height) / (jump_time_to_peak * jump_time_to_peak))*-1
 @onready var fall_gravity:float  =  ((-2 * jump_height) / (jump_time_to_descent * jump_time_to_descent))*-1
 
+@onready var water_can: Node2D = $WaterCan
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player = self
 	enter_state(STATES.IDLE)
-	mining_tools = []
+	mining_tools = [water_can]
 	flash_light.texture_scale = Global.vision_range
 	SignalBus.on_item_taken.connect(on_inv_item_taken)
 	SignalBus.vision_range_changed.connect(on_vision_changed)
 	SignalBus.dialog_started.connect(on_dialog_start)
 	SignalBus.dialog_ended.connect(on_dialog_end)
-	
+	SignalBus.puzzle_solved.connect(on_puzzle_solved)
 	SignalBus.on_take_item.emit(Global.drill_slot_data)
 	SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
 	
@@ -48,10 +49,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	match state:
-		STATES.RUNNING:move_state()
-		STATES.IDLE:idle_state()
+		STATES.RUNNING:move_state(delta)
+		STATES.IDLE:idle_state(delta)
+		STATES.PUSHED:pushed_state(delta)
 		STATES.DASH:dash_state(delta)
 		STATES.JUMP:jump_state()
 	constant_state(delta)
@@ -86,8 +87,8 @@ func movement_pressed()->bool:
 		!Input.is_action_pressed("LEFT")
 		)
 
-func idle_state():
-	velocity.x = 0
+func idle_state(delta:float):
+	velocity.x = lerpf(velocity.x,0,10*delta)
 	if(movement_pressed()):
 		change_state(STATES.RUNNING)
 	if(Input.is_action_just_pressed("JUMP")):
@@ -102,18 +103,21 @@ func jump_state():
 			change_state(STATES.RUNNING)
 		else:change_state(STATES.IDLE)
 	if(Input.is_action_just_pressed("DASH") and can_dash):
-		change_state(STATES.DASH)
+		pass
+		#change_state(STATES.DASH)
 	pass
 
-func move_state():
+func move_state(delta:float):
 	var dir_x = Input.get_axis("LEFT","RIGHT")
 	velocity.x = dir_x * SPEED
+	#velocity.x = lerpf(velocity.x,dir_x * SPEED,10*delta)
 	
 	if (!movement_pressed()):
 		change_state(STATES.IDLE)
 	
 	if(Input.is_action_just_pressed("DASH") and can_dash):
-		change_state(STATES.DASH)
+		pass
+		#change_state(STATES.DASH)
 	if(Input.is_action_just_pressed("JUMP") and can_jump()):
 		change_state(STATES.JUMP)
 	pass
@@ -129,6 +133,12 @@ func dash_state(delta:float):
 	velocity.x += DASH_POWER*dir_x*delta
 	
 	pass
+
+
+func pushed_state(delta:float):
+	if(is_on_floor() and velocity.x < 0.2):
+		change_state(STATES.IDLE)
+	velocity.x = lerpf(velocity.x,0,10*delta)
 
 func start_coyote():
 	in_coyote_time = true
@@ -154,6 +164,7 @@ func constant_state(delta:float):
 	
 
 
+
 var changing_state:bool = false
 func change_state(next:STATES,prev:STATES = state):
 	if !changing_state and state != next:
@@ -166,6 +177,8 @@ func change_state(next:STATES,prev:STATES = state):
 ##function for handleing state entries
 func enter_state(state_name:STATES):
 	match state_name:
+		STATES.PUSHED:
+			anim.play("idle")
 		STATES.FROZEN:
 			anim.play("idle")
 			velocity.x = 0
@@ -242,3 +255,16 @@ func on_dialog_start(dialog_name:String):
 func on_dialog_end(dialog_name:String):
 	change_state(STATES.IDLE)
 	cam.pan_up()
+
+
+func push(force:Vector2):
+	change_state(STATES.PUSHED)
+	velocity = force
+
+
+
+func on_puzzle_solved():
+	change_state(STATES.FROZEN)
+	cam.pan_to_exit()
+	await SignalBus.cam_pan_finished
+	change_state(STATES.IDLE)

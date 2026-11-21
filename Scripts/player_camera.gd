@@ -31,3 +31,25 @@ func pan_down():
 
 func pan_up():
 	position.y = -1*pan_offset
+
+
+func pan_to_exit():
+	var tween:=create_tween().set_trans(Tween.TRANS_CUBIC)
+	var target_pos:Vector2 = Global.exit_door.global_position
+	var dist:float = global_position.distance_to(target_pos)
+	var dur:float = dist / 300
+	tween.tween_property(self,"global_position",(target_pos),dur)
+	position_smoothing_enabled = false
+	tween.tween_callback(reached_target)
+	tween.tween_interval(2)
+	tween.tween_property(self,"global_position",get_parent().global_position,dur)
+	await tween.finished
+	SignalBus.cam_pan_finished.emit()
+	position_smoothing_enabled = true
+	position = Vector2.ZERO
+	
+	
+
+func reached_target():
+	SignalBus.open_exit.emit()
+	pass

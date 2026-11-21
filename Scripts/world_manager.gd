@@ -4,6 +4,8 @@ extends Node2D
 @onready var hit_box_layer: TileMapLayer = $tile_layers/hit_box_layer
 @onready var directional_light: DirectionalLight2D = $DirectionalLight2D
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.tile_map_layer = breakable_tile_layer

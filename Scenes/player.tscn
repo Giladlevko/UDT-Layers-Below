@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dr4fcm00cdgx2"]
+[gd_scene load_steps=21 format=3 uid="uid://dr4fcm00cdgx2"]
 
 [ext_resource type="Script" uid="uid://crq0aro1chiwb" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="3_6t5aa"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://wrjha12v4f5m" path="res://Assets/sfx_assets/SFX_Step.ogg" id="6_3smsa"]
 [ext_resource type="AudioStream" uid="uid://cr5fmer4ch4sy" path="res://Assets/sfx_assets/SFX_Jump.ogg" id="7_8erm5"]
+[ext_resource type="PackedScene" uid="uid://ctswhb5g4tlld" path="res://Scenes/Mining_tools_scenes/water_can.tscn" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("3_6t5aa")
@@ -134,6 +135,9 @@ stream = SubResource("AudioStreamRandomizer_8erm5")
 volume_db = -30.0
 pitch_scale = 1.68
 bus = &"sfx"
+
+[node name="WaterCan" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("8_8erm5")]
+tool_owner = NodePath("..")
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

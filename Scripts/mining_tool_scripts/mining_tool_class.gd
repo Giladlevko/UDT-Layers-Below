@@ -7,6 +7,8 @@ var state:states
 @export_group("Essential Nodes")
 @export var tool_owner:PLAYER
 @export var anim:AnimatedSprite2D
+@export var take_out_sfx: AudioStreamPlayer2D
+@export var put_away_sfx: AudioStreamPlayer2D
 
 
 @export var ray_cast: RayCast2D
@@ -17,6 +19,7 @@ var rays_target_pos:Array[Vector2]
 var rays_default_pos:Array[Vector2]
 
 @export_group("Anim Positions")
+@export var normalize_anim:bool = false
 @export var stashed_pos:Vector2 =  Vector2(-1,0)
 @export var stashed_angle:float = 25
 @export var held_pos:Vector2 = Vector2(25,0)
@@ -85,22 +88,24 @@ func flip_ray(flip:bool):
 var stopped_dir:Vector2
 func handle_tool(delta:float):
 	if(state == states.unequipped):
-		stash()
+		stash_handle_anim()
 		return
 	if(state != states.stashed):
 		var dir:float = tool_owner.global_position.angle_to_point(get_global_mouse_position())
 		dir = fposmod(snappedf(dir,PI/8),TAU)
 		rotation = lerp_angle(rotation,dir,5*delta)
 		
-		if(cos(rotation)<0):
-			anim.flip_v = true
-			flip_ray(true)
+		if(!normalize_anim):
+			if(cos(rotation)<0):
+				anim.flip_v = true
+				flip_ray(true)
+			else:
+				anim.flip_v = false
+				flip_ray(false)
 		else:
-			anim.flip_v = false
-			flip_ray(false)
-	
+			anim.global_rotation_degrees = 0
 	else:
-		stash()
+		stash_handle_anim()
 	
 	if(Input.is_action_just_pressed("GRAB_TOOL")):
 		if(state == states.stashed):
@@ -131,6 +136,7 @@ func change_state(new:states):
 
 
 func take_out():
+	take_out_sfx.play()
 	z_index = 0
 	anim.flip_v = false
 	anim.global_rotation_degrees = 0
@@ -138,15 +144,18 @@ func take_out():
 
 
 func stash():
+	put_away_sfx.play()
+	stash_handle_anim()
+	pass
+
+
+func stash_handle_anim():
 	rotation_degrees = 0
 	z_index = stashed_z_index
 	anim.flip_v = false
 	anim.position = stashed_pos
-	
 	anim.global_rotation_degrees = stashed_angle
-	
 	if(tool_owner.anim and tool_owner.anim.flip_h):
 		anim.global_rotation_degrees = 180-stashed_angle
 		anim.position.x = -1*stashed_pos.x
 		anim.flip_v = true
-	pass

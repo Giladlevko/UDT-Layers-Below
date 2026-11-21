@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="3_maddd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okm1w"]
-size = Vector2(158, 76)
+size = Vector2(136, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnvi7"]
 atlas = ExtResource("2_maddd")

@@ -93,6 +93,7 @@ func user_skiped()->bool:
 
 var line_tween:Tween
 func display_text(message:String,effect:String = ""):
+	line_tween = null
 	if !line_tween or !line_tween.is_valid():line_tween = create_tween()
 	line_tween.set_speed_scale(1)
 	if(end_label.visible):
