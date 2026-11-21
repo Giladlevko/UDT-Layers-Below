@@ -14,6 +14,7 @@ func _ready() -> void:
 func set_goal(val:int):
 	goal_amount = val
 	progress_bar.max_value = goal_amount
+	SignalBus.display_message.emit("New Coal Target: "+str(val))
 
 func on_currency_changed():
 	progress_bar.value = clamp(Global.currency["Coal"],0,progress_bar.max_value)

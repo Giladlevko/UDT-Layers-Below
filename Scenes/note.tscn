@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6edb4yk4cedf"]
+[gd_scene load_steps=6 format=3 uid="uid://c6edb4yk4cedf"]
 
 [ext_resource type="Texture2D" uid="uid://c81q3pq71hsva" path="res://Assets/note.png" id="1_ucs03"]
 [ext_resource type="Script" uid="uid://bf6u2bbxhvyhw" path="res://Scripts/note.gd" id="1_wfx1k"]
 [ext_resource type="PackedScene" uid="uid://clxcfwa3xedh" path="res://Scenes/interact_area.tscn" id="3_wfx1k"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_85erj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85erj"]
 radius = 18.0278
@@ -17,3 +18,6 @@ texture = ExtResource("1_ucs03")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_85erj")
+
+[node name="FlashLight" parent="." instance=ExtResource("4_85erj")]
+texture_scale = 2.0

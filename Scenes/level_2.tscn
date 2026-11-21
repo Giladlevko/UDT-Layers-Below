@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://dp1scy2qdx1iy"]
+
+[ext_resource type="Script" uid="uid://d0475qj7hcsly" path="res://Scripts/world_manager.gd" id="1_v3rpw"]
+[ext_resource type="Texture2D" uid="uid://curoc83nu11vh" path="res://Assets/dots_background tile-1.png" id="2_cggpd"]
+[ext_resource type="Texture2D" uid="uid://d12annnec6xol" path="res://Assets/dots_background tile-2.png" id="3_055b2"]
+[ext_resource type="Texture2D" uid="uid://67d0mjdvhiiu" path="res://Assets/tiles/black_tile.png" id="4_2mgoq"]
+[ext_resource type="TileSet" uid="uid://cxvqg3a86lid6" path="res://Scripts/Tile_scripts/tile_set_resource.tres" id="5_uhnj4"]
+[ext_resource type="PackedScene" uid="uid://bnwtgpmpg6kf" path="res://Scenes/tile_hit_box.tscn" id="6_42uki"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7v2y"]
+texture = ExtResource("4_2mgoq")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ait6c"]
+physics_layer_0/collision_layer = 15
+physics_layer_0/collision_mask = 15
+sources/3 = SubResource("TileSetAtlasSource_t7v2y")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vcilj"]
+scenes/1/scene = ExtResource("6_42uki")
+
+[sub_resource type="TileSet" id="TileSet_bl0du"]
+sources/1 = SubResource("TileSetScenesCollectionSource_vcilj")
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_v3rpw")
+
+[node name="paralax_layers" type="Node2D" parent="."]
+visible = false
+z_index = -100
+
+[node name="layer_1" type="Parallax2D" parent="paralax_layers"]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(640, 640)
+repeat_times = 3
+
+[node name="Sprite2D" type="TextureRect" parent="paralax_layers/layer_1"]
+offset_right = 640.0
+offset_bottom = 640.0
+texture = ExtResource("2_cggpd")
+stretch_mode = 1
+
+[node name="layer_2" type="Parallax2D" parent="paralax_layers"]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(640, 640)
+repeat_times = 3
+
+[node name="Sprite2D" type="TextureRect" parent="paralax_layers/layer_2"]
+offset_right = 640.0
+offset_bottom = 640.0
+texture = ExtResource("3_055b2")
+stretch_mode = 1
+
+[node name="tile_layers" type="Node2D" parent="."]
+
+[node name="un_miable_layer" type="TileMapLayer" parent="tile_layers"]
+tile_set = SubResource("TileSet_ait6c")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="tile_layers"]
+tile_set = ExtResource("5_uhnj4")
+
+[node name="hit_box_layer" type="TileMapLayer" parent="tile_layers"]
+tile_set = SubResource("TileSet_bl0du")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+blend_mode = 1

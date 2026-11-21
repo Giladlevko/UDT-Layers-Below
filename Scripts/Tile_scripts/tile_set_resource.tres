@@ -1,0 +1,176 @@
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://cxvqg3a86lid6"]
+
+[ext_resource type="Script" uid="uid://c2m0v3ngkm1eq" path="res://Scripts/Tile_scripts/tile_gem_data.gd" id="1_s188w"]
+[ext_resource type="Texture2D" uid="uid://d1aqqbugaheq7" path="res://Assets/tiles/all_tiles.png" id="2_hio1p"]
+
+[sub_resource type="Resource" id="Resource_o06y3"]
+script = ExtResource("1_s188w")
+max_drop = 4
+min_drop = 2
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_5ukr8"]
+script = ExtResource("1_s188w")
+max_drop = 3
+min_drop = 1
+type = 1
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_k7acu"]
+script = ExtResource("1_s188w")
+max_drop = 12
+min_drop = 8
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_5v1tr"]
+script = ExtResource("1_s188w")
+max_drop = 7
+min_drop = 4
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_0fj1v"]
+script = ExtResource("1_s188w")
+max_drop = 2
+min_drop = 1
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_ikia7"]
+script = ExtResource("1_s188w")
+max_drop = 2
+min_drop = 1
+type = 1
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_7yui6"]
+script = ExtResource("1_s188w")
+max_drop = 9
+min_drop = 6
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="Resource" id="Resource_c5t2i"]
+script = ExtResource("1_s188w")
+max_drop = 5
+min_drop = 3
+type = 0
+metadata/_custom_type_script = "uid://c2m0v3ngkm1eq"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ukr8"]
+texture = ExtResource("2_hio1p")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = &"DarkStone"
+0:0/0/custom_data_1 = Color(0.514662, 0.509165, 0.536858, 1)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/custom_data_0 = &"LightStone"
+1:0/0/custom_data_1 = Color(0.75507, 0.764126, 0.770171, 1)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/custom_data_0 = &"LightDirt"
+2:0/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0/custom_data_0 = &"LightSandyDirt"
+3:0/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0/custom_data_0 = &"Pumpkin"
+4:0/0/custom_data_1 = Color(0.723388, 0.318106, 0.280677, 1)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/custom_data_0 = &"DarkGreenGem"
+0:1/0/custom_data_1 = Color(0.523516, 0.983201, 0.549114, 1)
+0:1/0/custom_data_2 = SubResource("Resource_o06y3")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/custom_data_0 = &"LightGreenGem"
+1:1/0/custom_data_1 = Color(0.523516, 0.983201, 0.549114, 1)
+1:1/0/custom_data_2 = SubResource("Resource_0fj1v")
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/custom_data_0 = &"DarkDirt"
+2:1/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/custom_data_0 = &"DarkSandyDirt"
+3:1/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0/custom_data_0 = &"Wood"
+4:1/0/custom_data_1 = Color(0.773468, 0.487681, 0.115245, 1)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/custom_data_0 = &"DarkBlackGem"
+0:2/0/custom_data_1 = Color(0.230315, 0.230315, 0.230315, 1)
+0:2/0/custom_data_2 = SubResource("Resource_5ukr8")
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0/custom_data_0 = &"LightBlackGem"
+1:2/0/custom_data_1 = Color(0.230315, 0.230315, 0.230315, 1)
+1:2/0/custom_data_2 = SubResource("Resource_ikia7")
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0/custom_data_0 = &"LightDirt"
+2:2/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0/custom_data_0 = &"LightSandyDirt"
+3:2/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0/custom_data_0 = &"Slime"
+4:2/0/custom_data_1 = Color(0.94676, 0.99271, 0.852861, 1)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0/custom_data_0 = &"DarkPinkGem"
+0:3/0/custom_data_1 = Color(0.987035, 0.61172, 0.778819, 1)
+0:3/0/custom_data_2 = SubResource("Resource_k7acu")
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/custom_data_0 = &"LightPinkGem"
+1:3/0/custom_data_1 = Color(0.987035, 0.61172, 0.778819, 1)
+1:3/0/custom_data_2 = SubResource("Resource_7yui6")
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0/custom_data_0 = &"DarkDirt"
+2:3/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0/custom_data_0 = &"DarkSandyDirt"
+3:3/0/custom_data_1 = Color(0.576716, 0.369843, 0.186697, 1)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:4/0/custom_data_0 = &"LightBlueGem"
+1:4/0/custom_data_1 = Color(0.240916, 0.471215, 0.842082, 1)
+1:4/0/custom_data_2 = SubResource("Resource_c5t2i")
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:4/0/custom_data_0 = &"DarkBlueGem"
+0:4/0/custom_data_1 = Color(0.240916, 0.471215, 0.842082, 1)
+0:4/0/custom_data_2 = SubResource("Resource_5v1tr")
+
+[resource]
+physics_layer_0/collision_layer = 7
+physics_layer_0/collision_mask = 7
+physics_layer_1/collision_layer = 16
+physics_layer_1/collision_mask = 16
+custom_data_layer_0/name = "TileType"
+custom_data_layer_0/type = 21
+custom_data_layer_1/name = "ParticleColor"
+custom_data_layer_1/type = 20
+custom_data_layer_2/name = "GemData"
+custom_data_layer_2/type = 24
+sources/6 = SubResource("TileSetAtlasSource_5ukr8")
