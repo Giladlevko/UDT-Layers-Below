@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name ORE
+@onready var pick_up_sfx: AudioStreamPlayer2D = $pick_up_sfx
 
 var color:Color:
 	set(val):
@@ -43,5 +44,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			Global.change_currency_amount("Gems",1)
 		else:
 			Global.change_currency_amount("Coal",1)
+			pick_up_sfx.pitch_scale = 0.5
+		pick_up_sfx.play()
+		visible = false
+		await pick_up_sfx.finished
 		queue_free()
 	pass # Replace with function body.

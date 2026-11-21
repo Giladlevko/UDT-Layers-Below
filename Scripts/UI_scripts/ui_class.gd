@@ -51,12 +51,12 @@ func button_mouse_exited(button:Button,dur:float):
 ##Turns the screen dark by tweening the visibility of the dark_screen ColorRect
 func darken_screen(dur:float = 0.4):
 	assert(dark_screen != null)
-	tween_visibility(dark_screen,true,dur)
+	await tween_visibility(dark_screen,true,dur)
 
 ##Turns lightens the screen by tweening the visibility of the dark_screen ColorRect
 func lighten_screen(dur:float = 0.4):
 	assert(dark_screen != null)
-	tween_visibility(dark_screen,false,dur)
+	await tween_visibility(dark_screen,false,dur)
 	
 signal volume_changed
 ##Tweens the given Music's Linear volume to the given Value
@@ -106,10 +106,8 @@ func song_on(music:AudioStreamPlayer = song,db_val:float = -15,dur:float = 5):
 	tween_music(db_to_linear(db_val),music,dur)
 
 ##Darkens the screen, turns the song off, and switches to the given scene
-func handle_scene_transition(next_scene:String):
-	var dur:float = 0.3
-	darken_screen(dur)
+func handle_scene_transition(next_scene:String,dur:float = 0.3):
 	song_off(song,dur)
-	await volume_changed
+	await darken_screen(dur)
 	UI_GLOBAL.switch_scenes(next_scene)
 	

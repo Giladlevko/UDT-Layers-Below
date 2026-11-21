@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
-	self.handle_scene_transition("res://Scenes/world.tscn")
+	self.handle_scene_transition("res://Scenes/world.tscn",0.7);
 	pass # Replace with function body.
 
 

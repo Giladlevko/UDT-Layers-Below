@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0kjaiey3ek7v"]
+
+[ext_resource type="Script" uid="uid://df6u5xosx2dfq" path="res://Scripts/puzzle_scripts/flowers.gd" id="1_v4k6v"]
+[ext_resource type="Texture2D" uid="uid://bemqk431eq3fm" path="res://Assets/flower.png" id="2_gr6c3"]
+[ext_resource type="PackedScene" uid="uid://1im1jjwh3ajn" path="res://Scenes/puzzle_scenes/confetti_particles.tscn" id="3_gr6c3"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_4rjiu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rjiu"]
+atlas = ExtResource("2_gr6c3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byvt8"]
+atlas = ExtResource("2_gr6c3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yshu"]
+atlas = ExtResource("2_gr6c3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4rjiu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rjiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byvt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yshu")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vin3"]
+size = Vector2(20, 16)
+
+[node name="Flowers" type="Node2D"]
+script = ExtResource("1_v4k6v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4rjiu")
+animation = &"bloom"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4vin3")
+
+[node name="confetti_particles" parent="." instance=ExtResource("3_gr6c3")]
+
+[node name="FlashLight" parent="." instance=ExtResource("4_4rjiu")]
+texture_scale = 1.0

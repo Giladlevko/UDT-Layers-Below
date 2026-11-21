@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://clxcfwa3xedh"]
+
+[ext_resource type="Script" uid="uid://bd3plkxgh4x7t" path="res://Scripts/interact_area.gd" id="1_gmguv"]
+[ext_resource type="PackedScene" uid="uid://bm0841uickv75" path="res://Scenes/UI_scenes/interact_popup.tscn" id="1_njipq"]
+
+[node name="InteractArea" type="Area2D"]
+script = ExtResource("1_gmguv")
+
+[node name="InteractPopup" parent="." instance=ExtResource("1_njipq")]
+offset_left = -10.0
+offset_top = -52.0
+offset_right = -10.0
+offset_bottom = -52.0
+scale = Vector2(0.5, 0.5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

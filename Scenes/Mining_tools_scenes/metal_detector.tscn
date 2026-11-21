@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b683mqc15w0ck"]
+[gd_scene load_steps=13 format=3 uid="uid://b683mqc15w0ck"]
 
 [ext_resource type="Script" uid="uid://51mwnvp8dhnb" path="res://Scripts/mining_tool_scripts/metal_detector.gd" id="1_y2j5e"]
 [ext_resource type="Texture2D" uid="uid://b7p88dkqpavrm" path="res://Assets/metal_detector.png" id="2_y2j5e"]
+[ext_resource type="AudioStream" uid="uid://5y2mv84eulvy" path="res://Assets/sfx_assets/SFX_Tool_Takeout.ogg" id="3_h6t0k"]
+[ext_resource type="AudioStream" uid="uid://cixx5q4fvyv3q" path="res://Assets/sfx_assets/SFX_Tool_Putaway.ogg" id="4_ip78q"]
+[ext_resource type="AudioStream" uid="uid://bsikifj3kp6o6" path="res://Assets/sfx_assets/SFX_MetalDetectorBeep.ogg" id="5_ip78q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2j5e"]
 atlas = ExtResource("2_y2j5e")
@@ -39,9 +42,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MetalDetector" type="Node2D" node_paths=PackedStringArray("anim", "ray_cast", "collider_ray")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rft7l"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_h6t0k")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8w3cb"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_ip78q")
+
+[node name="MetalDetector" type="Node2D" node_paths=PackedStringArray("anim", "take_out_sfx", "put_away_sfx", "ray_cast", "collider_ray")]
 script = ExtResource("1_y2j5e")
 anim = NodePath("AnimatedSprite2D")
+take_out_sfx = NodePath("sfx/take_out")
+put_away_sfx = NodePath("sfx/put_away")
 ray_cast = NodePath("AnimatedSprite2D/rays/ray_cast")
 collider_ray = NodePath("AnimatedSprite2D/rays/collider_ray")
 stashed_pos = Vector2(-2, -5)
@@ -61,7 +76,6 @@ position = Vector2(-1, 0)
 target_position = Vector2(9, 0)
 collision_mask = 8
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="collider_ray" type="RayCast2D" parent="AnimatedSprite2D/rays"]
 position = Vector2(-5, 0)
@@ -79,5 +93,24 @@ collide_with_areas = true
 
 [node name="beep_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="take_out" type="AudioStreamPlayer2D" parent="sfx"]
+stream = SubResource("AudioStreamRandomizer_rft7l")
+volume_db = -35.0
+pitch_scale = 1.3
+bus = &"sfx"
+
+[node name="put_away" type="AudioStreamPlayer2D" parent="sfx"]
+stream = SubResource("AudioStreamRandomizer_8w3cb")
+volume_db = -35.0
+pitch_scale = 1.3
+bus = &"sfx"
+
+[node name="beep_sfx" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("5_ip78q")
+volume_db = -25.0
+bus = &"sfx"
 
 [connection signal="timeout" from="beep_timer" to="." method="_on_beep_timer_timeout"]

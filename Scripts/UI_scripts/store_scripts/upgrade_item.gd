@@ -4,6 +4,12 @@ extends Control
 @onready var upgrade_button: Button = $VBoxContainer/upgrade_button
 @onready var buy_sfx: AudioStreamPlayer = $buy_sfx
 
+@onready var texture_rect: TextureRect = $VBoxContainer/Panel/MarginContainer/TextureRect
+
+const DRILL_POWER_PATH:= ("res://Assets/upgrade_icons/drill_power.png")
+const DRILL_SPEED_PATH:= ("res://Assets/upgrade_icons/drill_speed.png")
+const METAL_DETECTOR_RANGE_PATH:= ("res://Assets/upgrade_icons/metal_detector_range.png")
+const VISON_INCREASE_PATH:= ("res://Assets/upgrade_icons/vison_increase.png")
 
 @export_enum("drill speed", "drill power", "vision range","detactor range")
 var effect:String = "drill speed"
@@ -20,10 +26,24 @@ var current_use = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	update_vars()
 	cost_label.text = "Cost: " + str(price)
 	pick_effect_text()
+	pick_texture()
 	
 	pass # Replace with function body.
+
+func update_vars():
+	if Global.upgrades_uses_count.has(name):
+		var count = Global.upgrades_uses_count[name]
+		current_use = count
+		if(current_use == max_uses):
+			upgrade_button.disabled = true
+			price = price * 2**(count-1)
+		else: price = price * 2**count
+	else:
+		Global.upgrades_uses_count[name] = 0
+	pass
 
 func pick_effect_text():
 	var txt:String = ""
@@ -37,6 +57,21 @@ func pick_effect_text():
 		"detactor range":
 			txt = "2x Metal Detector Range"
 	upgrade_button.text = txt
+
+
+func pick_texture():
+	var path:String = ""
+	match effect:
+		"drill speed":
+			path = DRILL_SPEED_PATH
+		"drill power":
+			path = DRILL_POWER_PATH
+		"vision range":
+			path = VISON_INCREASE_PATH
+		"detactor range":
+			path = METAL_DETECTOR_RANGE_PATH
+	texture_rect.texture = load(path)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -63,6 +98,7 @@ func _on_upgrade_button_pressed() -> void:
 		Global.change_currency_amount("Gems",-price)
 		buy_sfx.play()
 		current_use += 1
+		Global.upgrades_uses_count[name] = current_use
 		if(current_use == max_uses):
 			upgrade_button.disabled = true
 			print("disabled button")

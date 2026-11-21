@@ -18,3 +18,14 @@ signal vision_range_changed
 
 signal dialog_started(dialog_name:String)
 signal dialog_ended(dialog_name:String)
+
+
+signal puzzle_solved()
+
+signal open_exit()
+
+signal cam_pan_finished()
+
+signal level_finished
+
+signal coal_goal_changed()

@@ -43,17 +43,17 @@ func _ready() -> void:
 
 func init_dark_screen():
 	dark_screen.color = Color.BLACK
+	dark_screen.modulate.a = 1
 	#sets the anchor to the full screen
 	dark_screen.anchor_bottom = 1
 	dark_screen.anchor_right = 1
 	dark_screen.anchor_top = 0
 	dark_screen.anchor_left = 0
 	dark_screen.z_index = 500
+	canvas.layer = 100
 	get_tree().root.add_child.call_deferred(canvas)
-	canvas.add_child((dark_screen))
-	if(get_tree().current_scene is not MenuUI):
-		dark_screen.modulate.a = 0
-		dark_screen.visible = false
+	canvas.add_child.call_deferred((dark_screen))
+	
 		
 
 func init_button_sfx():
@@ -72,8 +72,8 @@ func init_song_player():
 
 func init_text_box():
 	text_box = text_box_scene.instantiate()
-	canvas.add_child(text_box)
-	text_box.z_index = 100
+	canvas.add_child.call_deferred(text_box)
+	text_box.z_index = 500
 	text_box.set_button_sfx_to_global()
 
 

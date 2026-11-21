@@ -5,7 +5,7 @@ var tile_particle: CPUParticles2D = null
 const TILE_PARTICLE = preload("res://Scenes/tile_particle.tscn")
 const ORE_SCENE = preload("res://Scenes/Ore.tscn")
 var curr_tex_coords:AtlasTexture
-@onready var dig_sfx: AudioStreamPlayer2D = $dig_sfx
+
 
 var max_health:int = 20
 var tile_stage:int = 0
@@ -38,7 +38,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Label.text = "health = "+str(curr_health)
 	pass
 
 func get_tile_pos()->Vector2:
@@ -55,7 +54,7 @@ func get_tile_data()->TileData:
 
 func crack_tile():
 	handle_particle()
-	dig_sfx.play()
+	Global.tile_dig_sfx.play()
 	sprite.visible = true
 	sprite.modulate.a = 1/5.0 * tile_stage
 

@@ -3,6 +3,7 @@ class_name METAL_DETECTOR
 @onready var gem_collider: RayCast2D = $AnimatedSprite2D/rays/gem_collider
 @onready var beep_timer: Timer = $beep_timer
 var beep_freq:float = 1.0
+@onready var beep_sfx: AudioStreamPlayer2D = $sfx/beep_sfx
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,5 +65,5 @@ func _on_beep_timer_timeout() -> void:
 	can_beep = true
 	if(gem_collider.is_colliding()):
 		#sfx here
-		UI_GLOBAL.button_hover_sfx.play()
+		beep_sfx.play()
 	pass # Replace with function body.

@@ -5,7 +5,7 @@ class_name JACK_HAMMER
 @onready var tile_particle: CPUParticles2D = $particles/tile_particle
 @onready var drill_ray: RayCast2D = $AnimatedSprite2D/drill_ray
 
-@onready var using_sfx: AudioStreamPlayer2D = $using_sfx
+@onready var using_sfx: AudioStreamPlayer2D = $sfx/using_sfx
 
 
 var damage:int = 15
