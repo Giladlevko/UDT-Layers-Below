@@ -13,7 +13,7 @@ class_name PLAYER
 var jack_hammer: JACK_HAMMER
 var metal_detector: METAL_DETECTOR
 
-var mining_tools:Array[MINING_TOOL] 
+var mining_tools:Array[MINING_TOOL] = []
 
 enum STATES{IDLE,RUNNING,JUMP,DASH,FROZEN,PUSHED}
 var state:STATES
@@ -35,15 +35,15 @@ const SPEED:int = 150
 func _ready() -> void:
 	Global.player = self
 	enter_state(STATES.IDLE)
-	mining_tools = []
 	flash_light.texture_scale = Global.vision_range
 	SignalBus.on_item_taken.connect(on_inv_item_taken)
 	SignalBus.vision_range_changed.connect(on_vision_changed)
 	SignalBus.dialog_started.connect(on_dialog_start)
 	SignalBus.dialog_ended.connect(on_dialog_end)
 	SignalBus.puzzle_solved.connect(on_puzzle_solved)
-	SignalBus.on_take_item.emit(Global.drill_slot_data)
-	SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
+	
+	#SignalBus.on_take_item.emit(Global.drill_slot_data)
+	#SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
 	
 	pass # Replace with function body.
 

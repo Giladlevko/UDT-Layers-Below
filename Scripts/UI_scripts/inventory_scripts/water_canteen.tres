@@ -2,17 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://ctswhb5g4tlld" path="res://Scenes/Mining_tools_scenes/water_can.tscn" id="1_fumw6"]
 [ext_resource type="Script" uid="uid://bocn5mgtxv3gm" path="res://Scripts/UI_scripts/inventory_scripts/InvSlotData.gd" id="1_qrdm8"]
-[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="2_atr66"]
+[ext_resource type="Texture2D" uid="uid://b6egs2iy00i6s" path="res://Assets/water_canteen.png" id="3_fumw6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fumw6"]
-atlas = ExtResource("2_atr66")
-region = Rect2(59, 61, 10, 15)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkqsv"]
+atlas = ExtResource("3_fumw6")
 
 [resource]
 script = ExtResource("1_qrdm8")
 name = "Water Canteen"
 slot_type = "Other"
-texture = SubResource("AtlasTexture_fumw6")
+texture = SubResource("AtlasTexture_gkqsv")
 scene = ExtResource("1_fumw6")
 value = 0
 metadata/_custom_type_script = "uid://bocn5mgtxv3gm"

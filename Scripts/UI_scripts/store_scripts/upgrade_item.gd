@@ -26,11 +26,24 @@ var current_use = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	update_vars()
 	cost_label.text = "Cost: " + str(price)
 	pick_effect_text()
 	pick_texture()
 	
 	pass # Replace with function body.
+
+func update_vars():
+	if Global.upgrades_uses_count.has(name):
+		var count = Global.upgrades_uses_count[name]
+		current_use = count
+		if(current_use == max_uses):
+			upgrade_button.disabled = true
+			price = price * 2**(count-1)
+		else: price = price * 2**count
+	else:
+		Global.upgrades_uses_count[name] = 0
+	pass
 
 func pick_effect_text():
 	var txt:String = ""
@@ -85,6 +98,7 @@ func _on_upgrade_button_pressed() -> void:
 		Global.change_currency_amount("Gems",-price)
 		buy_sfx.play()
 		current_use += 1
+		Global.upgrades_uses_count[name] = current_use
 		if(current_use == max_uses):
 			upgrade_button.disabled = true
 			print("disabled button")

@@ -6,6 +6,13 @@ var tile_hit_layer:TileMapLayer
 
 var player:PLAYER
 
+var tile_dig_sfx:AudioStreamPlayer
+const DIG_SFX_SCENE:PackedScene = preload("res://Scenes/dig_sfx.tscn")
+
+var inventory_items:Array[InvSlotData] = []
+
+var upgrades_uses_count:Dictionary[String,int] = {}
+
 var exit_door_position:Vector2
 var exit_door:ExitDoor
 
@@ -71,11 +78,17 @@ var quota_reached:bool = false
 
 func _ready() -> void:
 	puzzle_sfx_setup()
+	tile_dig_sfx_setup()
 	SignalBus.puzzle_solved.connect(on_puzzle_complete)
 
 func change_currency_amount(type:String,amount:int):
 	currency[type] += amount
 	SignalBus.currency_changed.emit()
+
+
+func tile_dig_sfx_setup():
+	tile_dig_sfx = DIG_SFX_SCENE.instantiate()
+	get_tree().root.add_child.call_deferred(tile_dig_sfx)
 
 
 func puzzle_sfx_setup():

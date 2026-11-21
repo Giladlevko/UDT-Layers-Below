@@ -27,3 +27,5 @@ signal open_exit()
 signal cam_pan_finished()
 
 signal level_finished
+
+signal coal_goal_changed()

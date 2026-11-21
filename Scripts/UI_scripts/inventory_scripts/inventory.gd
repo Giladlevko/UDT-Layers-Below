@@ -11,8 +11,16 @@ func _ready() -> void:
 	self.buttons = [close_button]
 	self.connect_buttons()
 	SignalBus.on_take_item.connect(take_item)
+	
+	
+	call_deferred("add_past_items")
+
 	pass # Replace with function body.
 
+func add_past_items():
+	for data in Global.inventory_items:
+		take_item(data)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,6 +42,8 @@ func add_tool(data:InvSlotData)->bool:
 		if(!slot.slot_data or !slot.slot_data.texture):
 			slot.slot_data = data
 			SignalBus.display_message.emit(data.name+" Added!")
+			if(!Global.inventory_items.has(data)):
+				Global.inventory_items.push_back(data)
 			return true
 	return false
 
@@ -42,5 +52,7 @@ func add_item(data:InvSlotData)->bool:
 		if(!slot.slot_data or !slot.slot_data.texture):
 			slot.slot_data = data
 			SignalBus.display_message.emit(data.name+" Added!")
+			if(!Global.inventory_items.has(data)):
+				Global.inventory_items.push_back(data)
 			return true
 	return false

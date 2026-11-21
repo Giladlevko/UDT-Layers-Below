@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func _on_play_button_pressed() -> void:
 	Music_GLOBAL.music_title.fade_out_music(1.0);
-	self.handle_scene_transition("res://Scenes/world.tscn")
+	self.handle_scene_transition("res://Scenes/world.tscn",0.7)
 	pass # Replace with function body.
 
 

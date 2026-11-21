@@ -53,5 +53,6 @@ texture = SubResource("GradientTexture2D_4i16t")
 [node name="pick_up_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_sw110")
 volume_db = -25.0
+bus = &"sfx"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

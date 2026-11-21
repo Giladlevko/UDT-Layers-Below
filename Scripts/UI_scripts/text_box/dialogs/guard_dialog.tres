@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogData" load_steps=17 format=3 uid="uid://dc2hlfnuc14rm"]
+[gd_resource type="Resource" script_class="DialogData" load_steps=19 format=3 uid="uid://dc2hlfnuc14rm"]
 
 [ext_resource type="Script" uid="uid://bhqovwl8pw33d" path="res://Scripts/UI_scripts/text_box/dialog_entry.gd" id="1_uy80n"]
 [ext_resource type="Script" uid="uid://bxrvun5bs65ck" path="res://Scripts/UI_scripts/text_box/dialog_line.gd" id="2_6wsn7"]
@@ -71,12 +71,24 @@ script = ExtResource("1_uy80n")
 Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_vbyt2")])
 metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 
+[sub_resource type="Resource" id="Resource_0cmj6"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Hello Rusty, you are late... ", "I will be your supervisor today...", "That means you do what I tell you, no less no more.", "You got that bucket brain?", "We have a couple of shifts today...", "Each time I'll tell you the amount of coal we need to collect.", "By \"we\" I mean you... I got much more important things to do.", "I'm not a miner, I am a GREAT GUARDIAN HA HA!", "Far too important for coal mining.", "Anyway...", "This is you first day huh?", "You forgot your Jack Hammer....", "How can a miner forget his mining tool...", "Why do I always get the idiots...", "Good thing I got an extra...", "Well... ", "Your coal target for this shift is 100 coals", "You might find gems as well.", "If you do you can use it to upgrade your tools.", "You can find the upgrade shop in your system's menu.", "You can also see there your inventory and other useful things.", "You can see your coal collecting progress in that bar in the top right corner", "Other than that I think you are good to go...", "What are you waiting for oven brain get on to work!"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_4smm7"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_0cmj6")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
 [resource]
 script = ExtResource("2_pfpyo")
 entries = Dictionary[String, ExtResource("1_uy80n")]({
 "give_me_coal1": SubResource("Resource_yyrw0"),
 "give_me_coal2": SubResource("Resource_33eh1"),
 "give_me_coal3": SubResource("Resource_1f5em"),
+"intro1": SubResource("Resource_4smm7"),
 "you_can_pass1": SubResource("Resource_xa5lp"),
 "you_can_pass2": SubResource("Resource_4ie28"),
 "you_can_pass3": SubResource("Resource_rovye")

@@ -43,6 +43,7 @@ func _ready() -> void:
 
 func init_dark_screen():
 	dark_screen.color = Color.BLACK
+	dark_screen.modulate.a = 1
 	#sets the anchor to the full screen
 	dark_screen.anchor_bottom = 1
 	dark_screen.anchor_right = 1

@@ -149,6 +149,7 @@ bus = &"sfx"
 [node name="walk_particles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_f1ek2")
 position = Vector2(0, 10)
+emitting = false
 texture = ExtResource("8_8erm5")
 spread = 12.0
 gravity = Vector2(0, 0)

@@ -54,7 +54,6 @@ target_position = Vector2(0, 6)
 collision_mask = 8
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="tile_collider" type="RayCast2D" parent="AnimatedSprite2D"]
 position = Vector2(0, -4)
