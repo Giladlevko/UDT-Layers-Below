@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr4fcm00cdgx2"]
+[gd_scene load_steps=23 format=3 uid="uid://dr4fcm00cdgx2"]
 
 [ext_resource type="Script" uid="uid://crq0aro1chiwb" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cesiwmf2hlqm6" path="res://Assets/running_player.png" id="3_6t5aa"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://wrjha12v4f5m" path="res://Assets/sfx_assets/SFX_Step.ogg" id="6_3smsa"]
 [ext_resource type="AudioStream" uid="uid://cr5fmer4ch4sy" path="res://Assets/sfx_assets/SFX_Jump.ogg" id="7_8erm5"]
-[ext_resource type="PackedScene" uid="uid://ctswhb5g4tlld" path="res://Scenes/Mining_tools_scenes/water_can.tscn" id="8_8erm5"]
+[ext_resource type="Texture2D" uid="uid://s78sdpdg5tc" path="res://Assets/walk_particles.png" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("3_6t5aa")
@@ -97,6 +97,16 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("7_8erm5")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f1ek2"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_tx1dd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_v0iea")
 
@@ -136,8 +146,19 @@ volume_db = -30.0
 pitch_scale = 1.68
 bus = &"sfx"
 
-[node name="WaterCan" parent="." node_paths=PackedStringArray("tool_owner") instance=ExtResource("8_8erm5")]
-tool_owner = NodePath("..")
+[node name="walk_particles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_f1ek2")
+position = Vector2(0, 10)
+texture = ExtResource("8_8erm5")
+spread = 12.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.7
+scale_amount_max = 0.7
+anim_offset_min = 1.0
+anim_offset_max = 1.0
+anim_offset_curve = SubResource("Curve_tx1dd")
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

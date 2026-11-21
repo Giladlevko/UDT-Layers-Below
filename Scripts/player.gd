@@ -27,14 +27,15 @@ const SPEED:int = 150
 @onready var JUMP_VELOCITY = (-2 * jump_height) / jump_time_to_peak
 @onready var jump_gravity: float = ((-2 * jump_height) / (jump_time_to_peak * jump_time_to_peak))*-1
 @onready var fall_gravity:float  =  ((-2 * jump_height) / (jump_time_to_descent * jump_time_to_descent))*-1
+@onready var walk_particles: CPUParticles2D = $walk_particles
 
-@onready var water_can: Node2D = $WaterCan
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player = self
 	enter_state(STATES.IDLE)
-	mining_tools = [water_can]
+	mining_tools = []
 	flash_light.texture_scale = Global.vision_range
 	SignalBus.on_item_taken.connect(on_inv_item_taken)
 	SignalBus.vision_range_changed.connect(on_vision_changed)
@@ -110,7 +111,10 @@ func jump_state():
 func move_state(delta:float):
 	var dir_x = Input.get_axis("LEFT","RIGHT")
 	velocity.x = dir_x * SPEED
-	#velocity.x = lerpf(velocity.x,dir_x * SPEED,10*delta)
+	if(!is_on_wall()):
+		walk_particles.emitting = true
+	else:
+		walk_particles.emitting = false
 	
 	if (!movement_pressed()):
 		change_state(STATES.IDLE)
@@ -161,6 +165,8 @@ func constant_state(delta:float):
 	var dir_x = Input.get_axis("LEFT","RIGHT")
 	if(dir_x != 0):
 		anim.flip_h = (dir_x == -1)
+	walk_particles.initial_velocity_max = 1*sign(dir_x)*40
+	walk_particles.initial_velocity_min = 1*sign(dir_x)*40
 	
 
 
@@ -186,6 +192,7 @@ func enter_state(state_name:STATES):
 			anim.play("idle")
 			pass
 		STATES.RUNNING:
+			#walk_particles.emitting = true
 			anim.play("run")
 			pass
 		STATES.DASH:
@@ -204,6 +211,8 @@ func enter_state(state_name:STATES):
 ##function for handleing state exits
 func exit_state(state_name):
 	match state_name:
+		STATES.RUNNING:
+			walk_particles.emitting = false
 		pass
 
 
@@ -215,7 +224,7 @@ func already_has_tool(tool:MINING_TOOL)->bool:
 	return false
 
 func on_inv_item_taken(successful:bool,data:InvSlotData):
-	if(data.slot_type == "Tool" and successful):
+	if((data.slot_type == "Tool" or data.name == "Water Canteen") and successful):
 		var new_tool:MINING_TOOL = data.scene.instantiate()
 		if(already_has_tool(new_tool)):
 			new_tool.queue_free()

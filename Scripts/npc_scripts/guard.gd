@@ -36,6 +36,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				var r = randi_range(1,versions_count)
 				UI_GLOBAL.text_box.play_dialog("you_can_pass"+str(r))
 		elif(state == states.LevelSTART):
+			
+			await SignalBus.dialog_ended
+			SignalBus.level_finished.emit()
 			pass
 		pass
 

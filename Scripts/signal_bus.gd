@@ -25,3 +25,5 @@ signal puzzle_solved()
 signal open_exit()
 
 signal cam_pan_finished()
+
+signal level_finished

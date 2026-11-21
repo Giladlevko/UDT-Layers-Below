@@ -18,6 +18,16 @@ var puzzle_sfx_stream: = preload("res://Assets/sfx_assets/SFX_PuzzleComplete.ogg
 @onready var puzzle_complete_sfx:AudioStreamPlayer = AudioStreamPlayer.new()
 
 
+var current_level_index:int = 1
+var next_level_paths:Dictionary[int,String] = {
+	1: "",
+	2: "",
+	3: "res://Scenes/UI_scenes/menu_scenes/main_menue.tscn"
+}
+
+func next_level_path()->String:
+	return next_level_paths[current_level_index]
+
 var tile_health:Dictionary[String,int] = {
 	"DarkStone": 100,
 	"LightStone":70,

@@ -1,11 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://2mi232hnubdl"]
+[gd_scene load_steps=16 format=3 uid="uid://2mi232hnubdl"]
 
 [ext_resource type="Script" uid="uid://bs71ynk060p6w" path="res://Scripts/mining_tool_scripts/jack_hammer.gd" id="1_odu2g"]
 [ext_resource type="Texture2D" uid="uid://bt4m8y712klsb" path="res://Assets/drill_anim.png" id="2_dts8e"]
 [ext_resource type="Texture2D" uid="uid://bhatv1qplfpiu" path="res://Assets/basic_particle.png" id="3_xx4kr"]
 [ext_resource type="AudioStream" uid="uid://djj3pf5uxle4x" path="res://Assets/sfx_assets/SFX_JackHammer_Boom_V2.ogg" id="4_dts8e"]
-[ext_resource type="AudioStream" uid="uid://b436fypefydme" path="res://Assets/sfx_assets/SFX_JackHammer_Working_Intro.ogg" id="5_xx4kr"]
-[ext_resource type="AudioStream" uid="uid://dpfc4fxgngxij" path="res://Assets/sfx_assets/SFX_JackHammer_Stopping.ogg" id="6_18cqf"]
 [ext_resource type="AudioStream" uid="uid://5y2mv84eulvy" path="res://Assets/sfx_assets/SFX_Tool_Takeout.ogg" id="7_cdu46"]
 [ext_resource type="AudioStream" uid="uid://cixx5q4fvyv3q" path="res://Assets/sfx_assets/SFX_Tool_Putaway.ogg" id="8_ksuxb"]
 
@@ -132,15 +130,6 @@ stream = SubResource("AudioStreamRandomizer_xx4kr")
 volume_db = -28.0
 pitch_scale = 0.1
 bus = &"sfx"
-
-[node name="starting" type="AudioStreamPlayer2D" parent="sfx"]
-stream = ExtResource("5_xx4kr")
-volume_db = -25.0
-pitch_scale = 0.3
-
-[node name="stop" type="AudioStreamPlayer2D" parent="sfx"]
-stream = ExtResource("6_18cqf")
-volume_db = -30.0
 
 [node name="take_out" type="AudioStreamPlayer2D" parent="sfx"]
 stream = SubResource("AudioStreamRandomizer_cdu46")

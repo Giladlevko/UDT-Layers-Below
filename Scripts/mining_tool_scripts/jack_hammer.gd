@@ -5,8 +5,6 @@ class_name JACK_HAMMER
 @onready var tile_particle: CPUParticles2D = $particles/tile_particle
 @onready var drill_ray: RayCast2D = $AnimatedSprite2D/drill_ray
 
-@onready var starting_sfx: AudioStreamPlayer2D = $sfx/starting
-@onready var stop_sfx: AudioStreamPlayer2D = $sfx/stop
 @onready var using_sfx: AudioStreamPlayer2D = $sfx/using_sfx
 
 
@@ -46,7 +44,6 @@ func on_state_changed(prev:states,new:states):
 var drill_tween:Tween
 func drill():
 	if(stop_tween):stop_tween.kill()
-	starting_sfx.play()
 	anim.play("drill")
 	if(anim.speed_scale < 1):
 		drill_tween = create_tween()
@@ -64,7 +61,6 @@ func stop():
 	drill_ray.enabled = false
 	stop_tween.tween_property(anim,"speed_scale",0,dur)
 	await stop_tween.finished
-	stop_sfx.play()
 	anim.stop()
 	anim.frame = 0
 	stop_tween.kill()
