@@ -37,11 +37,12 @@ func play(from_position:float = 0.0) -> void:
 
 ## This will set the volume relative to THIS music instance full volume.
 ## Change the music instance's max volume -> "max_volume".
-func set_volume_linear(linear_vol:float) -> void:
+func set_volume_linear(linear_vol:float) -> void:	
 	current_linear_volume = linear_vol;
+	my_stream_player.volume_linear = lerp(0.0, max_volume, current_linear_volume);
 
 func _process(_delta: float) -> void:
-	my_stream_player.volume_linear = lerp(0.0, max_volume, current_linear_volume);
+	set_volume_linear(current_linear_volume);
 
 ## Pause the music instance.
 func pause_music(is_paused_enabled:bool):

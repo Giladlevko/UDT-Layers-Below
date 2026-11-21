@@ -15,6 +15,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_return_button_pressed() -> void:
+func _on_return_button_pressed() -> void:	
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/main_menue.tscn")
 	pass # Replace with function body.

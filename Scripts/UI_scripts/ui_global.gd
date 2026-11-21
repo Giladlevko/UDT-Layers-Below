@@ -7,7 +7,7 @@ extends Node
 @onready var song_player:AudioStreamPlayer = AudioStreamPlayer.new()
 
 
-const button_hover_sfx_path:String = "res://Assets/UI_assets/UI_Button_Hover.ogg"
+const button_hover_sfx_path:String = "res://Assets/UI_assets/UI_Button_Hover_V3.ogg"
 const button_click_sfx_path:String = "res://Assets/UI_assets/UI_Button_Click.ogg"
 
 var button_hover_sfx_stream:AudioStream = preload(button_hover_sfx_path)
