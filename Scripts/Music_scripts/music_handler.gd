@@ -41,6 +41,7 @@ func set_music_paused(is_paused:bool):
 		music_options.stop_music();	
 		
 func on_back_to_main_menu():
+	music_debug_print("Going back to main menu")
 	set_music_paused(false);
 	music_gameplay.stop_music();
 	music_options.fade_out_music(2.0, func():			
@@ -79,7 +80,7 @@ func set_pause_menu(pause_menu:PauseMenu):
 	my_menu_paused = pause_menu;
 	my_menu_paused.visibility_changed.connect(on_pause_visibility_changed);
 	
-	var back_to_main_menu_button:Button = my_menu_main.buttons.get(4);
+	var back_to_main_menu_button:Button = my_menu_paused.buttons.get(2);
 	
 	if back_to_main_menu_button:
 		back_to_main_menu_button.pressed.connect(on_back_to_main_menu);
