@@ -5,5 +5,5 @@
 
 [node name="BGM_Options" type="Node"]
 script = ExtResource("1_yrcki")
-max_volume = -35.0
+max_volume = -10.0
 my_stream = ExtResource("2_vbxx3")

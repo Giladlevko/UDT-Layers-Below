@@ -9,6 +9,6 @@ stream_0/stream = ExtResource("1_06o3b")
 
 [node name="dig_sfx" type="AudioStreamPlayer"]
 stream = SubResource("AudioStreamRandomizer_f2mty")
-volume_db = -25.0
+volume_db = -35.0
 pitch_scale = 0.5
 bus = &"sfx"

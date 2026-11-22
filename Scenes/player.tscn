@@ -108,6 +108,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_v0iea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

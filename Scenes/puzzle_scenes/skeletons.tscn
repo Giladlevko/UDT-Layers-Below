@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://n53qu0j7q7sa"]
+
+[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="1_dju6x"]
+[ext_resource type="Script" uid="uid://xbfu22aw3rts" path="res://Scripts/puzzle_scripts/skeletons.gd" id="1_m7g1u"]
+[ext_resource type="PackedScene" uid="uid://1im1jjwh3ajn" path="res://Scenes/puzzle_scenes/confetti_particles.tscn" id="3_fsuyj"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_xvgjx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dju6x"]
+size = Vector2(114, 40)
+
+[node name="Skeletons" type="Node2D"]
+script = ExtResource("1_m7g1u")
+
+[node name="skeleton1" type="Sprite2D" parent="."]
+position = Vector2(-20, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_dju6x")
+
+[node name="skeleton2" type="Sprite2D" parent="."]
+position = Vector2(20, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_dju6x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dju6x")
+
+[node name="confetti_particles" parent="." instance=ExtResource("3_fsuyj")]
+
+[node name="FlashLight" parent="." instance=ExtResource("4_xvgjx")]
+texture_scale = 2.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -33,7 +33,7 @@ func set_music_paused(is_paused:bool):
 	if (is_currently_paused):
 		music_gameplay.pause_music(true);
 		music_options.set_volume_linear(0.0);
-		music_options.fade_in_music(3.0);
+		music_options.fade_in_music(1.0);
 		music_options.play();
 	else:
 		music_gameplay.set_volume_linear(1.0);
@@ -80,10 +80,11 @@ func set_pause_menu(pause_menu:PauseMenu):
 	my_menu_paused = pause_menu;
 	my_menu_paused.visibility_changed.connect(on_pause_visibility_changed);
 	
-	var back_to_main_menu_button:Button = my_menu_paused.buttons.get(2);
+	var back_to_main_menu_button:Button = my_menu_paused.back_to_main_button;
 	
 	if back_to_main_menu_button:
 		back_to_main_menu_button.pressed.connect(on_back_to_main_menu);
+	else:print("what?")
 	
 func set_main_menu(main_menu:MenuUI):
 	#buttons = [play_button,audio_button,credits_button,quit_button,help_button]
@@ -124,7 +125,7 @@ func on_main_menu_play():
 	music_title.fade_out_music(2.0);
 	await get_tree().create_timer(2.0).timeout
 	music_gameplay.set_volume_linear(0.0);
-	music_gameplay.fade_in_music(4.0);
+	music_gameplay.fade_in_music(3.0);
 	music_gameplay.play();
 	music_gameplay.pause_music(is_currently_paused);
 

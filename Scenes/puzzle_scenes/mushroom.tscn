@@ -1,18 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bndn3oyj8to2x"]
+[gd_scene load_steps=7 format=3 uid="uid://bndn3oyj8to2x"]
 
 [ext_resource type="Script" uid="uid://dvnsjgncvusp5" path="res://Scripts/puzzle_scripts/mushroom.gd" id="1_8qwgw"]
-[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="1_ulavm"]
+[ext_resource type="Texture2D" uid="uid://qnpw8l0ddfjc" path="res://Assets/mushroom.png" id="2_qltk6"]
 [ext_resource type="PackedScene" uid="uid://1im1jjwh3ajn" path="res://Scenes/puzzle_scenes/confetti_particles.tscn" id="3_r78ck"]
+[ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_qltk6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8qwgw"]
-radius = 13.0384
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qltk6"]
+size = Vector2(84, 50)
 
 [node name="Mushroom" type="Node2D"]
+z_index = -1
 script = ExtResource("1_8qwgw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_ulavm")
+texture = ExtResource("2_qltk6")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 10
@@ -22,3 +26,13 @@ collision_mask = 10
 shape = SubResource("CircleShape2D_8qwgw")
 
 [node name="confetti_particles" parent="." instance=ExtResource("3_r78ck")]
+
+[node name="FlashLight" parent="." instance=ExtResource("4_qltk6")]
+texture_scale = 2.0
+
+[node name="interact_zone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_zone"]
+shape = SubResource("RectangleShape2D_qltk6")
+
+[connection signal="body_entered" from="interact_zone" to="." method="_on_interact_zone_body_entered"]

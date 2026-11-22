@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="DialogData" load_steps=10 format=3 uid="uid://du8k1lh7ivwrs"]
+[gd_resource type="Resource" script_class="DialogData" load_steps=24 format=3 uid="uid://du8k1lh7ivwrs"]
 
 [ext_resource type="Script" uid="uid://bhqovwl8pw33d" path="res://Scripts/UI_scripts/text_box/dialog_entry.gd" id="1_hdnui"]
 [ext_resource type="Script" uid="uid://bxrvun5bs65ck" path="res://Scripts/UI_scripts/text_box/dialog_line.gd" id="2_4eged"]
 [ext_resource type="Script" uid="uid://by7pr2lmkc3eq" path="res://Scripts/UI_scripts/text_box/dialog_data.gd" id="2_hh0jm"]
 [ext_resource type="Resource" uid="uid://4duby2eu5d17" path="res://Scripts/UI_scripts/text_box/characters/old_man.tres" id="3_cthmq"]
 [ext_resource type="Resource" uid="uid://bgcrtp5b7d5dn" path="res://Scripts/UI_scripts/text_box/characters/player.tres" id="4_cthmq"]
+[ext_resource type="Resource" uid="uid://wkebv71rxuen" path="res://Scripts/UI_scripts/text_box/characters/crying_man.tres" id="5_ku8lb"]
+[ext_resource type="Resource" uid="uid://c610gq41xjsnk" path="res://Scripts/UI_scripts/text_box/characters/unknown_character.tres" id="6_n5c2s"]
 
 [sub_resource type="Resource" id="Resource_ku8lb"]
 script = ExtResource("2_4eged")
@@ -29,9 +31,81 @@ script = ExtResource("1_hdnui")
 Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_ku8lb"), SubResource("Resource_n5c2s"), SubResource("Resource_cthmq")])
 metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 
+[sub_resource type="Resource" id="Resource_7mt04"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("5_ku8lb")
+lines = Array[String](["After more than 10 years... I found them...", "My two brothers... ", "They were explorers in this cave...", "We were triplets... ", "My mother always said we were a miracle, a gift from the heavens...", "They were always braver than I was. They liked exploring this cave more than anything...", "But I was always scared to go...", "One day they didn't return...", "Since then my mother stopped talking...", "She died a few years after... ", "The doctors said nothing was physically wrong....", "She simply lost the will to live...", "Why didn't I go with them?", "If I did my cautiousness would have saved us...", "The search teams never found them.. They said they were caved in too deep.", "I couldn't let it go... ", "I wanted them to have a proper burial... ", "I couldn't have let them stay in this cave...", "So I started searching myself.", "And now I found them...", "I can hear them... calling me to rescue them...", "But no matter what I try I cannot break through the rocks..", "If only I went with them that day... None of it would have happened..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_hc6o5"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_7mt04")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_4sqb8"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("5_ku8lb")
+lines = Array[String](["Thank you.. You found them... ", "I was begining to lose hope...", "Now I can take them to a true resting place...", "I will bury them next to our mother...", "Perhaps now her soul can rest too...", "Thank you..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_55d27"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_4sqb8")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_x62nf"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("6_n5c2s")
+lines = Array[String](["Why was I so foolish and irresponsible?", "How could I have given them that explorer permit...", "No knows where they are...", "The mining team were talking about an incident...", "Everyone is freaked out of their minds...", "If it's really what I think it is, it will be the first time in 80 years in this cave...", "People are starting to talk about closing the mine...", "Hundreds could lose their jobs...", "And they might not survive this at all...", "God... their poor family...", "I must resign... Its all my fault...", "When I know more I'll write to you again..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_231fo"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_x62nf")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_tq7hp"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("6_n5c2s")
+lines = Array[String](["The mining team has been searching for three days...", "Based on what we know they are almost certainly dead at this point...", "Water can not be found this deep in the cave...", "No one can survive 3 days without water...", "It would take a miracle...", "The team has not rested...", "They have been searching this whole time...", "But they can't dig deep enough since it might collapse even more...", "I am waiting for your orders..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_xa03u"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_tq7hp")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_y1cd3"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("6_n5c2s")
+lines = Array[String](["Weeks have passed and we still didn't find the bodies...", "We searched the entire cave...", "It's almost like they vanished into thin air...", "People are starting to believe they aren't ment to be found...", "They believe this is their resting place and that we should leave this cave for good...", "I remind them that the family needs a proper burial...", "But I don't think they listen.", "Should we call off the search?"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_uj5wg"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_y1cd3")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_sa5ud"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("6_n5c2s")
+lines = Array[String](["Me and my brother have been trapped here for a couple of hours now...", "We are unsure we will get out of here...", "We can here the search parties digging all around us.", "We tried to scream but they can't here us...", "Maybe we aren't meant to be rescued...", "We are starting to get thirsty and breathing is becoming harder...", "If this letter is ever found...", "Please tell our mother that we are sorry for not listening to her...", "for not being smart like our brother..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_smhtd"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_sa5ud")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
 [resource]
 script = ExtResource("2_hh0jm")
 entries = Dictionary[String, ExtResource("1_hdnui")]({
+"find_skeletons": SubResource("Resource_hc6o5"),
+"found_skeletons": SubResource("Resource_55d27"),
+"note1": SubResource("Resource_231fo"),
+"note2": SubResource("Resource_xa03u"),
+"note3": SubResource("Resource_uj5wg"),
+"note4": SubResource("Resource_smhtd"),
 "water_canteen": SubResource("Resource_tv1on")
 })
 metadata/_custom_type_script = "uid://by7pr2lmkc3eq"

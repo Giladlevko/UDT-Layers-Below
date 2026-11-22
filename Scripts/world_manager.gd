@@ -17,6 +17,8 @@ func _ready() -> void:
 	for tile in tiles:
 		hit_box_layer.set_cell(tile,1,Vector2i.ZERO,1)
 	pass # Replace with function body.
+	#SignalBus.puzzle_solved.emit()
+	#Global.quota_reached = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -69,13 +69,13 @@ func stop():
 var curr_collider:TILE_HIT_BOX
 func _on_animated_sprite_2d_animation_looped() -> void:
 	using_sfx.play()
-	if(drill_ray.enabled):
+	if(drill_ray.enabled and drill_ray.is_colliding()):
 		var collider = drill_ray.get_collider()
-		curr_collider = collider
 		if(collider is TILE_HIT_BOX):
+			curr_collider = collider
 			collider.take_damage(Global.drill_power)
-		elif(collider is Mushroom):
-			collider.push()
+		elif(collider.get_parent() is Mushroom):
+			collider.get_parent().push()
 	pass # Replace with function body.
 
 func emit_tile_particle(count:int = 16,color:Color = Color.DARK_GRAY):

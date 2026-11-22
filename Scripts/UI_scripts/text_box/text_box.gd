@@ -148,6 +148,7 @@ func on_dialog_end():
 	#line_tween.stop()
 	await self.vis_changed
 	ending_dialog = false
+	reset_text()
 	SignalBus.dialog_ended.emit(current_dialog_name)
 
 func _on_skip_button_pressed() -> void:

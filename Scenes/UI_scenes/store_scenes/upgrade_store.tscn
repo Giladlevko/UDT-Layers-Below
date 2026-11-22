@@ -101,7 +101,8 @@ layout_mode = 2
 [node name="hammer_power" parent="MarginContainer/VBoxContainer/store_panel/MarginContainer/GridContainer" instance=ExtResource("2_ttkle")]
 layout_mode = 2
 effect = "drill power"
-price = 40
+max_uses = 3
+price = 30
 
 [node name="UpgradeItem" parent="MarginContainer/VBoxContainer/store_panel/MarginContainer/GridContainer" instance=ExtResource("2_ttkle")]
 layout_mode = 2

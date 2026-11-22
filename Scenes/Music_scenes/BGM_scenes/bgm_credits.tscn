@@ -16,4 +16,5 @@ clip_1/auto_advance = 0
 
 [node name="BGM_Credits" type="Node"]
 script = ExtResource("1_14wb7")
+max_volume = -17.0
 my_stream = SubResource("AudioStreamInteractive_jgfy7")

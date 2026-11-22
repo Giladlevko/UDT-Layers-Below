@@ -17,4 +17,5 @@ func _process(delta: float) -> void:
 
 func _on_return_button_pressed() -> void:	
 	self.handle_scene_transition("res://Scenes/UI_scenes/menu_scenes/main_menue.tscn")
+	Music_GLOBAL.on_main_menu_on_credits_exit()
 	pass # Replace with function body.

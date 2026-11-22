@@ -42,7 +42,7 @@ func _ready() -> void:
 	SignalBus.dialog_ended.connect(on_dialog_end)
 	SignalBus.puzzle_solved.connect(on_puzzle_solved)
 	
-	#SignalBus.on_take_item.emit(Global.drill_slot_data)
+	SignalBus.on_take_item.emit.call_deferred(Global.drill_slot_data)
 	#SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
 	
 	pass # Replace with function body.
