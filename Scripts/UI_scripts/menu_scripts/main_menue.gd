@@ -10,10 +10,11 @@ extends MenuUI
 @onready var audio_controler: AUDIO_CONTROLER = $Panel/MarginContainer/audio_controler
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void:	
 	self.setup_UI()
 	buttons = [play_button,audio_button,credits_button,quit_button,help_button]
 	self.connect_buttons()
+	Music_GLOBAL.set_main_menu(self);
 	pass # Replace with function body.
 
 

@@ -13,94 +13,120 @@ var music_gameplay:MUS_Gameplay;
 var queue_ready_function:Callable;
 var has_ready_function_queued:bool = false;
 
-# MAIN MENU
-const MENU_MAIN_MARGIN_PATH:NodePath = "../MainMenue/Panel/MarginContainer";
-const MENU_AUDIO_CLOSE_BUTTON_PATH:NodePath = "audio_controler/Panel/button_cont/close_button";
-const MENU_AUDIO_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/audio_button";
-const MENU_PLAY_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/play_button";
-const MENU_CREDITS_BUTTON_PATH:NodePath = "VBoxContainer/buttons_container/credits_button";
 
 var is_currently_paused:bool = false;
+var my_menu_paused:PauseMenu;
+var my_menu_main:MenuUI;
 
+func music_debug_print(msg:String):
+	print("Music Debug - ", msg);
 
-func _process(delta: float) -> void:
-	var is_paused = get_tree().paused;
+func music_debug_printerr(msg:String):
+	printerr("Music ERROR - ", msg);
+
+func set_music_paused(is_paused:bool):
 	if (is_currently_paused == is_paused):
 		return;
-	
+		
 	is_currently_paused = is_paused;
+		
 	if (is_currently_paused):
 		music_gameplay.pause_music(true);
 		music_options.set_volume_linear(0.0);
 		music_options.fade_in_music(3.0);
 		music_options.play();
 	else:
+		music_gameplay.set_volume_linear(1.0);
 		music_gameplay.pause_music(false);
-		music_options.stop_music();
+		music_options.stop_music();	
 		
+func on_back_to_main_menu():
+	music_debug_print("Going back to main menu")
+	set_music_paused(false);
+	music_gameplay.stop_music();
+	music_options.fade_out_music(2.0, func():			
+		music_options.stop_music();
+		music_title.play();
+		music_title.set_volume_linear(1.0);
+		music_debug_print("Play menu music again")
+	)
+	
 	
 func _ready() -> void:
 	music_title = add_music("BGM_Title");
 	music_gameplay = add_music("BGM_Gameplay");
 	music_options = add_music("BGM_Options");
 	
-	if has_ready_function_queued and queue_ready_function:
+	
+	if has_ready_function_queued:
 		queue_ready_function.call();
 		has_ready_function_queued = false;
 
 	
-func _main_menu_switch_to_settings():
+func on_main_menu_switch_to_settings():
 	music_title.switch_to_settings();
 
-func _main_menu_switch_to_main():
+func on_main_menu_switch_to_main():
 	music_title.switch_to_main();
 	
-func _main_menu_on_credits_exit():
-	pass;
-	#music_title.fade_in_music(2.0);
-	#var old_credits_music:MUS_Base = Music_GLOBAL.music_credits;
-	#music_credits = null;
-	#old_credits_music.fade_out_music(2.0, func():
-		#old_credits_music.terminate_music();
-	#)
+
+func on_pause_visibility_changed():
+	set_music_paused(my_menu_paused.visible);
 	
-func _main_menu_on_credits_enter():
-	pass;
-	#music_credits = add_music("BGM_Credits");
-	#music_credits.play();
-	#music_title.fade_out_music(2.0);
+func set_pause_menu(pause_menu:PauseMenu):
+	#self.buttons = [resume_button,inv_button,back_to_main_button,audio_button,store_button]
+	my_menu_paused = pause_menu;
+	my_menu_paused.visibility_changed.connect(on_pause_visibility_changed);
 	
-func _main_menu_play():
+	var back_to_main_menu_button:Button = my_menu_paused.buttons.get(2);
+	
+	if back_to_main_menu_button:
+		back_to_main_menu_button.pressed.connect(on_back_to_main_menu);
+	
+func set_main_menu(main_menu:MenuUI):
+	#buttons = [play_button,audio_button,credits_button,quit_button,help_button]
+	my_menu_main = main_menu;
+	
+	var main_menu_play_button:Button = my_menu_main.buttons.get(0);
+	var main_menu_audio_settings_button:Button = my_menu_main.buttons.get(1);
+	var main_menu_credits_button:Button = my_menu_main.buttons.get(2);
+	var back_to_menu_from_settings_button:Button = my_menu_main.get_node("Panel/MarginContainer/audio_controler/Panel/button_cont/close_button");
+	
+	if main_menu_credits_button:
+		main_menu_credits_button.pressed.connect(on_main_menu_on_credits_enter);
+		
+	if back_to_menu_from_settings_button:
+		back_to_menu_from_settings_button.pressed.connect(on_main_menu_switch_to_main);
+		
+	if main_menu_play_button:
+		main_menu_play_button.pressed.connect(on_main_menu_play);
+		
+	if main_menu_audio_settings_button:
+		main_menu_audio_settings_button.pressed.connect(on_main_menu_switch_to_settings)
+	
+func on_main_menu_on_credits_exit():
+	music_title.fade_in_music(2.0);
+	var old_credits_music:MUS_Base = Music_GLOBAL.music_credits;
+	music_credits = null;
+	old_credits_music.fade_out_music(2.0, func():
+		old_credits_music.terminate_music();
+	)
+	
+func on_main_menu_on_credits_enter():
+	music_credits = add_music("BGM_Credits");
+	music_credits.play();
 	music_title.fade_out_music(2.0);
-	await get_tree().create_timer(2.0).timeout	
+	
+func on_main_menu_play():
+	music_debug_print("Time to play!")
+	music_title.fade_out_music(2.0);
+	await get_tree().create_timer(2.0).timeout
 	music_gameplay.set_volume_linear(0.0);
 	music_gameplay.fade_in_music(4.0);
 	music_gameplay.play();
+	music_gameplay.pause_music(is_currently_paused);
 
-func _enter_menu_tree():
-	music_title.play();
-	var menu_margin:MarginContainer = get_node(MENU_MAIN_MARGIN_PATH);	
-	var menu_audio_button:Button = menu_margin.get_node(MENU_AUDIO_BUTTON_PATH)
-	var menu_audio_close_button:Button = menu_margin.get_node(MENU_AUDIO_CLOSE_BUTTON_PATH);
-	var menu_play_button:Button = menu_margin.get_node(MENU_PLAY_BUTTON_PATH);
-	var menu_credits_button:Button = menu_margin.get_node(MENU_CREDITS_BUTTON_PATH);
-	
-	menu_audio_button.pressed.connect(_main_menu_switch_to_settings);	
-	menu_audio_close_button.pressed.connect(_main_menu_switch_to_main)
-	menu_play_button.pressed.connect(_main_menu_play)
-	menu_credits_button.pressed.connect(_main_menu_on_credits_enter)
-		
 
-func _enter_tree() -> void:
-	var scene_tree:SceneTree = self.get_tree();
-	print("Current Scene : " + scene_tree.current_scene.name)
-	if (scene_tree.current_scene.name == "MainMenue"):
-		queue_ready_function =  _enter_menu_tree;
-		
-	if (is_node_ready()):
-		queue_ready_function.call();
-	else:
-		has_ready_function_queued = true;
 
 
 ## Once the music is added it will begin playing
@@ -108,7 +134,7 @@ func _enter_tree() -> void:
 func add_music(music_name:StringName) -> MUS_Base:
 	var packedScene:PackedScene = _music_dictionary.get(music_name);	
 	if packedScene == null:
-		printerr("ERROR: Could not find music name " + music_name)
+		music_debug_printerr("Could not find music name " + music_name)
 		return null;
 	var music_instance:MUS_Base = packedScene.instantiate();	
 	add_child(music_instance)
