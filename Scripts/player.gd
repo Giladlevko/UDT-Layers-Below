@@ -63,6 +63,7 @@ func _process(delta: float) -> void:
 
 var current_tool_index = 0
 func switch_tool():
+	if mining_tools.is_empty():return
 	var next_index:int = (current_tool_index + 1) % mining_tools.size()
 	if(next_index == current_tool_index):return
 	

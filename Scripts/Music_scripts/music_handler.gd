@@ -33,7 +33,7 @@ func set_music_paused(is_paused:bool):
 	if (is_currently_paused):
 		music_gameplay.pause_music(true);
 		music_options.set_volume_linear(0.0);
-		music_options.fade_in_music(20.0);
+		music_options.fade_in_music(3.0);
 		music_options.play();
 	else:
 		music_gameplay.set_volume_linear(1.0);

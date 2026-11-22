@@ -93,7 +93,7 @@ func tile_dig_sfx_setup():
 
 func puzzle_sfx_setup():
 	puzzle_complete_sfx.stream = puzzle_sfx_stream
-	puzzle_complete_sfx.volume_db = -20
+	puzzle_complete_sfx.volume_db = -35
 	puzzle_complete_sfx.bus = "sfx"
 	get_tree().root.add_child.call_deferred(puzzle_complete_sfx)
 

@@ -53,6 +53,8 @@ func init_dark_screen():
 	canvas.layer = 100
 	get_tree().root.add_child.call_deferred(canvas)
 	canvas.add_child.call_deferred((dark_screen))
+	if(get_tree().current_scene.get_script().get_global_name() is not MenuUI):
+		dark_screen.visible = false
 	
 		
 
@@ -65,6 +67,8 @@ func init_button_sfx():
 	button_click_sfx.volume_db = button_click_sfx_db
 	get_tree().root.add_child.call_deferred(button_click_sfx)
 	get_tree().root.add_child.call_deferred(button_hover_sfx)
+
+
 
 func init_song_player():
 	song_player.bus = "music"

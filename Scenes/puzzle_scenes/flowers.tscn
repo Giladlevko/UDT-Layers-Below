@@ -52,4 +52,4 @@ shape = SubResource("RectangleShape2D_4vin3")
 [node name="confetti_particles" parent="." instance=ExtResource("3_gr6c3")]
 
 [node name="FlashLight" parent="." instance=ExtResource("4_4rjiu")]
-texture_scale = 1.0
+texture_scale = 2.0
