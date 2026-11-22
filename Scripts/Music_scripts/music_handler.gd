@@ -57,6 +57,8 @@ func _ready() -> void:
 	music_gameplay = add_music("BGM_Gameplay");
 	music_options = add_music("BGM_Options");
 	
+	music_title.play();
+	
 	
 	if has_ready_function_queued:
 		queue_ready_function.call();
