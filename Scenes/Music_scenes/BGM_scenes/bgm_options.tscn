@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8wrii41gfb3s"]
+[gd_scene load_steps=3 format=3 uid="uid://r7tph8w3aql2"]
 
 [ext_resource type="Script" uid="uid://13f1qplilho4" path="res://Scripts/Music_scripts/mus_base.gd" id="1_yrcki"]
 [ext_resource type="AudioStream" uid="uid://d1tgcjqksj7o7" path="res://Assets/Music_assets/GWJ099_Options_Loop_130bpm.ogg" id="2_vbxx3"]
@@ -6,5 +6,5 @@
 [node name="BGM_Options" type="Node"]
 process_mode = 3
 script = ExtResource("1_yrcki")
-max_volume = 0.25
+max_volume = -35.0
 my_stream = ExtResource("2_vbxx3")

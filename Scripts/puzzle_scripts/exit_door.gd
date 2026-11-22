@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 class_name ExitDoor
 signal door_opened
 @onready var flash_light: PointLight2D = $FlashLight
@@ -6,6 +6,8 @@ var base_pos:Vector2
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var guard_pos_node: Node2D = $guard_pos_node
 @export var guard_pos:Vector2
+
+var opened:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,17 +26,23 @@ func _process(delta: float) -> void:
 
 
 func open():
-	
+	opened = true
 	var tween := create_tween()
 	print("moving...")
-	tween.tween_property(sprite,"position",Vector2(0,-32),1.5)
+	var new_pos = base_pos + Vector2(0,-32)
+	tween.tween_property(self,"position",new_pos,1.5)
 	await tween.finished
 	door_opened.emit()
 
-func close():
-	var tween := create_tween()
-	tween.tween_property(sprite,"position",Vector2(0,0),1.5)
+
 
 
 func on_puzzle_sloved():
 	flash_light.visible = true
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is PLAYER and !opened:
+		SignalBus.display_message.emit("Door is locked! Continue to explore!") 
+		SignalBus.display_message.emit("Find something that would open the door!")
+	pass # Replace with function body.

@@ -7,7 +7,7 @@ var my_stream_player:AudioStreamPlayer;
 var my_fadeout_tween:Tween;
 var is_playing:bool = false;
 var play_from_position:float = 0.0;
-@export_range(0.0, 1.0, 0.001) var max_volume:float = 1.0;
+@export_range(-35.0, 1.0, 0.001) var max_volume:float = 1.0;
 
 ## This is the volume relative to this music instance's max volume.
 ## e.g. if the [b]max_volume[/b] is set to [b]0.8[/b]
@@ -39,7 +39,7 @@ func play(from_position:float = 0.0) -> void:
 ## Change the music instance's max volume -> "max_volume".
 func set_volume_linear(linear_vol:float) -> void:	
 	current_linear_volume = linear_vol;
-	my_stream_player.volume_linear = lerp(0.0, max_volume, current_linear_volume);
+	my_stream_player.volume_linear = lerp(0.0, db_to_linear(max_volume), current_linear_volume);
 
 func _process(_delta: float) -> void:
 	set_volume_linear(current_linear_volume);

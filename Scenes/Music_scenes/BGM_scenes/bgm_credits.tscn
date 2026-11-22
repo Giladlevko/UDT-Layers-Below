@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdmoqiqyut30q"]
+[gd_scene load_steps=5 format=3 uid="uid://cix01nqh6ye00"]
 
 [ext_resource type="Script" uid="uid://13f1qplilho4" path="res://Scripts/Music_scripts/mus_base.gd" id="1_14wb7"]
 [ext_resource type="AudioStream" uid="uid://hwg00glc0ejq" path="res://Assets/Music_assets/GWJ099_EndingCredits_Intro_70bpm.ogg" id="2_b2rx6"]
@@ -16,5 +16,4 @@ clip_1/auto_advance = 0
 
 [node name="BGM_Credits" type="Node"]
 script = ExtResource("1_14wb7")
-max_volume = 0.5
 my_stream = SubResource("AudioStreamInteractive_jgfy7")

@@ -1,8 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfapw7qac4mu5"]
+[gd_scene load_steps=9 format=3 uid="uid://cfapw7qac4mu5"]
 
 [ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_n2h7q"]
 [ext_resource type="Script" uid="uid://c02am5adcvdoq" path="res://Scripts/UI_scripts/menu_scripts/main_menue.gd" id="1_x4vq2"]
+[ext_resource type="Texture2D" uid="uid://d1uuce8uv2ut0" path="res://Assets/menu_background.png" id="3_1v40b"]
 [ext_resource type="PackedScene" uid="uid://clovevcxnu2qx" path="res://Scenes/UI_scenes/audio_controler.tscn" id="3_e4u0r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvq73"]
+atlas = ExtResource("3_1v40b")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="Animation" id="Animation_1v40b"]
+resource_name = "background_anim"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 288, 162), Rect2(288, 0, 288, 162)]
+}
+
+[sub_resource type="Animation" id="Animation_nvq73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 288, 162)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmfhc"]
+_data = {
+&"RESET": SubResource("Animation_nvq73"),
+&"background_anim": SubResource("Animation_1v40b")
+}
 
 [node name="MainMenue" type="Control"]
 layout_mode = 3
@@ -23,6 +66,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_nvq73")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
@@ -141,6 +193,13 @@ text = "Help?"
 visible = false
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Panel")
+libraries = {
+&"": SubResource("AnimationLibrary_hmfhc")
+}
+autoplay = "background_anim"
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/buttons_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/buttons_container/audio_button" to="." method="_on_audio_button_pressed"]

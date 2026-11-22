@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=3 uid="uid://b8ukrhdsd7be5"]
+
+[ext_resource type="Script" uid="uid://df2287thhbl8x" path="res://Scripts/npc_scripts/crying_man.gd" id="1_oi5q0"]
+[ext_resource type="Texture2D" uid="uid://d3j05cvifx4hm" path="res://Assets/npcs/crying_man_crying.png" id="1_p6kwh"]
+[ext_resource type="Texture2D" uid="uid://dlsl8v26we1a1" path="res://Assets/npcs/crying_man_talking.png" id="1_ss8ka"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saqmr"]
+atlas = ExtResource("1_p6kwh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d0se"]
+atlas = ExtResource("1_p6kwh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt1xk"]
+atlas = ExtResource("1_p6kwh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4l8p"]
+atlas = ExtResource("1_p6kwh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oieda"]
+atlas = ExtResource("1_p6kwh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6kwh"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi5q0"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0vnc"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui0p1"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry5kt"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcwqe"]
+atlas = ExtResource("1_ss8ka")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_saqmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saqmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d0se")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt1xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4l8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oieda")
+}],
+"loop": true,
+"name": &"crying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6kwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi5q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0vnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ui0p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry5kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcwqe")
+}],
+"loop": true,
+"name": &"speaking",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_me6pd"]
+radius = 8.0
+height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6kwh"]
+size = Vector2(80, 42)
+
+[node name="CryingMan" type="CharacterBody2D"]
+script = ExtResource("1_oi5q0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_saqmr")
+animation = &"crying"
+frame_progress = 0.625012
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_me6pd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_p6kwh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

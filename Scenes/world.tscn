@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cao14xofyevlq"]
+[gd_scene load_steps=15 format=4 uid="uid://cao14xofyevlq"]
 
 [ext_resource type="Script" uid="uid://d0475qj7hcsly" path="res://Scripts/world_manager.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://bnwtgpmpg6kf" path="res://Scenes/tile_hit_box.tscn" id="2_5a7ea"]
@@ -9,9 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cngthwuci8cu2" path="res://Scenes/npc_scenes/guard.tscn" id="7_o06y3"]
 [ext_resource type="Texture2D" uid="uid://curoc83nu11vh" path="res://Assets/dots_background tile-1.png" id="8_k7acu"]
 [ext_resource type="Texture2D" uid="uid://d12annnec6xol" path="res://Assets/dots_background tile-2.png" id="9_5v1tr"]
-[ext_resource type="PackedScene" uid="uid://4evdwrbru5vh" path="res://Scenes/npc_scenes/old_man.tscn" id="10_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://6sm8qgypgvbt" path="res://Scenes/puzzle_scenes/exit_door.tscn" id="11_ikia7"]
-[ext_resource type="PackedScene" uid="uid://c0kjaiey3ek7v" path="res://Scenes/puzzle_scenes/flowers.tscn" id="12_7yui6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7yui6"]
 texture = ExtResource("4_c5t2i")
@@ -80,15 +78,9 @@ position = Vector2(98, -27)
 [node name="Guard" parent="." instance=ExtResource("7_o06y3")]
 position = Vector2(989, 279)
 
-[node name="OldMan" parent="." instance=ExtResource("10_0fj1v")]
-position = Vector2(-444, -93)
-
 [node name="player" parent="." instance=ExtResource("2_go701")]
 position = Vector2(623, 209)
 
 [node name="ExitDoor" parent="." instance=ExtResource("11_ikia7")]
 position = Vector2(1832, 968)
 guard_pos = Vector2(1772, 968)
-
-[node name="Flowers" parent="." instance=ExtResource("12_7yui6")]
-position = Vector2(-24, -8)

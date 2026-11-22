@@ -74,6 +74,8 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 		curr_collider = collider
 		if(collider is TILE_HIT_BOX):
 			collider.take_damage(Global.drill_power)
+		elif(collider is Mushroom):
+			collider.push()
 	pass # Replace with function body.
 
 func emit_tile_particle(count:int = 16,color:Color = Color.DARK_GRAY):

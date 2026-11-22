@@ -13,8 +13,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Continue Dialog"):
-		push()
 	pass
 
 
@@ -25,4 +23,6 @@ func push():
 	tween.tween_property(self,"global_position",new_pos,1.5)
 	await tween.finished
 	confetti_particles.emit()
+	await get_tree().create_timer(1).timeout
+	SignalBus.puzzle_solved.emit()
 	pass

@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	if (is_currently_paused):
 		music_gameplay.pause_music(true);
 		music_options.set_volume_linear(0.0);
-		music_options.fade_in_music(20.0);
+		music_options.fade_in_music(3.0);
 		music_options.play();
 	else:
 		music_gameplay.pause_music(false);
@@ -44,7 +44,7 @@ func _ready() -> void:
 	music_gameplay = add_music("BGM_Gameplay");
 	music_options = add_music("BGM_Options");
 	
-	if has_ready_function_queued:
+	if has_ready_function_queued and queue_ready_function:
 		queue_ready_function.call();
 		has_ready_function_queued = false;
 

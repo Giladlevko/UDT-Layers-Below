@@ -33,6 +33,6 @@ clip_1/auto_advance = 0
 [node name="BGM_Title" type="Node"]
 script = ExtResource("1_ir6el")
 sync_streams = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_c2t3y"), SubResource("AudioStreamSynchronized_gpch2")])
-max_volume = 0.8
+max_volume = -10.0
 my_stream = SubResource("AudioStreamInteractive_aoyns")
 metadata/_custom_type_script = "uid://13f1qplilho4"

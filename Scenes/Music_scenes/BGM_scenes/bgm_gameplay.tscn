@@ -16,5 +16,5 @@ stream_3 = ExtResource("5_n5n2s")
 
 [node name="BGM_Gameplay" type="Node"]
 script = ExtResource("1_5bq45")
-max_volume = 0.8
+max_volume = -20.0
 my_stream = SubResource("AudioStreamPlaylist_rwcat")
