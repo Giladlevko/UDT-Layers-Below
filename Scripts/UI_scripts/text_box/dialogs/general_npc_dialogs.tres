@@ -8,29 +8,6 @@
 [ext_resource type="Resource" uid="uid://wkebv71rxuen" path="res://Scripts/UI_scripts/text_box/characters/crying_man.tres" id="5_ku8lb"]
 [ext_resource type="Resource" uid="uid://c610gq41xjsnk" path="res://Scripts/UI_scripts/text_box/characters/unknown_character.tres" id="6_n5c2s"]
 
-[sub_resource type="Resource" id="Resource_ku8lb"]
-script = ExtResource("2_4eged")
-speaker = ExtResource("3_cthmq")
-lines = Array[String](["Oh... Hello there young coal miner.", "I am old man Randy, but around here everyone just calls me old man...", "What is your name?"])
-metadata/_custom_type_script = "uid://bxrvun5bs65ck"
-
-[sub_resource type="Resource" id="Resource_n5c2s"]
-script = ExtResource("2_4eged")
-speaker = ExtResource("4_cthmq")
-lines = Array[String](["I am 48-15"])
-metadata/_custom_type_script = "uid://bxrvun5bs65ck"
-
-[sub_resource type="Resource" id="Resource_cthmq"]
-script = ExtResource("2_4eged")
-speaker = ExtResource("3_cthmq")
-lines = Array[String](["Well thats no name at all...", "I have been in these caves as long as I remember...  Around 80 years... ", "I used to be a coal miner as well... ", "but by the time miners like you were made, I made my way to management.", "I still blame myself for what happend here...", " That rueful day...", "How could I ever forget?", "I was incharge of the unit that...", "I'm sorry its too painful.", "Ever since I asked myself why it happened.", "I followed the procedural checks every day; it became a habit.", "So much so that I am not sure I followed them that day...", " but I must have...", "I still wonder if there was any way I could have prevented it...", "But I don't think there is anything I could have done...", "Its almost as if it had to happen...", "For a while now I felt I was dying.", "I wanted to help someone in the caves more than anything.", "Here in the mines Water is extremly rare...", "I came here to bring this water canteen to the one who needs it the most...", "But there are no more human workers here.", "I thought I'll find an explorer.", "And perhaps my water would help him enjoy this cave even longer.", "But I only found you...", "And you run on fuel... ", "I am unable to go further...", "There is nothing that would make me happier than to help someone in this cave...", "Would you take this canteen and give it to the one who needs it the most?"])
-metadata/_custom_type_script = "uid://bxrvun5bs65ck"
-
-[sub_resource type="Resource" id="Resource_tv1on"]
-script = ExtResource("1_hdnui")
-Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_ku8lb"), SubResource("Resource_n5c2s"), SubResource("Resource_cthmq")])
-metadata/_custom_type_script = "uid://bhqovwl8pw33d"
-
 [sub_resource type="Resource" id="Resource_7mt04"]
 script = ExtResource("2_4eged")
 speaker = ExtResource("5_ku8lb")
@@ -89,12 +66,35 @@ metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 [sub_resource type="Resource" id="Resource_sa5ud"]
 script = ExtResource("2_4eged")
 speaker = ExtResource("6_n5c2s")
-lines = Array[String](["Me and my brother have been trapped here for a couple of hours now...", "We are unsure we will get out of here...", "We can here the search parties digging all around us.", "We tried to scream but they can't here us...", "Maybe we aren't meant to be rescued...", "We are starting to get thirsty and breathing is becoming harder...", "If this letter is ever found...", "Please tell our mother that we are sorry for not listening to her...", "for not being smart like our brother..."])
+lines = Array[String](["Me and my brother have been trapped here for a couple of hours now...", "We are unsure we will get out of here...", "We can here the search parties digging all around us.", "We tried to scream but they can't hear us...", "Maybe we aren't meant to be rescued...", "We are starting to get thirsty and breathing is becoming harder...", "If this letter is ever found...", "Please tell our mother that we are sorry for not listening to her...", "for not being smart like our brother..."])
 metadata/_custom_type_script = "uid://bxrvun5bs65ck"
 
 [sub_resource type="Resource" id="Resource_smhtd"]
 script = ExtResource("1_hdnui")
 Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_sa5ud")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_ku8lb"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("3_cthmq")
+lines = Array[String](["Oh... Hello there young coal miner.", "I am old man Randy, but around here everyone just calls me old man...", "What is your name?"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_n5c2s"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("4_cthmq")
+lines = Array[String](["I am 48-15"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_cthmq"]
+script = ExtResource("2_4eged")
+speaker = ExtResource("3_cthmq")
+lines = Array[String](["Well thats no name at all...", "I have been in these caves as long as I remember...  Around 80 years... ", "I used to be a coal miner as well... ", "but by the time miners like you were made, I made my way to management.", "I still blame myself for what happend here...", " That rueful day...", "How could I ever forget?", "I was incharge of the unit that...", "I'm sorry its too painful.", "Ever since I asked myself why it happened.", "I followed the procedural checks every day; it became a habit.", "So much so that I am not sure I followed them that day...", " but I must have...", "I still wonder if there was any way I could have prevented it...", "But I don't think there is anything I could have done...", "Its almost as if it had to happen...", "For a while now I felt I was dying.", "I wanted to help someone in the caves more than anything.", "Here in the mines Water is extremly rare...", "I came here to bring this water canteen to the one who needs it the most...", "But there are no more human workers here.", "I thought I'll find an explorer.", "And perhaps my water would help him enjoy this cave even longer.", "But I only found you...", "And you run on fuel... ", "I am unable to go further...", "There is nothing that would make me happier than to help someone in this cave...", "Would you take this canteen and give it to the one who needs it the most?"])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_tv1on"]
+script = ExtResource("1_hdnui")
+Dialog = Array[ExtResource("2_4eged")]([SubResource("Resource_ku8lb"), SubResource("Resource_n5c2s"), SubResource("Resource_cthmq")])
 metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 
 [resource]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr461u8t0lyfo"]
+[gd_scene load_steps=9 format=3 uid="uid://dr461u8t0lyfo"]
 
 [ext_resource type="Script" uid="uid://dvdwmxap3ip0o" path="res://Scripts/UI_scripts/menu_scripts/gameplay_menu.gd" id="1_iob0h"]
 [ext_resource type="PackedScene" uid="uid://6vr1dc5bbyeh" path="res://Scenes/UI_scenes/cooldown_bar.tscn" id="1_lhtiu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c8djxxsus4lep" path="res://Scenes/UI_scenes/pause_menu.tscn" id="5_fbkoo"]
 [ext_resource type="PackedScene" uid="uid://03uuj3wy64ik" path="res://Scenes/UI_scenes/merged_currency_label.tscn" id="5_tquf2"]
 [ext_resource type="PackedScene" uid="uid://qofu32a7k4bl" path="res://Scenes/UI_scenes/coal_goal.tscn" id="7_l2372"]
+[ext_resource type="AudioStream" uid="uid://cmg4eyqe4ptbo" path="res://Assets/Music_assets/gameplay_music.ogg" id="8_rnt5f"]
 
 [node name="gameplay_ui" type="Control"]
 layout_mode = 3
@@ -86,5 +87,10 @@ size_flags_vertical = 0
 [node name="CoalGoal" parent="MarginContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_l2372")]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="gameplay_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_rnt5f")
+volume_db = -10.0
+bus = &"music"
 
 [connection signal="pressed" from="MarginContainer/menu_cont/menu_button" to="." method="_on_menu_button_pressed"]

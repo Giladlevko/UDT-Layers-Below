@@ -5,16 +5,22 @@ extends MenuUI
 @onready var quit_button: Button = $Panel/MarginContainer/VBoxContainer/buttons_container/quit_button
 @onready var help_button: Button = $Panel/MarginContainer/help_button_container/help_button
 
+@onready var main_song: AudioStreamPlayer = $main_song
+
 @onready var controls_panel: Panel = $Panel/MarginContainer/contols_cont/MarginContainer/controls_panel
 
 @onready var audio_controler: AUDIO_CONTROLER = $Panel/MarginContainer/audio_controler
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:	
+func _ready() -> void:
+	song = main_song
+	song_on(song,-5,3,10)
 	self.setup_UI()
 	buttons = [play_button,audio_button,credits_button,quit_button,help_button]
 	self.connect_buttons()
-	Music_GLOBAL.set_main_menu(self);
+	#Music_GLOBAL.set_main_menu(self);
+	#Music_GLOBAL.music_gameplay.fade_out_music()
+	
 	pass # Replace with function body.
 
 

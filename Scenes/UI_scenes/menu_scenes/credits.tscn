@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxtku25doaimk"]
+[gd_scene load_steps=4 format=3 uid="uid://cxtku25doaimk"]
 
 [ext_resource type="Script" uid="uid://djh10ucwwkndj" path="res://Scripts/UI_scripts/menu_scripts/credits.gd" id="1_2udfx"]
 [ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_4dncf"]
+[ext_resource type="AudioStream" uid="uid://rfvjsf3uklpj" path="res://Assets/Music_assets/GWJ099_EndingCredits_Loop_70bpm.ogg" id="3_mmu34"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -78,9 +79,17 @@ theme_override_constants/margin_bottom = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "Names 
-More names"
+bbcode_enabled = true
+text = "Lead & Programmer: [color=FUCHSIA]Mr.lad[/color]
+[url=https://giladlevko.itch.io/][color=#478fff]Mr.lad's Itch page![/color][/url]
+
+Artist: [color=#fd9029]Uncle Sams[/color]
+[url=https://uncle-sams.itch.io/][color=#478fff]Uncle Sams' Itch page![/color][/url]
+
+Musician: [color=GREEN]easternunit100[/color]
+[url=https://easternunit100.itch.io/][color=478fff]easternunit100's Itch Page![/color][/url]"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -95,4 +104,10 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Back to Main"
 
+[node name="credits_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mmu34")
+volume_db = -15.0
+bus = &"music"
+
+[connection signal="meta_clicked" from="Panel/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="Panel/MarginContainer/MarginContainer/return_button" to="." method="_on_return_button_pressed"]

@@ -30,14 +30,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if(state == states.LevelEND):
 			if(!Global.quota_reached):
 				var versions_count = 3
-				var r = randi_range(1,versions_count)
+				var r = Global.current_level_index
 				UI_GLOBAL.text_box.play_dialog("give_me_coal"+str(r))
 				await SignalBus.dialog_ended
 				var d = sign(dir.x)
 				body.push(Vector2(600*d,-100))
 			else:
 				var versions_count = 3
-				var r = randi_range(1,versions_count)
+				var r = Global.current_level_index
 				UI_GLOBAL.text_box.play_dialog("you_can_pass"+str(r))
 				await SignalBus.dialog_ended
 				SignalBus.level_finished.emit()

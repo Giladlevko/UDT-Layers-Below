@@ -8,7 +8,7 @@ class_name MusicHandler
 
 var music_title:MUS_Title;
 var music_credits:MUS_Base
-var music_options:MUS_Base
+#var music_options:MUS_Base
 var music_gameplay:MUS_Gameplay;
 var queue_ready_function:Callable;
 var has_ready_function_queued:bool = false;
@@ -31,33 +31,36 @@ func set_music_paused(is_paused:bool):
 	is_currently_paused = is_paused;
 		
 	if (is_currently_paused):
-		music_gameplay.pause_music(true);
-		music_options.set_volume_linear(0.0);
-		music_options.fade_in_music(1.0);
-		music_options.play();
+		pass
+		#music_gameplay.pause_music(true);
+		#music_options.set_volume_linear(0.0);
+		#music_options.fade_in_music(0.2);
+		#music_options.play();
 	else:
-		music_gameplay.set_volume_linear(1.0);
-		music_gameplay.pause_music(false);
-		music_options.stop_music();	
+		pass
+		#music_gameplay.set_volume_linear(1.0);
+		#music_gameplay.pause_music(false);
+		#music_options.stop_music();	
 		
 func on_back_to_main_menu():
 	music_debug_print("Going back to main menu")
-	set_music_paused(false);
-	music_gameplay.stop_music();
-	music_options.fade_out_music(2.0, func():			
-		music_options.stop_music();
-		music_title.play();
-		music_title.set_volume_linear(1.0);
-		music_debug_print("Play menu music again")
-	)
+	#set_music_paused(false);
+	#music_gameplay.stop_music();
+	#music_options.fade_out_music(2.0, func():			
+		#music_options.stop_music();
+		#music_title.play();
+		#music_title.set_volume_linear(1.0);
+		#music_debug_print("Play menu music again")
+	#)
 	
 	
 func _ready() -> void:
-	music_title = add_music("BGM_Title");
+	return
+	#music_title = add_music("BGM_Title");
 	music_gameplay = add_music("BGM_Gameplay");
-	music_options = add_music("BGM_Options");
+	#music_options = add_music("BGM_Options");
 	
-	music_title.play();
+	#music_title.play();
 	
 	
 	if has_ready_function_queued:
@@ -66,7 +69,8 @@ func _ready() -> void:
 
 	
 func on_main_menu_switch_to_settings():
-	music_title.switch_to_settings();
+	pass
+	#music_title.switch_to_settings();
 
 func on_main_menu_switch_to_main():
 	music_title.switch_to_main();
@@ -96,7 +100,8 @@ func set_main_menu(main_menu:MenuUI):
 	var back_to_menu_from_settings_button:Button = my_menu_main.get_node("Panel/MarginContainer/audio_controler/Panel/button_cont/close_button");
 	
 	if main_menu_credits_button:
-		main_menu_credits_button.pressed.connect(on_main_menu_on_credits_enter);
+		pass
+		#main_menu_credits_button.pressed.connect(on_main_menu_on_credits_enter);
 		
 	if back_to_menu_from_settings_button:
 		back_to_menu_from_settings_button.pressed.connect(on_main_menu_switch_to_main);
@@ -108,22 +113,30 @@ func set_main_menu(main_menu:MenuUI):
 		main_menu_audio_settings_button.pressed.connect(on_main_menu_switch_to_settings)
 	
 func on_main_menu_on_credits_exit():
-	music_title.fade_in_music(2.0);
+	return
+	#music_title.fade_in_music(2.0);
 	var old_credits_music:MUS_Base = Music_GLOBAL.music_credits;
 	music_credits = null;
 	old_credits_music.fade_out_music(2.0, func():
 		old_credits_music.terminate_music();
 	)
 	
+	
+
+
 func on_main_menu_on_credits_enter():
+	return
 	music_credits = add_music("BGM_Credits");
 	music_credits.play();
-	music_title.fade_out_music(2.0);
+	#music_title.fade_out_music(2.0);
 	
 func on_main_menu_play():
+	return
 	music_debug_print("Time to play!")
-	music_title.fade_out_music(2.0);
-	await get_tree().create_timer(2.0).timeout
+	#music_title.fade_out_music(2.0,func():
+	#	music_title.terminate_music();
+	#);
+	#await get_tree().create_timer(2.0).timeout
 	music_gameplay.set_volume_linear(0.0);
 	music_gameplay.fade_in_music(3.0);
 	music_gameplay.play();
@@ -139,7 +152,7 @@ func add_music(music_name:StringName) -> MUS_Base:
 	if packedScene == null:
 		music_debug_printerr("Could not find music name " + music_name)
 		return null;
-	var music_instance:MUS_Base = packedScene.instantiate();	
+	var music_instance:MUS_Base = packedScene.instantiate();
 	add_child(music_instance)
 	music_instance.process_mode = Node.PROCESS_MODE_INHERIT
 	return music_instance;

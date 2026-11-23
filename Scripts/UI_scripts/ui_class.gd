@@ -13,7 +13,8 @@ signal vis_changed
 func enter_trans():
 	if get_tree().paused: get_tree().paused = false
 	lighten_screen()
-	song_on(song)
+	if(!song.playing):
+		song_on(song)
 
 ##Sets the button SFX to their global counterparts
 func set_button_sfx_to_global():
@@ -49,12 +50,12 @@ func button_mouse_exited(button:Button,dur:float):
 	pass
 
 ##Turns the screen dark by tweening the visibility of the dark_screen ColorRect
-func darken_screen(dur:float = 0.4):
+func darken_screen(dur:float = 0.5):
 	assert(dark_screen != null)
 	await tween_visibility(dark_screen,true,dur)
 
 ##Turns lightens the screen by tweening the visibility of the dark_screen ColorRect
-func lighten_screen(dur:float = 0.4):
+func lighten_screen(dur:float = 0.5):
 	assert(dark_screen != null)
 	await tween_visibility(dark_screen,false,dur)
 	
@@ -99,14 +100,14 @@ func song_off(music:AudioStreamPlayer = song,dur:float = 0.6):
 	music.playing = false
 
 ##plays the given song and tweens the song's DB from silence to the given DB 
-func song_on(music:AudioStreamPlayer = song,db_val:float = -15,dur:float = 5):
+func song_on(music:AudioStreamPlayer = song,db_val:float = -15,dur:float = 5,start_pos:float = 0.0):
 	music.volume_linear = db_to_linear(-80)
 	music.playing = true
-	music.play()
+	music.play(start_pos)
 	tween_music(db_to_linear(db_val),music,dur)
 
 ##Darkens the screen, turns the song off, and switches to the given scene
-func handle_scene_transition(next_scene:String,dur:float = 0.3):
+func handle_scene_transition(next_scene:String,dur:float = 0.5):
 	song_off(song,dur)
 	await darken_screen(dur)
 	UI_GLOBAL.switch_scenes(next_scene)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://n53qu0j7q7sa"]
 
-[ext_resource type="Texture2D" uid="uid://be0gljgjr6v8x" path="res://icon.svg" id="1_dju6x"]
 [ext_resource type="Script" uid="uid://xbfu22aw3rts" path="res://Scripts/puzzle_scripts/skeletons.gd" id="1_m7g1u"]
+[ext_resource type="Texture2D" uid="uid://ci4saq4x4ecjj" path="res://Assets/mushroom_and_skulls.png" id="2_fsuyj"]
 [ext_resource type="PackedScene" uid="uid://1im1jjwh3ajn" path="res://Scenes/puzzle_scenes/confetti_particles.tscn" id="3_fsuyj"]
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_xvgjx"]
 
@@ -12,14 +12,16 @@ size = Vector2(114, 40)
 script = ExtResource("1_m7g1u")
 
 [node name="skeleton1" type="Sprite2D" parent="."]
-position = Vector2(-20, 0)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_dju6x")
+position = Vector2(-10, -1)
+texture = ExtResource("2_fsuyj")
+region_enabled = true
+region_rect = Rect2(42, 44, 15, 11)
 
 [node name="skeleton2" type="Sprite2D" parent="."]
-position = Vector2(20, 0)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_dju6x")
+position = Vector2(10, -1)
+texture = ExtResource("2_fsuyj")
+region_enabled = true
+region_rect = Rect2(57, 44, 15, 11)
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -49,6 +49,28 @@ script = ExtResource("1_uy80n")
 Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_0cmj6")])
 metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 
+[sub_resource type="Resource" id="Resource_dl71b"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Look who decided to show up...", "Your break was far too long Rusty...", "You have no shame do  you?", "I can actually respect that...", "Maybe you aren't as bad after all huh?", "Anyway...", "The amount of coal you need to collect this time is...", "1500... no wait...", "150... Stupid handwriting... did you write this Rusty?", "well...", "Since I don't have time to wait around like last time, I brought you a little gift...", "This is a metal detector! ", "I tuned its settings so you will be able to find coal and gems with it.", "This should help you work faster right?", "You can switch between different tools with the mouse wheel.", "Or by pressing K...", "Well go on, you have lots of work to do..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_0jqqa"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_dl71b")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
+[sub_resource type="Resource" id="Resource_ysphk"]
+script = ExtResource("2_6wsn7")
+speaker = ExtResource("3_33eh1")
+lines = Array[String](["Well you know the drill oven head...", "You better not keep me waiting again huh?", "The amount of coal you need to collect this time is 200.", "Easy enough, At least for me! HA HA!", "Well go on then..."])
+metadata/_custom_type_script = "uid://bxrvun5bs65ck"
+
+[sub_resource type="Resource" id="Resource_x8ev2"]
+script = ExtResource("1_uy80n")
+Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_ysphk")])
+metadata/_custom_type_script = "uid://bhqovwl8pw33d"
+
 [sub_resource type="Resource" id="Resource_grg5q"]
 script = ExtResource("2_6wsn7")
 speaker = ExtResource("3_33eh1")
@@ -80,28 +102,6 @@ metadata/_custom_type_script = "uid://bxrvun5bs65ck"
 [sub_resource type="Resource" id="Resource_rovye"]
 script = ExtResource("1_uy80n")
 Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_vbyt2")])
-metadata/_custom_type_script = "uid://bhqovwl8pw33d"
-
-[sub_resource type="Resource" id="Resource_dl71b"]
-script = ExtResource("2_6wsn7")
-speaker = ExtResource("3_33eh1")
-lines = Array[String](["Look who decided to show up...", "Your break was far too long Rusty...", "You have no shame do  you?", "I can actually respect that...", "Maybe you aren't as bad after all huh?", "Anyway...", "The amount of coal you need to collect this time is...", "1500... no wait...", "150... Stupid handwriting... did you write this Rusty?", "well...", "Since I don't have time to wait around like last time, I brought you a little gift...", "This is a metal detector! ", "I tuned its settings so you will be able to find coal and gems with it.", "This should help you work faster right?", "You can switch between different tools with the mouse wheel.", "Or by pressing K...", "Well go on, you have lots of work to do..."])
-metadata/_custom_type_script = "uid://bxrvun5bs65ck"
-
-[sub_resource type="Resource" id="Resource_0jqqa"]
-script = ExtResource("1_uy80n")
-Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_dl71b")])
-metadata/_custom_type_script = "uid://bhqovwl8pw33d"
-
-[sub_resource type="Resource" id="Resource_ysphk"]
-script = ExtResource("2_6wsn7")
-speaker = ExtResource("3_33eh1")
-lines = Array[String](["Well you know the drill oven head...", "You better not keep me waiting again huh?", "The amount of coal you need to collect this time is 200.", "Easy enough, At least for me! HA HA!", "Well go on then..."])
-metadata/_custom_type_script = "uid://bxrvun5bs65ck"
-
-[sub_resource type="Resource" id="Resource_x8ev2"]
-script = ExtResource("1_uy80n")
-Dialog = Array[ExtResource("2_6wsn7")]([SubResource("Resource_ysphk")])
 metadata/_custom_type_script = "uid://bhqovwl8pw33d"
 
 [resource]

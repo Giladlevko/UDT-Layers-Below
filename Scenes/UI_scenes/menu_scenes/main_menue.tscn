@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfapw7qac4mu5"]
+[gd_scene load_steps=10 format=3 uid="uid://cfapw7qac4mu5"]
 
 [ext_resource type="Theme" uid="uid://rgyna2d0tcac" path="res://UI_themes/dark_theme.tres" id="1_n2h7q"]
 [ext_resource type="Script" uid="uid://c02am5adcvdoq" path="res://Scripts/UI_scripts/menu_scripts/main_menue.gd" id="1_x4vq2"]
 [ext_resource type="Texture2D" uid="uid://d1uuce8uv2ut0" path="res://Assets/menu_background.png" id="3_1v40b"]
 [ext_resource type="PackedScene" uid="uid://clovevcxnu2qx" path="res://Scenes/UI_scenes/audio_controler.tscn" id="3_e4u0r"]
+[ext_resource type="AudioStream" uid="uid://dygate2wwdxp0" path="res://Assets/Music_assets/GWJ099_Menu_Layer1_Loop_90bpm.ogg" id="5_nvq73"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nvq73"]
 atlas = ExtResource("3_1v40b")
@@ -92,7 +93,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 
 [node name="game_title" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -111,7 +112,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "Game mame"
+text = "Layers Below"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
@@ -151,7 +152,7 @@ size_flags_horizontal = 0
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/contols_cont"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 65
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/contols_cont"]
 layout_mode = 2
@@ -159,13 +160,22 @@ theme_override_constants/margin_left = 20
 
 [node name="controls_panel" type="Panel" parent="Panel/MarginContainer/contols_cont/MarginContainer"]
 visible = false
-custom_minimum_size = Vector2(300, 100)
+custom_minimum_size = Vector2(400, 150)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/contols_cont/MarginContainer/controls_panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -60.5
+offset_right = 187.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -174,7 +184,13 @@ theme_override_constants/margin_bottom = 5
 [node name="Label" type="Label" parent="Panel/MarginContainer/contols_cont/MarginContainer/controls_panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Controls:"
+text = "Controls:
+A, D - Left, Right
+Space bar - Jump
+Left Mouse / J - Use Item
+Right Mouse / L - Stash Item
+Mouse Wheel / K - Switch item
+E - Interact"
 
 [node name="help_button_container" type="MarginContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -200,6 +216,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_hmfhc")
 }
 autoplay = "background_anim"
+
+[node name="main_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_nvq73")
+volume_db = 5.0
+bus = &"music"
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/buttons_container/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/buttons_container/audio_button" to="." method="_on_audio_button_pressed"]

@@ -3,7 +3,8 @@ class_name ExitDoor
 signal door_opened
 @onready var flash_light: PointLight2D = $FlashLight
 var base_pos:Vector2
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim: AnimatedSprite2D = $anim
+
 @onready var guard_pos_node: Node2D = $guard_pos_node
 @export var guard_pos:Vector2
 
@@ -15,7 +16,6 @@ func _ready() -> void:
 	Global.exit_door = self
 	SignalBus.open_exit.connect(open)
 	SignalBus.puzzle_solved.connect(on_puzzle_sloved)
-	flash_light.visible = false
 	guard_pos_node.global_position = guard_pos
 	pass # Replace with function body.
 
@@ -32,6 +32,7 @@ func open():
 	var new_pos = base_pos + Vector2(0,-32)
 	tween.tween_property(self,"position",new_pos,1.5)
 	await tween.finished
+	anim.play("open")
 	door_opened.emit()
 
 

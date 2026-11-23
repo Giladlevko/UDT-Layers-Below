@@ -1,12 +1,15 @@
 extends MenuUI
 @onready var menu_button: Button = $MarginContainer/menu_cont/menu_button
 
+@onready var gameplay_song: AudioStreamPlayer = $gameplay_song
+
 
 @onready var pause_menu: PauseMenu = $MarginContainer/PauseMenu
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	song = gameplay_song
 	self.setup_UI()
 	self.buttons = [menu_button]
 	connect_buttons()

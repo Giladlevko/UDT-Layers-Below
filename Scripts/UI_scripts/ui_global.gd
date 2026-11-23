@@ -24,7 +24,7 @@ var text_box_scene:PackedScene = preload("res://Scenes/UI_scenes/TextBox/text_bo
 var text_box:TEXT_BOX
 
 var menu_songs_path:Dictionary[String,String] = {
-	"MainMenu":"",
+	"MainMenu":"res://Assets/Music_assets/GWJ099_Menu_Layer1_Loop_90bpm.ogg",
 	"Credits":""
 }
 

@@ -8,6 +8,7 @@ class_name WATER_CAN
 func _ready() -> void:
 	self.state_changed.connect(on_state_changed)
 	self.setup()
+	change_state(states.unequipped)
 	pass # Replace with function body.
 
 

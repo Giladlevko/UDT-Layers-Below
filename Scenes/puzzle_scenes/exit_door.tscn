@@ -1,8 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://6sm8qgypgvbt"]
+[gd_scene load_steps=10 format=3 uid="uid://6sm8qgypgvbt"]
 
 [ext_resource type="Script" uid="uid://b8urenkt23v2d" path="res://Scripts/puzzle_scripts/exit_door.gd" id="1_q5ctg"]
-[ext_resource type="Texture2D" uid="uid://deop8kbtwnnp8" path="res://Assets/tiles/black_tile_set.png" id="2_i3ey1"]
+[ext_resource type="Texture2D" uid="uid://d254ctwrt0fot" path="res://Assets/door_closed.png" id="2_0r2fe"]
+[ext_resource type="Texture2D" uid="uid://c44v7ss624ole" path="res://Assets/door_opened.png" id="3_hkrr8"]
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="3_i3ey1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv7ui"]
+atlas = ExtResource("2_0r2fe")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0brb"]
+atlas = ExtResource("3_hkrr8")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibcti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv7ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0brb")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3ey1"]
 size = Vector2(104, 48)
@@ -13,10 +36,9 @@ size = Vector2(16, 48)
 [node name="ExitDoor" type="StaticBody2D"]
 script = ExtResource("1_q5ctg")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_i3ey1")
-region_enabled = true
-region_rect = Rect2(40, 40, 16, 48)
+[node name="anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ibcti")
+animation = &"open"
 
 [node name="FlashLight" parent="." instance=ExtResource("3_i3ey1")]
 

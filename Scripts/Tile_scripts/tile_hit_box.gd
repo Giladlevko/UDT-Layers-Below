@@ -94,6 +94,7 @@ func set_particles():
 	get_tree().root.add_child(tile_particle)
 	tile_particle.global_position = global_position
 	var data:= get_tile_data()
+	if(!data):return
 	tile_particle.color = data.get_custom_data("ParticleColor")
 
 func handle_particle():

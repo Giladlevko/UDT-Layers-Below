@@ -28,7 +28,7 @@ var puzzle_sfx_stream: = preload("res://Assets/sfx_assets/SFX_PuzzleComplete.ogg
 var current_level_index:int = 1
 var next_level_paths:Dictionary[int,String] = {
 	1: "res://Scenes/level_2.tscn",
-	2: "",
+	2: "res://Scenes/level3.tscn",
 	3: "res://Scenes/UI_scenes/menu_scenes/credits.tscn"
 }
 

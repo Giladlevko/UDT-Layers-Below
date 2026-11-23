@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bndn3oyj8to2x"]
 
 [ext_resource type="Script" uid="uid://dvnsjgncvusp5" path="res://Scripts/puzzle_scripts/mushroom.gd" id="1_8qwgw"]
-[ext_resource type="Texture2D" uid="uid://qnpw8l0ddfjc" path="res://Assets/mushroom.png" id="2_qltk6"]
+[ext_resource type="Texture2D" uid="uid://ci4saq4x4ecjj" path="res://Assets/mushroom_and_skulls.png" id="2_qltk6"]
 [ext_resource type="PackedScene" uid="uid://1im1jjwh3ajn" path="res://Scenes/puzzle_scenes/confetti_particles.tscn" id="3_r78ck"]
 [ext_resource type="PackedScene" uid="uid://crk0jd5ugir2d" path="res://Scenes/FlashLight.tscn" id="4_qltk6"]
 
@@ -17,6 +17,8 @@ script = ExtResource("1_8qwgw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qltk6")
+region_enabled = true
+region_rect = Rect2(27, 44, 11, 11)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 10

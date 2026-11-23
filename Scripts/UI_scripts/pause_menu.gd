@@ -18,7 +18,7 @@ func _ready() -> void:
 	self.buttons = [resume_button,inv_button,back_to_main_button,audio_button,store_button]
 	self.connect_buttons()
 	self.set_button_sfx_to_global()
-	Music_GLOBAL.set_pause_menu(self);
+	#Music_GLOBAL.set_pause_menu(self);
 	pass # Replace with function body.
 
 

@@ -11,7 +11,7 @@ func _ready() -> void:
 	Global.tile_map_layer = breakable_tile_layer
 	Global.tile_hit_layer = hit_box_layer
 	Global.current_level_index = level_index
-	Global.currency["Coal"] = 0
+	Global.change_currency_amount("Coal",-Global.currency["Coal"])
 	directional_light.visible = true
 	var tiles:Array[Vector2i] = breakable_tile_layer.get_used_cells()
 	for tile in tiles:

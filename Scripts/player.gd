@@ -34,6 +34,7 @@ const SPEED:int = 150
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.player = self
+	mining_tools = []
 	enter_state(STATES.IDLE)
 	flash_light.texture_scale = Global.vision_range
 	SignalBus.on_item_taken.connect(on_inv_item_taken)
@@ -42,7 +43,7 @@ func _ready() -> void:
 	SignalBus.dialog_ended.connect(on_dialog_end)
 	SignalBus.puzzle_solved.connect(on_puzzle_solved)
 	
-	SignalBus.on_take_item.emit.call_deferred(Global.drill_slot_data)
+	#SignalBus.on_take_item.emit.call_deferred(Global.drill_slot_data)
 	#SignalBus.on_take_item.emit(Global.metal_detector_slot_data)
 	
 	pass # Replace with function body.
@@ -66,7 +67,6 @@ func switch_tool():
 	if mining_tools.is_empty():return
 	var next_index:int = (current_tool_index + 1) % mining_tools.size()
 	if(next_index == current_tool_index):return
-	
 	var current_tool_state: = mining_tools[current_tool_index].state
 	mining_tools[next_index].equip(current_tool_state)
 	mining_tools[next_index].stashed_z_index = -1
@@ -238,7 +238,7 @@ func on_inv_item_taken(successful:bool,data:InvSlotData):
 			jack_hammer = new_tool
 		elif new_tool is METAL_DETECTOR:
 			metal_detector = new_tool
-			
+		print(metal_detector)
 		switch_tool()
 	
 
